@@ -1,5 +1,6 @@
 package lf.com.android.blackfishdemo.splash;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
@@ -13,33 +14,37 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import lf.com.android.blackfishdemo.HomeActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.ViewPagerTransformer.DepthPageTransformer;
 import lf.com.android.blackfishdemo.listener.OnViewListener;
 import lf.com.android.blackfishdemo.util.BitmapUtil;
+import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.ViewUtil;
 
 public class WelcomeSplashActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
     private ViewPager mViewPager;
-    private List<View> mViewList;
+    private List<View> mViewList = new ArrayList<>();
     private int[] mImageArray;
     private Button mBtn_splash;
     private Bitmap mBitmap;
     private ViewPagerAdapter adapter;
     private LinearLayout mlayout;
+    private ImageView mImageView;
     private ImageView mIvpoint;
     private ImageView[] mIvPointArray;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome_splash);
         //隐藏状态栏
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.activity_welcome_splash);
+
 
         initView();
         initPoint();
@@ -48,34 +53,46 @@ public class WelcomeSplashActivity extends AppCompatActivity implements ViewPage
 
     private void initView() {
         //实例化控件
-        mViewPager.findViewById(R.id.viewpager_splash);
-        mBtn_splash.findViewById(R.id.btn_splash);
-        mlayout.findViewById(R.id.linear_layout_indicator);
+        mViewPager = findViewById(R.id.viewpager_splash);
+        mBtn_splash = findViewById(R.id.btn_splash);
+        mlayout = findViewById(R.id.linear_layout_indicator);
         //获得图片资源
         mImageArray = new int[]{R.drawable.icon_splash_1, R.drawable.icon_splash_2,
                 R.drawable.icon_splash_3, R.drawable.icon_splash_4};
         //设置控件参数
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams
+        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams
                 (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         //循环设置ViewList
         for (int i = 0; i < mImageArray.length; i++) {
-            final ImageView mImageView = new ImageView(this);
+            mImageView = new ImageView(this);
             final int ImageResourcesID = mImageArray[i];//获得当前资源ID
             mImageView.setLayoutParams(params);
             ViewUtil.getViewWidth(mImageView, new OnViewListener() {
                 @Override
                 public void onView(int width, int height) {
+                    LogUtil.e("lf123", "width =" + width + "height = " + height);
                     mBitmap = BitmapUtil.Resource(getResources(), ImageResourcesID, width, height);
                     mImageView.setImageBitmap(mBitmap);
                     mViewList.add(mImageView);
                 }
             });
+
         }
 
         mViewPager.setPageTransformer(true, new DepthPageTransformer());
         adapter = new ViewPagerAdapter(mViewList);
         mViewPager.setAdapter(adapter);
         mViewPager.setOnPageChangeListener(this);
+
+
+        mBtn_splash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WelcomeSplashActivity.this, HomeActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
+
     }
 
     private void initPoint() {
@@ -125,12 +142,15 @@ public class WelcomeSplashActivity extends AppCompatActivity implements ViewPage
         private List<View> lists;
 
         public ViewPagerAdapter(List<View> list) {
-            lists = list;
+            this.lists = list;
         }
 
         @Override
         public int getCount() {
-            return lists.size();
+            if (lists != null) {
+                return lists.size();
+            }
+            return 0;
         }
 
         @Override
@@ -146,7 +166,8 @@ public class WelcomeSplashActivity extends AppCompatActivity implements ViewPage
         }
 
         @Override
-        public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        public void destroyItem(@NonNull ViewGroup container, int position,
+                                @NonNull Object object) {
             container.removeView(lists.get(position));
         }
     }

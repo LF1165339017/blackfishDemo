@@ -9,33 +9,36 @@ public class LogUtil {
     public static final int WARN = 4;
     public static final int ERROR = 5;
     public static final int NOTHING = 6;
+    public static int level = VERBOSE;
 
-
-    public static void loglevel(String TAG, String msg, int level) {
-        if (level < NOTHING) {
-            switch (level) {
-                case VERBOSE:
-                    Log.v(TAG, msg);
-                    break;
-                case DEBUG:
-                    Log.d(TAG, msg);
-                    break;
-                case INFO:
-                    Log.i(TAG, msg);
-                    break;
-                case WARN:
-                    Log.w(TAG, msg);
-                    break;
-                case ERROR:
-                    Log.e(TAG, msg);
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            return;
+    public static void v(String TAG, String msg) {
+        if (level <= VERBOSE) {
+            Log.v(TAG, msg);
         }
     }
 
+    public static void d(String TAG, String msg) {
+        if (level <= DEBUG) {
+            Log.v(TAG, msg);
+        }
+    }
+
+    public static void i(String TAG, String msg) {
+        if (level <= INFO) {
+            Log.v(TAG, msg);
+        }
+    }
+
+    public static void w(String TAG, String msg) {
+        if (level <= WARN) {
+            Log.v(TAG, msg);
+        }
+    }
+
+    public static void e(String TAG, String msg) {
+        if (level <= ERROR) {
+            Log.v(TAG, msg);
+        }
+    }
 
 }
