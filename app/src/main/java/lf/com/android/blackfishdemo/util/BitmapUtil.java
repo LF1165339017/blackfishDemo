@@ -3,6 +3,7 @@ package lf.com.android.blackfishdemo.util;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.util.Log;
 
 public class BitmapUtil {
@@ -42,4 +43,5 @@ public class BitmapUtil {
         }
         return SimpleSize;
     }
+
 }

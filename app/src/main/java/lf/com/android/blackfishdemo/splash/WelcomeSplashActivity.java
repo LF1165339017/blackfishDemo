@@ -1,12 +1,12 @@
 package lf.com.android.blackfishdemo.splash;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -22,20 +22,19 @@ import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.ViewPagerTransformer.DepthPageTransformer;
 import lf.com.android.blackfishdemo.listener.OnViewListener;
 import lf.com.android.blackfishdemo.util.BitmapUtil;
+import lf.com.android.blackfishdemo.util.GetScreen;
 import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.ViewUtil;
 
-public class WelcomeSplashActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener {
+public class WelcomeSplashActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
     private ViewPager mViewPager;
     private List<View> mViewList = new ArrayList<>();
-    private int[] mImageArray;
     private Button mBtn_splash;
-    private Bitmap mBitmap;
     private ViewPagerAdapter adapter;
     private LinearLayout mlayout;
-    private ImageView mImageView;
     private ImageView mIvpoint;
     private ImageView[] mIvPointArray;
+    private int[] Id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +43,9 @@ public class WelcomeSplashActivity extends AppCompatActivity implements ViewPage
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_welcome_splash);
-
-
+        //编写布局
         initView();
+        //编写指示器
         initPoint();
 
     }
@@ -56,58 +55,35 @@ public class WelcomeSplashActivity extends AppCompatActivity implements ViewPage
         mViewPager = findViewById(R.id.viewpager_splash);
         mBtn_splash = findViewById(R.id.btn_splash);
         mlayout = findViewById(R.id.linear_layout_indicator);
-        //获得图片资源
-        mImageArray = new int[]{R.drawable.icon_splash_1, R.drawable.icon_splash_2,
-                R.drawable.icon_splash_3, R.drawable.icon_splash_4};
-        //设置控件参数
-        ViewGroup.LayoutParams params = new LinearLayout.LayoutParams
-                (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        //循环设置ViewList
-        for (int i = 0; i < mImageArray.length; i++) {
-            mImageView = new ImageView(this);
-            final int ImageResourcesID = mImageArray[i];//获得当前资源ID
-            mImageView.setLayoutParams(params);
-            ViewUtil.getViewWidth(mImageView, new OnViewListener() {
-                @Override
-                public void onView(int width, int height) {
-                    LogUtil.e("lf123", "width =" + width + "height = " + height);
-                    mBitmap = BitmapUtil.Resource(getResources(), ImageResourcesID, width, height);
-                    mImageView.setImageBitmap(mBitmap);
-                    mViewList.add(mImageView);
-                }
-            });
 
+        //添加视图
+        Id = new int[]{R.layout.splash_layout_1, R.layout.splash_layout_2,
+                R.layout.splash_layout_3, R.layout.splash_layout_4};
+        for (int i = 0; i < Id.length; i++) {
+            View view = LayoutInflater.from(this).inflate(Id[i], null);
+            mViewList.add(view);
         }
-
         mViewPager.setPageTransformer(true, new DepthPageTransformer());
         adapter = new ViewPagerAdapter(mViewList);
         mViewPager.setAdapter(adapter);
         mViewPager.setOnPageChangeListener(this);
-
-
-        mBtn_splash.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(WelcomeSplashActivity.this, HomeActivity.class)
-                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
-            }
-        });
-
+        mBtn_splash.setOnClickListener(this);
     }
 
     private void initPoint() {
         mIvPointArray = new ImageView[mViewList.size()];
         for (int i = 0; i < mViewList.size(); i++) {
             mIvpoint = new ImageView(this);
-            mIvpoint.setLayoutParams(new LinearLayout.LayoutParams(20, 20));
-            mIvpoint.setPadding(30, 0, 30, 0);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(30, 30);
+            mIvpoint.setLayoutParams(params);
+            params.setMargins(10, 0, 10, 0);
             mIvPointArray[i] = mIvpoint;
-
             if (i == 0) {
                 mIvpoint.setImageResource(R.drawable.shape_circle_yellow);
             } else {
                 mIvpoint.setImageResource(R.drawable.shape_circle_white);
             }
+
             mlayout.addView(mIvpoint);
         }
     }
@@ -126,8 +102,9 @@ public class WelcomeSplashActivity extends AppCompatActivity implements ViewPage
             }
         }
 
-        if (i == mImageArray.length - 1) {
+        if (i == mViewList.size() - 1) {
             mBtn_splash.setVisibility(View.VISIBLE);
+
         } else {
             mBtn_splash.setVisibility(View.INVISIBLE);
         }
@@ -136,6 +113,12 @@ public class WelcomeSplashActivity extends AppCompatActivity implements ViewPage
     @Override
     public void onPageScrollStateChanged(int i) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        startActivity(new Intent(WelcomeSplashActivity.this, HomeActivity.class)
+                .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 
     class ViewPagerAdapter extends PagerAdapter {

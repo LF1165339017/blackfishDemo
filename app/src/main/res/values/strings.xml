@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">BlackFishDemo</string>
     <string name="btn_splash_login">开启新生活</string>
+    <string name="splash_msg_1">小黑鱼</string>
+    <string name="splash_msg_2">会员制消费服务平台</string>
+    <string name="splash_msg_3">小黑鱼黑金会员</string>
+    <string name="splash_msg_4">会员权益 重磅升级</string>
+    <string name="splash_msg_5">小黑鱼旅行</string>
+    <string name="splash_msg_6">机票/火车票/酒店 专享优惠</string>
 </resources>
