@@ -21,7 +21,7 @@ import lf.com.android.blackfishdemo.util.ViewUtil;
 
 public class WelcomeActivity extends AppCompatActivity {
     private SharedPreferences.Editor mEditor;
-    private boolean isFirstload = true;
+    private boolean isFirstload;
     private Bitmap mBitmap;
     private ImageView mImageView;
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -51,18 +51,15 @@ public class WelcomeActivity extends AppCompatActivity {
         //利用异步使用bitmap去加载图片
         Message msg = mHandler.obtainMessage(0x01);
         mHandler.sendMessage(msg);
-
-        /*mEditor = getSharedPreferences("data", MODE_PRIVATE).edit();
-        mEditor.putBoolean("isFirstload", true);
-        mEditor.apply();*/
-
+        SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
+        isFirstload = preferences.getBoolean("isFirstload", true);
+        mEditor = preferences.edit();
         isFirstload();
     }
 
     //判断是否是第一次登录
     private void isFirstload() {
-        /*SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
-        isFirstload = preferences.getBoolean("isFirstload", true);*/
+
         if (isFirstload) {
             mHandler.postDelayed(new Runnable() {
                 @Override
@@ -70,9 +67,11 @@ public class WelcomeActivity extends AppCompatActivity {
                     startActivity(new Intent(WelcomeActivity.this,
                             WelcomeSplashActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
                             Intent.FLAG_ACTIVITY_NEW_TASK));
-                    overridePendingTransition(R.anim.activity_left_out, R.anim.activity_right_in);
+                    overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
                 }
             }, 1500);
+            mEditor.putBoolean("isFirstload", false);
+            mEditor.apply();
         } else {
             mHandler.postDelayed(new Runnable() {
                 @Override
@@ -80,7 +79,7 @@ public class WelcomeActivity extends AppCompatActivity {
                     startActivity(new Intent(WelcomeActivity.this,
                             HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
                             Intent.FLAG_ACTIVITY_NEW_TASK));
-                    overridePendingTransition(R.anim.activity_left_out, R.anim.activity_right_in);
+                    overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
                 }
             }, 1500);
         }
