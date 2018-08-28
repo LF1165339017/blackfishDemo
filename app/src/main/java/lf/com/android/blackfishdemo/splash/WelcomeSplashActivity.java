@@ -17,14 +17,9 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-import lf.com.android.blackfishdemo.HomeActivity;
+import lf.com.android.blackfishdemo.Activity.LoginActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.ViewPagerTransformer.DepthPageTransformer;
-import lf.com.android.blackfishdemo.listener.OnViewListener;
-import lf.com.android.blackfishdemo.util.BitmapUtil;
-import lf.com.android.blackfishdemo.util.GetScreen;
-import lf.com.android.blackfishdemo.util.LogUtil;
-import lf.com.android.blackfishdemo.util.ViewUtil;
 
 public class WelcomeSplashActivity extends AppCompatActivity implements ViewPager.OnPageChangeListener, View.OnClickListener {
     private ViewPager mViewPager;
@@ -117,7 +112,7 @@ public class WelcomeSplashActivity extends AppCompatActivity implements ViewPage
 
     @Override
     public void onClick(View view) {
-        startActivity(new Intent(WelcomeSplashActivity.this, HomeActivity.class)
+        startActivity(new Intent(WelcomeSplashActivity.this, LoginActivity.class)
                 .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
     }
 

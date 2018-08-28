@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
+    <style name="cut_off_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:height">0.5dp</item>
+        <item name="android:layout_marginLeft">10dp</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
 
 </resources>

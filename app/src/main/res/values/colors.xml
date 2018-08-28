@@ -9,4 +9,20 @@
     <color name="White">#FFFFFF</color>
     <color name="Black">#000000</color>
     <color name="colorRoyalBlue">#4169E1</color>
+    <color name="colorYellow">#FFFF00</color>
+    <color name="colorYellowEEEE00">#EEEE00</color>
+    <color name="colorGoldFFC125">#FFC125</color>
+    <color name="colorGray696969">#696969</color>
+    <color name="colorGrayCFCFCF">#CFCFCF</color>
+    <color name="colorOrange">#FFA500</color>
+    <color name="colorYellowf1f44e">#f1f44e</color>
+    <color name="colorGray707061">#707061</color>
+    <color name="colorGrayE8E8E8">#E8E8E8</color>
+    <color name="colorYellofbe328">#fbe328</color>
+    <color name="colorYellof7fe3e">#f7fe3e</color>
+    <color name="colorYelloefec48">#efec48</color>
+    <color name="Khaki1">#FFF68F</color>
+    <color name="colorYelloFFDE00">#FFDE00</color>
+    <color name="colorRedFF5A34">#FF5A34</color>
+    <color name="colorRedEF1F1F">#EF1F1F</color>
 </resources>

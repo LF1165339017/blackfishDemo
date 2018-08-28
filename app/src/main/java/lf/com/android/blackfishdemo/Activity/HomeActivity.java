@@ -1,7 +1,9 @@
-package lf.com.android.blackfishdemo;
+package lf.com.android.blackfishdemo.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import lf.com.android.blackfishdemo.R;
 
 public class HomeActivity extends AppCompatActivity {
 

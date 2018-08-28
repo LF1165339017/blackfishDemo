@@ -9,11 +9,10 @@ import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import lf.com.android.blackfishdemo.HomeActivity;
+import lf.com.android.blackfishdemo.Activity.LoginActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnViewListener;
 import lf.com.android.blackfishdemo.util.BitmapUtil;
@@ -51,6 +50,7 @@ public class WelcomeActivity extends AppCompatActivity {
         //利用异步使用bitmap去加载图片
         Message msg = mHandler.obtainMessage(0x01);
         mHandler.sendMessage(msg);
+
         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
         isFirstload = preferences.getBoolean("isFirstload", true);
         mEditor = preferences.edit();
@@ -77,7 +77,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     startActivity(new Intent(WelcomeActivity.this,
-                            HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
+                            LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK |
                             Intent.FLAG_ACTIVITY_NEW_TASK));
                     overridePendingTransition(R.anim.activity_right_in, R.anim.activity_left_out);
                 }

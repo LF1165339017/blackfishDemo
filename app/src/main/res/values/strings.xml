@@ -7,4 +7,18 @@
     <string name="splash_msg_4">会员权益 重磅升级</string>
     <string name="splash_msg_5">小黑鱼旅行</string>
     <string name="splash_msg_6">机票/火车票/酒店 专享优惠</string>
+    <string name="registered">注册</string>
+    <string name="login">登录</string>
+    <string name="Tecentlogin">QQ登录</string>
+    <string name="WeChatLogin">微信登录</string>
+    <string name="pleaseIntoPhoneNumber">请输入手机号码</string>
+    <string name="pleaseIntoPhonePassword">输入当前登录密码</string>
+    <string name="registered_msg1">我已注册，请使用密码登录</string>
+    <string name="losePassword">忘记密码</string>
+    <string name="btn_registered_msg1">下一步</string>
+    <string name="btn_registered_msg2">登录</string>
+    <string name="other_login_message">其他登录方式</string>
+    <string name="Tencent">QQ</string>
+    <string name="WeChat">微信</string>
+    <string name="Prompt">提示:</string>
 </resources>
