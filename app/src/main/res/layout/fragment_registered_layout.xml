@@ -47,7 +47,7 @@
                 <EditText
                     android:id="@+id/Ed_uerPhoneNumber"
                     android:layout_width="0dp"
-                    android:layout_height="20dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="20dp"
                     android:layout_weight="8"
                     android:background="@color/White"
@@ -67,6 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/linear_userPhone_line"
                 android:src="@drawable/user_icon_circle_clear"
                 android:visibility="invisible" />
@@ -89,7 +90,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/Relayout_PhoneNumber"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="20dp"
+            android:visibility="gone">
 
 
             <LinearLayout
@@ -102,6 +104,7 @@
                     android:id="@+id/user_icon_password"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginStart="20dp"
                     android:scaleType="center"
                     android:src="@drawable/user_icon_password" />
@@ -109,7 +112,7 @@
                 <EditText
                     android:id="@+id/Ed_uerPassword"
                     android:layout_width="0dp"
-                    android:layout_height="20dp"
+                    android:layout_height="40dp"
                     android:layout_marginStart="20dp"
                     android:layout_weight="8"
                     android:background="@color/White"
@@ -129,6 +132,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@+id/linear_userPassword_line"
                 android:src="@drawable/user_icon_circle_clear"
                 android:visibility="invisible" />
@@ -138,6 +142,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_toEndOf="@id/icon_Password_clean"
                 android:src="@drawable/user_icon_eye_close_blue" />
 
@@ -159,7 +164,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/Tv_registered_msg1"
+                android:id="@+id/Tv_registered_msg"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -189,7 +194,7 @@
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
-            android:background="@drawable/shape_btn_orange_bg"
+            android:background="@drawable/shape_btn_khakil_bg"
             android:text="@string/btn_registered_msg1"
             android:textColor="@color/colorGray696969"
             android:textSize="16sp" />

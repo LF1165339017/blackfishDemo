@@ -1,14 +1,17 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnButtonClick;
+import lf.com.android.blackfishdemo.util.LogUtil;
 
 public class MyRegisteredFragment extends BaseFragment {
     private Context mContext;
@@ -27,28 +31,54 @@ public class MyRegisteredFragment extends BaseFragment {
     private LinearLayout mUserPhonelayout, mUserPasswordlayout;
     private EditText muserPNEdtext, muserPAPEdtext;
     private ImageView mIv_PhoneNumber_clean, mIv_Password_clean,
-            mIv_eyes_type, mIv_user_qq, mIv_user_weChat, mIv_user_phone, mIv_user_password;
+            mIv_eyes_type, mIv_user_qq, mIv_user_weChat;
     private TextView mTv_Choose_type, mTv_lose_password;
     private View mView_phonebg_line, mView_password_line;
     private Button mLogin_btn;
-    private boolean isUserInput;
+    private boolean isUserPhoneCheck = false;//判断输入框格式是否正确 false为默认不正确
+    private boolean isViewRegisteredType = true;//true 为登录界面 false为注册界面
+    private boolean isPasswordinit = false;//判断输入框是否输入密码;
+    private int mEyesType = 0;//设置点击计数器，判断当前密码状态
+    private int layoutChange = 0;//设置点击计数器，判断当前布局状态
+    private SharedPreferences pref;//
+    private SharedPreferences.Editor editor;
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
             switch (msg.what) {
-                case 0x01:
+                case 0x01://获取输入框焦点时，让下划线背景颜色改变
                     mView_phonebg_line.setBackgroundResource(R.color.colorGoldFFC125);
                     mView_password_line.setBackgroundResource(R.color.colorGrayE8E8E8);
                     break;
-                case 0x02:
+                case 0x02://获取密码框焦点时，让下划线背景颜色改变
                     mView_phonebg_line.setBackgroundResource(R.color.colorGrayE8E8E8);
                     mView_password_line.setBackgroundResource(R.color.colorGoldFFC125);
                     break;
                 case 0x03:
-                    mEduserPhoneGetFocus();
+                    mEduserPhoneGetFocus();//点击手机图标也能让输入框获取到焦点
                     break;
                 case 0x04:
-                    mEduserPasswordGetFocus();
+                    mEduserPasswordGetFocus();//点击密码图标也能让输入框获取到焦点
+                    break;
+                case 0x05://通过点击次数判断是否显示密码，此时不显示
+                    mIv_eyes_type.setImageResource(R.drawable.user_icon_eye_close_blue);
+                    muserPAPEdtext.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    break;
+                case 0x06://通过点击次数判断是否显示密码，此时显示
+                    mIv_eyes_type.setImageResource(R.drawable.user_icon_eye_open_blue);
+                    muserPAPEdtext.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    break;
+                case 0x07://通过点击次数判断是否改变格局，此时不改变
+                    muserpasswordRelayout.setVisibility(View.VISIBLE);
+                    mTv_Choose_type.setText(R.string.registered_msg2);
+                    mLogin_btn.setText(R.string.btn_registered_msg2);
+                    mLogin_btn.setBackground(getResources().getDrawable(R.drawable.shape_btn_light_yellow_bg));
+                    break;
+                case 0x08://通过点击次数判断是否改变格局，此时改变
+                    muserpasswordRelayout.setVisibility(View.GONE);
+                    mTv_Choose_type.setText(R.string.registered_msg1);
+                    mLogin_btn.setText(R.string.btn_registered_msg1);
+                    mLogin_btn.setBackground(getResources().getDrawable(R.drawable.shape_btn_khakil_bg));
                     break;
                 default:
                     break;
@@ -82,7 +112,7 @@ public class MyRegisteredFragment extends BaseFragment {
         mIv_eyes_type = findView(R.id.icon_eye_type);
         mIv_user_qq = findView(R.id.user_icon_qq);
         mIv_user_weChat = findView(R.id.user_icon_wechat_login);
-        mTv_Choose_type = findView(R.id.Tv_registered_msg1);
+        mTv_Choose_type = findView(R.id.Tv_registered_msg);
         mTv_lose_password = findView(R.id.tv_user_losePassword);
         mView_phonebg_line = findView(R.id.view_phoneNumber_line);
         mView_password_line = findView(R.id.view_phonePassword_line);
@@ -96,12 +126,27 @@ public class MyRegisteredFragment extends BaseFragment {
         mTv_Choose_type.setOnClickListener(this);
         mTv_lose_password.setOnClickListener(this);
         mLogin_btn.setOnClickListener(this);
+        mIv_user_qq.setOnClickListener(this);
+        mIv_user_weChat.setOnClickListener(this);
         //对输入框监听，设置格式化3-4-4手机号码模式
         edittextlistener();
+
+        pref = PreferenceManager.getDefaultSharedPreferences(mContext);
+        editor = pref.edit();
+        editor.putString("phoneNumber", "187 5693 5216");
+        editor.putString("password", "123456");
+        editor.apply();
+
+        String userPhoneNumber = pref.getString("phoneNumber", null);
+        String PhonePassword = pref.getString("password", null);
+        LogUtil.e("lf123", "Success");
+        muserPNEdtext.setText(userPhoneNumber);
+        muserPNEdtext.setSelection(userPhoneNumber.length());
     }
 
     @Override
     public void initdata() {
+
 
     }
 
@@ -109,7 +154,6 @@ public class MyRegisteredFragment extends BaseFragment {
     public void lisetener(View view) {
         switch (view.getId()) {
             case R.id.linear_userPhone_line://获取点击事件，设置用户账号输入弹出软件盘
-
                 Message message = mHandler.obtainMessage(0x03);
                 mHandler.sendMessage(message);
                 break;
@@ -122,6 +166,23 @@ public class MyRegisteredFragment extends BaseFragment {
                 break;
             case R.id.icon_Password_clean://获取点击事件，清除用户密码数据
                 muserPAPEdtext.setText("");
+                break;
+            case R.id.icon_eye_type://获取点击事件，判断是否显示密码
+                TypeChang();
+                break;
+            case R.id.Tv_registered_msg://获取点击事件，改变布局
+                LayoutChange();
+                break;
+            case R.id.tv_user_losePassword://忘记密码的操作
+                buttonClick.OnClick(mTv_lose_password);
+                break;
+            case R.id.user_icon_qq:
+                break;
+            case R.id.user_icon_wechat_login:
+                break;
+            case R.id.btn_registered_login:
+                checklogin();
+                break;
             default:
                 break;
         }
@@ -130,6 +191,10 @@ public class MyRegisteredFragment extends BaseFragment {
     @Override
     public int getLayoutId() {
         return R.layout.fragment_registered_layout;
+    }
+
+    private void checklogin() {
+
     }
 
     public void setButtonClick(OnButtonClick buttonClick) {
@@ -215,6 +280,12 @@ public class MyRegisteredFragment extends BaseFragment {
                     }
                 }
 
+                if (s.length() == 13) {//判断手机号码是否正确
+                    isUserPhoneCheck = true;
+                } else {
+                    isUserPhoneCheck = false;
+                }
+
             }
         });
         /**
@@ -243,14 +314,17 @@ public class MyRegisteredFragment extends BaseFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
-                //将光标移动到末尾
-                muserPNEdtext.setSelection(muserPNEdtext.getText().toString().length());
-                //处理
                 if (s.toString().length() == 0) {
                     mIv_Password_clean.setVisibility(View.INVISIBLE);
                 } else {
                     mIv_Password_clean.setVisibility(View.VISIBLE);
+                }
+                muserPAPEdtext.setSelection(s.length());
+
+                if (s.length() != 0 && !s.equals("")) {
+                    isPasswordinit = true;
+                } else {
+                    isPasswordinit = false;
                 }
             }
         });
@@ -267,7 +341,34 @@ public class MyRegisteredFragment extends BaseFragment {
             }
         });
 
+    }
 
+    /**
+     * 对密码框是否显示密码的控制
+     */
+    private void TypeChang() {
+        if (mEyesType % 2 == 0) {
+            Message message = mHandler.obtainMessage(0x05);
+            mHandler.sendMessage(message);
+        } else {
+            Message message = mHandler.obtainMessage(0x06);
+            mHandler.sendMessage(message);
+        }
+        mEyesType++;
+    }
+
+    /**
+     * 通过点击判断布局格式
+     */
+    private void LayoutChange() {
+        if (layoutChange % 2 == 0) {
+            Message message = mHandler.obtainMessage(0x07);
+            mHandler.sendMessage(message);
+        } else {
+            Message message = mHandler.obtainMessage(0x08);
+            mHandler.sendMessage(message);
+        }
+        layoutChange++;
     }
 
 }

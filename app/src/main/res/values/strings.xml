@@ -14,6 +14,7 @@
     <string name="pleaseIntoPhoneNumber">请输入手机号码</string>
     <string name="pleaseIntoPhonePassword">输入当前登录密码</string>
     <string name="registered_msg1">我已注册，请使用密码登录</string>
+    <string name="registered_msg2">短信快捷登录</string>
     <string name="losePassword">忘记密码</string>
     <string name="btn_registered_msg1">下一步</string>
     <string name="btn_registered_msg2">登录</string>

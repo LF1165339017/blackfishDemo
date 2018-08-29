@@ -3,6 +3,7 @@ package lf.com.android.blackfishdemo.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +23,6 @@ public class LoginActivity extends BaseActivity {
     ImageView mIv_icon_qq;
     @BindView(R.id.user_icon_wechat_login)
     ImageView mIv_icon_Wechat;
-
     @Override
     public int getlayoutId() {
         return R.layout.activity_login;
@@ -54,7 +54,6 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void intitdata() {
-
     }
 
     @Override

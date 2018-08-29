@@ -15,9 +15,6 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
-    private boolean isFirstload = true;
-    private boolean isInitView = false;
-    private boolean isVisible = false;
     private View contentView;
     private SparseArray<View> mViews;
 
@@ -36,8 +33,6 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         mViews = new SparseArray<>();
         contentView = inflater.inflate(getLayoutId(), container, false);
         initView();
-        isInitView = true;
-        lazyload();
         return contentView;
     }
 
@@ -51,19 +46,10 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser) {
-            isVisible = true;
-            lazyload();
-        } else {
-            isVisible = false;
+            initdata();
         }
     }
 
-    private void lazyload() {
-        if (!isFirstload || !isVisible || !isInitView) {
-            return;
-        }
-        initdata();
-    }
 
     public <E extends View> E findView(int ViewId) {
         if (contentView != null) {
