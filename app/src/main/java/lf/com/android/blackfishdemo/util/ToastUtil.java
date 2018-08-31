@@ -12,9 +12,9 @@ import lf.com.android.blackfishdemo.R;
 
 public class ToastUtil {
 
-    private static final String PROMPT = "提示";
-    private static final String WARING = "警告";
-    private static final String ERROR = "错误";
+    public static final String PROMPT = "提示";
+    public static final String WARING = "警告";
+    public static final String ERROR = "错误";
     private static View view;
     private static Toast mToast;
     private static TextView mTv_toastPrompt, mTv_toastMessage;
@@ -36,12 +36,15 @@ public class ToastUtil {
         mTv_toastMessage = view.findViewById(R.id.toast_message_hint);
         switch (toastPrompt) {
             case PROMPT:
+                mTv_toastPrompt.setText(PROMPT);
                 mTv_toastPrompt.setTextColor(Color.parseColor("#707061"));
                 break;
             case WARING:
+                mTv_toastPrompt.setText(WARING);
                 mTv_toastPrompt.setTextColor(Color.parseColor("#FF5A34"));
                 break;
             case ERROR:
+                mTv_toastPrompt.setText(ERROR);
                 mTv_toastPrompt.setTextColor(Color.parseColor("#EF1F1F"));
                 break;
             default:

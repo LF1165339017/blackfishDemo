@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
-    android:layout_height="25dp"
+    android:layout_width="250dp"
+    android:layout_height="40dp"
     android:background="@drawable/shape_toast"
     android:orientation="horizontal">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
-        android:src="@drawable/push_small" />
+        android:src="@drawable/sh_protocol_icon" />
 
     <TextView
         android:id="@+id/toast_message"
@@ -17,9 +18,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:layout_marginStart="10dp"
+        android:gravity="center"
         android:text="@string/Prompt"
         android:textColor="@color/colorGray707061"
-        android:textSize="12sp" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/toast_message_hint"
@@ -28,9 +30,10 @@
         android:layout_gravity="center_vertical"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
+        android:gravity="center"
         android:maxLength="15"
         android:maxLines="1"
         android:textColor="@color/colorGray707061"
-        android:textSize="12sp" />
+        android:textSize="16sp" />
 
 </LinearLayout>

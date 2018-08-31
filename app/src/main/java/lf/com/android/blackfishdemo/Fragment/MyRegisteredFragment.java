@@ -19,14 +19,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnButtonClick;
+import lf.com.android.blackfishdemo.listener.OnCheckReturn;
 import lf.com.android.blackfishdemo.util.LogUtil;
+import lf.com.android.blackfishdemo.util.PhoneUtil;
+import lf.com.android.blackfishdemo.util.ToastUtil;
 
 public class MyRegisteredFragment extends BaseFragment {
     private Context mContext;
     private OnButtonClick buttonClick;
+    private OnCheckReturn aReturn;
     private RelativeLayout muserpasswordRelayout;
     private LinearLayout mUserPhonelayout, mUserPasswordlayout;
     private EditText muserPNEdtext, muserPAPEdtext;
@@ -36,12 +41,14 @@ public class MyRegisteredFragment extends BaseFragment {
     private View mView_phonebg_line, mView_password_line;
     private Button mLogin_btn;
     private boolean isUserPhoneCheck = false;//判断输入框格式是否正确 false为默认不正确
-    private boolean isViewRegisteredType = true;//true 为登录界面 false为注册界面
+    private boolean isViewRegisteredType = false;//true 为登录界面 false为注册界面
     private boolean isPasswordinit = false;//判断输入框是否输入密码;
     private int mEyesType = 0;//设置点击计数器，判断当前密码状态
     private int layoutChange = 0;//设置点击计数器，判断当前布局状态
     private SharedPreferences pref;//
     private SharedPreferences.Editor editor;
+    private String userPhoneNumber;
+    private String PhonePassword;
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -70,12 +77,14 @@ public class MyRegisteredFragment extends BaseFragment {
                     break;
                 case 0x07://通过点击次数判断是否改变格局，此时不改变
                     muserpasswordRelayout.setVisibility(View.VISIBLE);
+                    isViewRegisteredType = true;//是登录界面
                     mTv_Choose_type.setText(R.string.registered_msg2);
                     mLogin_btn.setText(R.string.btn_registered_msg2);
                     mLogin_btn.setBackground(getResources().getDrawable(R.drawable.shape_btn_light_yellow_bg));
                     break;
                 case 0x08://通过点击次数判断是否改变格局，此时改变
                     muserpasswordRelayout.setVisibility(View.GONE);
+                    isViewRegisteredType = false;//是注册界面
                     mTv_Choose_type.setText(R.string.registered_msg1);
                     mLogin_btn.setText(R.string.btn_registered_msg1);
                     mLogin_btn.setBackground(getResources().getDrawable(R.drawable.shape_btn_khakil_bg));
@@ -137,16 +146,14 @@ public class MyRegisteredFragment extends BaseFragment {
         editor.putString("password", "123456");
         editor.apply();
 
-        String userPhoneNumber = pref.getString("phoneNumber", null);
-        String PhonePassword = pref.getString("password", null);
-        LogUtil.e("lf123", "Success");
+        userPhoneNumber = pref.getString("phoneNumber", null);
+        PhonePassword = pref.getString("password", null);
         muserPNEdtext.setText(userPhoneNumber);
         muserPNEdtext.setSelection(userPhoneNumber.length());
     }
 
     @Override
     public void initdata() {
-
 
     }
 
@@ -193,12 +200,67 @@ public class MyRegisteredFragment extends BaseFragment {
         return R.layout.fragment_registered_layout;
     }
 
-    private void checklogin() {
+    private void checklogin() {//登录时对手机号码的判断
+        String number = muserPNEdtext.getText().toString();
+        String phonePassword = muserPAPEdtext.getText().toString();
+        String phonenumber = number.replace(" ", "");
+        String password = muserPAPEdtext.toString();
+        Toast toast = ToastUtil.setMyToast(mContext, ToastUtil.PROMPT,
+                "手机号码格式不对", Toast.LENGTH_SHORT);
+        Toast toast1 = ToastUtil.setMyToast(mContext, ToastUtil.WARING,
+                "这不是手机号码", Toast.LENGTH_SHORT);
+        Toast toast2 = ToastUtil.setMyToast(mContext, ToastUtil.ERROR,
+                "请输入密码，长度在6-20之间", Toast.LENGTH_SHORT);
+        Toast toast3 = ToastUtil.setMyToast(mContext, ToastUtil.PROMPT,
+                "用户不存在", Toast.LENGTH_SHORT);
+
+        if (isViewRegisteredType) {//判断是什么界面，true为登录界面，false为注册界面
+            if (isUserPhoneCheck) {//判断手机号是否是13位
+                if (PhoneUtil.isPhone(phonenumber)) {//判断手机号是否是手机号
+                    if (isPasswordinit) {//判断密码是否输入且位数是否在6-20之间
+                        if (number.equals(userPhoneNumber)) {//判断账户是否存在
+                            if (phonePassword.equals(PhonePassword)) {
+                                Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
+                            } else {
+                                aReturn.onCheckResultReturn();
+                            }
+                        } else {
+                            toast3.show();
+                        }
+                    } else {
+                        toast2.show();
+                    }
+                } else {
+                    toast1.show();
+                }
+            } else {
+                toast.show();
+            }
+
+        } else {
+            if (isUserPhoneCheck) {//判断手机号是否有13位
+                if (PhoneUtil.isPhone(phonenumber)) {
+                    if (number.equals(userPhoneNumber)) {//判断账户是否存在
+                        ToastUtil.setToastNormal(mContext, "下一步", Toast.LENGTH_SHORT);
+                    } else {
+                        toast3.show();
+                    }
+                } else {
+                    toast1.show();
+                }
+            } else {
+                toast.show();
+            }
+        }
 
     }
 
-    public void setButtonClick(OnButtonClick buttonClick) {
+    public void setButtonClick(OnButtonClick buttonClick) {//点击忘记密码时回调的函数
         this.buttonClick = buttonClick;
+    }
+
+    public void setCheckReturn(OnCheckReturn aReturn) {//点击Dialog忘记密码时回调的函数
+        this.aReturn = aReturn;
     }
 
     /**
@@ -321,7 +383,7 @@ public class MyRegisteredFragment extends BaseFragment {
                 }
                 muserPAPEdtext.setSelection(s.length());
 
-                if (s.length() != 0 && !s.equals("")) {
+                if (s.toString().length() != 0 && s.toString().length() > 5 && s.toString().length() < 21) {
                     isPasswordinit = true;
                 } else {
                     isPasswordinit = false;

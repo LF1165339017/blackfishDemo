@@ -22,4 +22,6 @@
     <string name="Tencent">QQ</string>
     <string name="WeChat">微信</string>
     <string name="Prompt">提示:</string>
+    <string name="passwordError">密码错误！请核对</string>
+    <string name="Reset">重置</string>
 </resources>
