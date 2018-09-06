@@ -39,7 +39,6 @@ public class RegisteredActivity extends BaseActivity {
     @Override
     public void initView() {
         fragment = (MyRegisteredFragment) getSupportFragmentManager().findFragmentById(R.id.registeredFrame_layout);
-        fragment.setArguments(bundle);
         fragment.setButtonClick(new OnButtonClick() {
             @Override
             public void OnClick(View v) {
@@ -76,7 +75,8 @@ public class RegisteredActivity extends BaseActivity {
         bundle.putString("Password", PhonePassword);
         bundle.putString("MyRegisteredFragmentPhoneNumber", fragment.getEdUserPhoneNumber());
         //bundle.putString("MyLosePasswordFragment1UserPhoneNumber", losefragment1.getEduserPhone());
-
+        fragment.setArguments(bundle);
+        fragment.updateView();
     }
 
     @Override

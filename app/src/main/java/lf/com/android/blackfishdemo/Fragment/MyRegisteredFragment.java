@@ -140,6 +140,10 @@ public class MyRegisteredFragment extends BaseFragment {
         //对输入框监听，设置格式化3-4-4手机号码模式
         edittextlistener();
 
+    }
+
+    public void updateView() {
+        bundle = getArguments();
         userPhoneNumber = bundle.getString("PhoneNumber");
         PhonePassword = bundle.getString("Password");
         muserPNEdtext.setText(userPhoneNumber);
