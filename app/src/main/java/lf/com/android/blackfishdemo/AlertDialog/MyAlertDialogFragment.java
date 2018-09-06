@@ -28,20 +28,19 @@ public class MyAlertDialogFragment extends DialogFragment implements View.OnClic
         view = LayoutInflater.from(mContext).inflate(R.layout.passworderrordialog, null);
         mDialog = new Dialog(mContext, R.style.PassWordDialog);
         mDialog.setContentView(view);
-        mDialog.setTitle(null);
         intitView();
         initData();
         return mDialog;
     }
 
     private void initData() {
-        SpannableStringUtil.setText(mTv_dialog_message, 0, 3,
+        SpannableStringUtil.setText(mTv_dialog_message, 0, 4,
                 R.color.colorRedEF1F1F, mTv_dialog_message.getText().toString());
     }
 
     private void intitView() {
         mTv_dialog_message = view.findViewById(R.id.dialog_messageTitle);
-        mTv_losePassword = view.findViewById(R.id.tv_user_losePassword);
+        mTv_losePassword = view.findViewById(R.id.Tv_lose_password);
         mTv_Reset = view.findViewById(R.id.Tv_Reset);
 
         mTv_dialog_message.setOnClickListener(this);

@@ -24,4 +24,6 @@
     <string name="Prompt">提示:</string>
     <string name="passwordError">密码错误！请核对</string>
     <string name="Reset">重置</string>
+    <string name="InputVerificationCode">输入验证码</string>
+    <string name="losePassword_Message1">请输入正确验证码，以防假冒</string>
 </resources>

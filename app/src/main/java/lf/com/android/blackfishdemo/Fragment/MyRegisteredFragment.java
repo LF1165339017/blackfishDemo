@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
@@ -45,8 +46,7 @@ public class MyRegisteredFragment extends BaseFragment {
     private boolean isPasswordinit = false;//判断输入框是否输入密码;
     private int mEyesType = 0;//设置点击计数器，判断当前密码状态
     private int layoutChange = 0;//设置点击计数器，判断当前布局状态
-    private SharedPreferences pref;//
-    private SharedPreferences.Editor editor;
+    private Bundle bundle = getArguments();
     private String userPhoneNumber;
     private String PhonePassword;
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -140,14 +140,8 @@ public class MyRegisteredFragment extends BaseFragment {
         //对输入框监听，设置格式化3-4-4手机号码模式
         edittextlistener();
 
-        pref = PreferenceManager.getDefaultSharedPreferences(mContext);
-        editor = pref.edit();
-        editor.putString("phoneNumber", "187 5693 5216");
-        editor.putString("password", "123456");
-        editor.apply();
-
-        userPhoneNumber = pref.getString("phoneNumber", null);
-        PhonePassword = pref.getString("password", null);
+        userPhoneNumber = bundle.getString("PhoneNumber");
+        PhonePassword = bundle.getString("Password");
         muserPNEdtext.setText(userPhoneNumber);
         muserPNEdtext.setSelection(userPhoneNumber.length());
     }
@@ -289,6 +283,7 @@ public class MyRegisteredFragment extends BaseFragment {
     }
 
     private void edittextlistener() {
+
         //账号输入框事件监听
         muserPNEdtext.addTextChangedListener(new TextWatcher() {
             //这个方法被调用，说明在S字符串中，从start位置开始的count个字符即将被长度为after的新文本
@@ -431,6 +426,10 @@ public class MyRegisteredFragment extends BaseFragment {
             mHandler.sendMessage(message);
         }
         layoutChange++;
+    }
+
+    public String getEdUserPhoneNumber() {
+        return muserPNEdtext.getText().toString();
     }
 
 }

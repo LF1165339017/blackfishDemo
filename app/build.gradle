@@ -1,5 +1,14 @@
 apply plugin: 'com.android.application'
+// 添加插件
+apply plugin: 'com.mob.sdk'
 
+// 在MobSDK的扩展中注册SMSSDK的相关信息
+MobSDK {
+    appKey "2712bec9981e6"
+    appSecret "0c0ff78dacd07f9529e2140b0b016374"
+
+    SMSSDK {}
+}
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -27,4 +36,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    implementation 'com.android.support:design:28.0.0-rc01'
 }
