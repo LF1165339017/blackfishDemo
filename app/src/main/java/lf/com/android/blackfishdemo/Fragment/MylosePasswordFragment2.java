@@ -17,6 +17,7 @@ import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.InputCompleterListener;
 import lf.com.android.blackfishdemo.listener.OnVerifyCodeResultListener;
 import lf.com.android.blackfishdemo.util.CountDownUtil;
+import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.SpannableStringUtil;
 import lf.com.android.blackfishdemo.view.ViewCodeView;
 
@@ -26,7 +27,7 @@ public class MylosePasswordFragment2 extends BaseFragment {
     private TextView mTvMessage1;
     private TextView mTvMessage2;
     private String getPhoneNumber;
-    private String message1, message2, message3;
+    private String message1, message2, message3, message4;
     private TextView mTextVerifyTimer;
     private ImageView mIvback;
     private Context mContext;
@@ -35,6 +36,7 @@ public class MylosePasswordFragment2 extends BaseFragment {
     private OnVerifyCodeResultListener listener = new OnVerifyCodeResultListener() {
         @Override
         public void sendSuccess() {
+            mTvMessage2.setVisibility(View.INVISIBLE);
             new Thread(new Runnable() {
                 @Override
                 public void run() {
@@ -47,32 +49,42 @@ public class MylosePasswordFragment2 extends BaseFragment {
 
         @Override
         public void sendCodeFailure() {
-
+            /*message4 = getString(R.string.losePasswordMessageError2);
+            mTvMessage2.setVisibility(View.VISIBLE);
+            SpannableStringUtil.setText(mTvMessage2, 0,
+                    message4.length(), Color.parseColor("#EF1F1F"), message4);*/
         }
 
         @Override
         public void getCodeSuccess() {
+            //mTvMessage2.setVisibility(View.INVISIBLE);
 
         }
 
         @Override
         public void getCodeFailure() {
-
+           /* message4 = getString(R.string.losePasswordMessageError2);
+            mTvMessage2.setVisibility(View.VISIBLE);
+            SpannableStringUtil.setText(mTvMessage2, 0,
+                    message4.length(), Color.parseColor("#EF1F1F"), message4);*/
         }
 
 
         @Override
         public void submitCodeSuccesss(String phoneNumber, String data) {
+            //mTvMessage2.setVisibility(View.INVISIBLE);
 
         }
 
         @Override
         public void submitCodeFailure() {
-
+           /* message3 = getString(R.string.losePasswordMessageError1);
+            mTvMessage2.setVisibility(View.VISIBLE);
+            SpannableStringUtil.setText(mTvMessage2, 0, message3.length(),
+                    Color.parseColor("#EF1F1F"), message3);*/
 
         }
     };
-
 
     @Override
     public void initView() {
@@ -97,7 +109,12 @@ public class MylosePasswordFragment2 extends BaseFragment {
         //获取手机号码参数
         bundle = getArguments();
         PhoneNumber = bundle.getString("MyLosePasswordFragment1UserPhoneNumber", null);
-        getPhoneNumber = PhoneNumber.replace(" ", "");
+        if (PhoneNumber != null) {
+            getPhoneNumber = PhoneNumber.replace(" ", "");
+        } else {
+            return;
+        }
+        LogUtil.d("LF123", "123:" + getPhoneNumber);
 
         //设置监听
         mIvback.setOnClickListener(this);
@@ -105,14 +122,11 @@ public class MylosePasswordFragment2 extends BaseFragment {
 
         //
         message1 = "我们已向" + PhoneNumber + "发送验证信息";
-        message2 = "请查看短信并输入验证码";
-        message3 = "验证码已失效，请重新获取";
-        SpannableStringUtil.setText(mTvMessage, 5, 17,
-                Color.parseColor("#F83334"), message1);
-        mTvMessage1.setText(message2);
-
-        SpannableStringUtil.setText(mTvMessage2, 0,
-                message3.length(), Color.parseColor("#EF1F1F"), message3);
+        message2 = getString(R.string.losePassword_Message1);
+        SpannableStringUtil.setText(mTvMessage, 4, 17,
+                Color.parseColor("#4169E1"), message1);
+        SpannableStringUtil.setText(mTvMessage1, 9, message2.toString().length(),
+                Color.parseColor("#EF1F1F"), message2);
 
         SendCode("86", getPhoneNumber);
 
@@ -128,7 +142,7 @@ public class MylosePasswordFragment2 extends BaseFragment {
     public void lisetener(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
-                onDestroy();
+                getFragmentManager().popBackStack();
                 break;
             case R.id.tv_showTime:
                 SendCode("86", getPhoneNumber);
@@ -183,7 +197,6 @@ public class MylosePasswordFragment2 extends BaseFragment {
                 }
             }
         };
-
         SMSSDK.submitVerificationCode(country, number, code);
     }
 
@@ -194,6 +207,7 @@ public class MylosePasswordFragment2 extends BaseFragment {
     }
 
     private void checkSumbitcode() {
+
         mViewCodeView.setListener(new InputCompleterListener() {
             @Override
             public void inputComplete() {

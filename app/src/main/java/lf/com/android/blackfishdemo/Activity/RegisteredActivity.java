@@ -15,6 +15,7 @@ import android.view.View;
 import lf.com.android.blackfishdemo.AlertDialog.MyAlertDialogFragment;
 import lf.com.android.blackfishdemo.Fragment.MyRegisteredFragment;
 import lf.com.android.blackfishdemo.Fragment.MylosePasswordFragment1;
+import lf.com.android.blackfishdemo.Fragment.MylosePasswordFragment2;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnButtonClick;
 import lf.com.android.blackfishdemo.listener.OnCheckReturn;
@@ -25,11 +26,10 @@ public class RegisteredActivity extends BaseActivity {
     private String userPhoneNumber;
     private String PhonePassword;
     private MyRegisteredFragment fragment = new MyRegisteredFragment();
-    private MylosePasswordFragment1 losefragment1 = new MylosePasswordFragment1();
     private static final String TAG = "RegisteredActivity";
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    private Bundle bundle = new Bundle();
+    private Bundle Regisredbundle = new Bundle();
 
     @Override
     public int getlayoutId() {
@@ -38,20 +38,18 @@ public class RegisteredActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        fragment = (MyRegisteredFragment) getSupportFragmentManager().findFragmentById(R.id.registeredFrame_layout);
-        fragment.setArguments(bundle);
-        fragment.setButtonClick(new OnButtonClick() {
-            @Override
-            public void OnClick(View v) {
-                LogUtil.d("RegisteredActivity", "回调成功");
-                replaceFragment(losefragment1, bundle);
-            }
-        });
+        pref = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = pref.edit();
+        editor.putString("phoneNumber", "187 5693 5216");
+        editor.putString("password", "123456");
+        editor.apply();
 
+        userPhoneNumber = pref.getString("phoneNumber", null);
+        PhonePassword = pref.getString("password", null);
+        fragment = (MyRegisteredFragment) getSupportFragmentManager().findFragmentById(R.id.registeredFrame_layout);
         fragment.setCheckReturn(new OnCheckReturn() {
             @Override
             public void onCheckResultReturn() {
-                LogUtil.d("lf123", "进入到此方法3");
                 MyAlertDialogFragment fragment = new MyAlertDialogFragment();
                 fragment.setOnLosePassword(new Ondialoglistener() {
                     @Override
@@ -63,21 +61,10 @@ public class RegisteredActivity extends BaseActivity {
             }
         });
 
-
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = pref.edit();
-        editor.putString("phoneNumber", "187 5693 5216");
-        editor.putString("password", "123456");
-        editor.apply();
-
-        userPhoneNumber = pref.getString("phoneNumber", null);
-        PhonePassword = pref.getString("password", null);
-        bundle.putString("PhoneNumber", userPhoneNumber);
-        bundle.putString("Password", PhonePassword);
-        bundle.putString("MyRegisteredFragmentPhoneNumber", fragment.getEdUserPhoneNumber());
-        //bundle.putString("MyLosePasswordFragment1UserPhoneNumber", losefragment1.getEduserPhone());
+        fragment.updateView(userPhoneNumber, PhonePassword);
 
     }
+
 
     @Override
     public void intitdata() {

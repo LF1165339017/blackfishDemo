@@ -2,6 +2,8 @@ package lf.com.android.blackfishdemo.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.InputCompleterListener;
+import lf.com.android.blackfishdemo.util.LogUtil;
 
 public class ViewCodeView extends RelativeLayout {
     private EditText mEditText;
@@ -53,14 +56,8 @@ public class ViewCodeView extends RelativeLayout {
         mViews[4] = findViewById(R.id.view5);
         mViews[5] = findViewById(R.id.view6);
         mEditText = findViewById(R.id.et_code_text);
-        //隐藏光标
-        mEditText.setCursorVisible(true);
+        mEditText.setCursorVisible(false);
         setEditTextLitener();
-        setViewBackColor();
-    }
-
-    private void setViewBackColor() {
-
     }
 
     private void setEditTextLitener() {
@@ -93,6 +90,7 @@ public class ViewCodeView extends RelativeLayout {
                         mTextViews[i].setText("");
                     }
                 }
+
             }
         });
     }
@@ -109,13 +107,5 @@ public class ViewCodeView extends RelativeLayout {
         mEditText.setText("");
     }
 
-    private void setViewbackColor() {
-        for (int i = 0; i < Max; i++) {
-            if (mTextViews[i].isFocused()) {
-                mViews[i].setBackgroundColor(Color.parseColor("#FECD15"));
-            } else {
-                mViews[i].setBackgroundColor(Color.parseColor("#9D9D9D"));
-            }
-        }
-    }
+
 }

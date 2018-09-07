@@ -1,13 +1,14 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -16,10 +17,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import lf.com.android.blackfishdemo.R;
+import lf.com.android.blackfishdemo.listener.OnCheckReturn;
+import lf.com.android.blackfishdemo.util.FragmentTranscationUtil;
+import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.PhoneUtil;
 import lf.com.android.blackfishdemo.util.ToastUtil;
 
@@ -30,8 +33,8 @@ public class MylosePasswordFragment1 extends BaseFragment {
     private Button mbtn;
     private LinearLayout mLinlayout;
     private boolean isUserPhoneCheck;
-    private String userPhoneNumber;
-    private Bundle bundle;
+    private String userPhoneNumber, bundlePhoneNumber;
+    private Bundle bundle, mLosePassword1Bundle;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -73,11 +76,9 @@ public class MylosePasswordFragment1 extends BaseFragment {
         mIv_icon_left.setOnClickListener(this);
         //对EditText进行监听
         EdittextListener();
+        //获取传入的参数，更新
+        updateView();
 
-
-        bundle = getArguments();
-        userPhoneNumber = bundle.getString("MyRegisteredFragmentPhoneNumber", null);
-        mUserPhoneEdittext.setText(userPhoneNumber);
     }
 
     @Override
@@ -99,7 +100,7 @@ public class MylosePasswordFragment1 extends BaseFragment {
                 btnCheck();
                 break;
             case R.id.icon_left:
-                onDestroy();
+                getFragmentManager().popBackStack();
                 break;
             default:
                 break;
@@ -187,8 +188,8 @@ public class MylosePasswordFragment1 extends BaseFragment {
     }
 
     private void btnCheck() {
-        String number = mUserPhoneEdittext.getText().toString();
-        String phonenumber = number.replace(" ", "");
+        userPhoneNumber = mUserPhoneEdittext.getText().toString();
+        String number = userPhoneNumber.replace(" ", "");
         Toast toast = ToastUtil.setMyToast(mContext, ToastUtil.PROMPT,
                 "手机号码格式不对", Toast.LENGTH_SHORT);
         Toast toast1 = ToastUtil.setMyToast(mContext, ToastUtil.WARING,
@@ -196,9 +197,9 @@ public class MylosePasswordFragment1 extends BaseFragment {
         Toast toast2 = ToastUtil.setMyToast(mContext, ToastUtil.PROMPT,
                 "用户不存在", Toast.LENGTH_SHORT);
         if (isUserPhoneCheck) {//判断手机号是否有13位
-            if (PhoneUtil.isPhone(phonenumber)) {//判断是否是手机号
-                if (number.equals(userPhoneNumber)) {//判断账户是否存在
-                    ToastUtil.setToastNormal(mContext, "下一步", Toast.LENGTH_SHORT);
+            if (PhoneUtil.isPhone(number)) {//判断是否是手机号
+                if (userPhoneNumber.equals(bundlePhoneNumber)) {//判断账户是否存在
+                    jumpNewFragment();
                 } else {
                     toast2.show();
                 }
@@ -210,8 +211,20 @@ public class MylosePasswordFragment1 extends BaseFragment {
         }
     }
 
+    private void jumpNewFragment() {
+        mLosePassword1Bundle = new Bundle();
+        mLosePassword1Bundle.putString("MyLosePasswordFragment1UserPhoneNumber", userPhoneNumber);
+        FragmentTranscationUtil.replaceFragment(getActivity(), new MylosePasswordFragment2(), mLosePassword1Bundle);
+    }
 
-    /*public String getEduserPhone() {
-        return mUserPhoneEdittext.getText().toString();
-    }*/
+
+    private void updateView() {
+        bundle = getArguments();
+        bundlePhoneNumber = bundle.getString("MyRegisteredFragmentPhoneNumber", null);
+        if (bundlePhoneNumber != null) {
+            mUserPhoneEdittext.setText(bundlePhoneNumber);
+            mUserPhoneEdittext.setSelection(bundlePhoneNumber.length());
+        }
+    }
+
 }

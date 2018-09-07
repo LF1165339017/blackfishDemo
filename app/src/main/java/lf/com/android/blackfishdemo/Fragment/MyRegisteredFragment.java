@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
@@ -25,13 +28,13 @@ import android.widget.Toast;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnButtonClick;
 import lf.com.android.blackfishdemo.listener.OnCheckReturn;
+import lf.com.android.blackfishdemo.util.FragmentTranscationUtil;
 import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.PhoneUtil;
 import lf.com.android.blackfishdemo.util.ToastUtil;
 
 public class MyRegisteredFragment extends BaseFragment {
     private Context mContext;
-    private OnButtonClick buttonClick;
     private OnCheckReturn aReturn;
     private RelativeLayout muserpasswordRelayout;
     private LinearLayout mUserPhonelayout, mUserPasswordlayout;
@@ -46,9 +49,9 @@ public class MyRegisteredFragment extends BaseFragment {
     private boolean isPasswordinit = false;//判断输入框是否输入密码;
     private int mEyesType = 0;//设置点击计数器，判断当前密码状态
     private int layoutChange = 0;//设置点击计数器，判断当前布局状态
-    private Bundle bundle = getArguments();
-    private String userPhoneNumber;
-    private String PhonePassword;
+    private Bundle bundle, myRegisteredFragmentBundle;
+    private String userPhoneNumber, bundlePhoneNumber;
+    private String userPhonePassword, bundlePhonePassword;
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
         public boolean handleMessage(Message msg) {
@@ -139,15 +142,11 @@ public class MyRegisteredFragment extends BaseFragment {
         mIv_user_weChat.setOnClickListener(this);
         //对输入框监听，设置格式化3-4-4手机号码模式
         edittextlistener();
-
-        userPhoneNumber = bundle.getString("PhoneNumber");
-        PhonePassword = bundle.getString("Password");
-        muserPNEdtext.setText(userPhoneNumber);
-        muserPNEdtext.setSelection(userPhoneNumber.length());
     }
 
     @Override
     public void initdata() {
+
 
     }
 
@@ -175,7 +174,7 @@ public class MyRegisteredFragment extends BaseFragment {
                 LayoutChange();
                 break;
             case R.id.tv_user_losePassword://忘记密码的操作
-                buttonClick.OnClick(mTv_lose_password);
+                jumpNewFragment();
                 break;
             case R.id.user_icon_qq:
                 break;
@@ -194,11 +193,11 @@ public class MyRegisteredFragment extends BaseFragment {
         return R.layout.fragment_registered_layout;
     }
 
+
     private void checklogin() {//登录时对手机号码的判断
-        String number = muserPNEdtext.getText().toString();
-        String phonePassword = muserPAPEdtext.getText().toString();
-        String phonenumber = number.replace(" ", "");
-        String password = muserPAPEdtext.toString();
+        userPhoneNumber = muserPNEdtext.getText().toString();
+        userPhonePassword = muserPAPEdtext.getText().toString();
+        String phonenumber = userPhoneNumber.replace(" ", "");
         Toast toast = ToastUtil.setMyToast(mContext, ToastUtil.PROMPT,
                 "手机号码格式不对", Toast.LENGTH_SHORT);
         Toast toast1 = ToastUtil.setMyToast(mContext, ToastUtil.WARING,
@@ -212,8 +211,8 @@ public class MyRegisteredFragment extends BaseFragment {
             if (isUserPhoneCheck) {//判断手机号是否是13位
                 if (PhoneUtil.isPhone(phonenumber)) {//判断手机号是否是手机号
                     if (isPasswordinit) {//判断密码是否输入且位数是否在6-20之间
-                        if (number.equals(userPhoneNumber)) {//判断账户是否存在
-                            if (phonePassword.equals(PhonePassword)) {
+                        if (userPhoneNumber.equals(bundlePhoneNumber)) {//判断账户是否存在
+                            if (userPhonePassword.equals(bundlePhonePassword)) {//判断密码是否正确
                                 Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
                             } else {
                                 aReturn.onCheckResultReturn();
@@ -233,10 +232,12 @@ public class MyRegisteredFragment extends BaseFragment {
 
         } else {
             if (isUserPhoneCheck) {//判断手机号是否有13位
-                if (PhoneUtil.isPhone(phonenumber)) {
-                    if (number.equals(userPhoneNumber)) {//判断账户是否存在
+                if (PhoneUtil.isPhone(phonenumber)) {//判断是否是手机号
+                    if (userPhoneNumber.equals(bundlePhoneNumber)) {//判断账户是否存在
+
                         ToastUtil.setToastNormal(mContext, "下一步", Toast.LENGTH_SHORT);
                     } else {
+
                         toast3.show();
                     }
                 } else {
@@ -249,8 +250,24 @@ public class MyRegisteredFragment extends BaseFragment {
 
     }
 
-    public void setButtonClick(OnButtonClick buttonClick) {//点击忘记密码时回调的函数
-        this.buttonClick = buttonClick;
+    /**
+     * 忘记密码跳转到新的页面
+     */
+    private void jumpNewFragment() {
+        myRegisteredFragmentBundle = new Bundle();
+        userPhoneNumber = muserPNEdtext.getText().toString();
+        String phonenumber = userPhoneNumber.replace(" ", "");
+        if (isUserPhoneCheck) {//判断手机号是否是13位
+            if (PhoneUtil.isPhone(phonenumber)) {//判断手机号是否是手机号
+                myRegisteredFragmentBundle.putString("MyRegisteredFragmentPhoneNumber", userPhoneNumber);
+            } else {
+                myRegisteredFragmentBundle.putString("MyRegisteredFragmentPhoneNumber", null);
+            }
+        } else {
+            myRegisteredFragmentBundle.putString("MyRegisteredFragmentPhoneNumber", null);
+        }
+
+        FragmentTranscationUtil.replaceFragment(getActivity(), new MylosePasswordFragment1(), myRegisteredFragmentBundle);
     }
 
     public void setCheckReturn(OnCheckReturn aReturn) {//点击Dialog忘记密码时回调的函数
@@ -428,8 +445,15 @@ public class MyRegisteredFragment extends BaseFragment {
         layoutChange++;
     }
 
-    public String getEdUserPhoneNumber() {
-        return muserPNEdtext.getText().toString();
+    public void updateView(String userPhoneNumber, String userPhonePassword) {
+        if (userPhoneNumber != null) {
+            bundlePhoneNumber = userPhoneNumber;
+            muserPNEdtext.setText(bundlePhoneNumber);
+            muserPNEdtext.setSelection(bundlePhoneNumber.length());
+        }
+        if (userPhonePassword != null) {
+            bundlePhonePassword = userPhonePassword;
+        }
     }
 
 }
