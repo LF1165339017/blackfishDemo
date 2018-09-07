@@ -142,6 +142,18 @@ public class MyRegisteredFragment extends BaseFragment {
         mIv_user_weChat.setOnClickListener(this);
         //对输入框监听，设置格式化3-4-4手机号码模式
         edittextlistener();
+<<<<<<< HEAD
+=======
+
+    }
+
+    public void updateView() {
+        bundle = getArguments();
+        userPhoneNumber = bundle.getString("PhoneNumber");
+        PhonePassword = bundle.getString("Password");
+        muserPNEdtext.setText(userPhoneNumber);
+        muserPNEdtext.setSelection(userPhoneNumber.length());
+>>>>>>> 01461fb85d6724c508303d6f8a9c147e25a3724b
     }
 
     @Override
