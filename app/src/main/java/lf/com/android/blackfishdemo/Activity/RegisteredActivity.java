@@ -29,7 +29,6 @@ public class RegisteredActivity extends BaseActivity {
     private static final String TAG = "RegisteredActivity";
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
-    private Bundle Regisredbundle = new Bundle();
 
     @Override
     public int getlayoutId() {
@@ -80,27 +79,6 @@ public class RegisteredActivity extends BaseActivity {
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(0, R.anim.activity_bottom_out);
-    }
-
-    //获取FragmentManager，开启事务，添加碎片
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager manager = getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.activity_right_in, 0, 0, R.anim.activity_right_out);
-        transaction.replace(R.id.registeredFrame_layout, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    //获取FragmentManager，开启事务，添加碎片
-    private void replaceFragment(Fragment fragment, Bundle bundle) {
-        FragmentManager manager = getSupportFragmentManager();
-        fragment.setArguments(bundle);
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.setCustomAnimations(R.anim.activity_right_in, 0, 0, R.anim.activity_right_out);
-        transaction.replace(R.id.registeredFrame_layout, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
     }
 
 }
