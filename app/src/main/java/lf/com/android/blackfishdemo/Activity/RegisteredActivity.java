@@ -37,22 +37,12 @@ public class RegisteredActivity extends BaseActivity {
 
     @Override
     public void initView() {
-<<<<<<< HEAD
         pref = PreferenceManager.getDefaultSharedPreferences(this);
         editor = pref.edit();
         editor.putString("phoneNumber", "187 5693 5216");
         editor.putString("password", "123456");
         editor.apply();
-=======
         fragment = (MyRegisteredFragment) getSupportFragmentManager().findFragmentById(R.id.registeredFrame_layout);
-        fragment.setButtonClick(new OnButtonClick() {
-            @Override
-            public void OnClick(View v) {
-                LogUtil.d("RegisteredActivity", "回调成功");
-                replaceFragment(losefragment1, bundle);
-            }
-        });
->>>>>>> 01461fb85d6724c508303d6f8a9c147e25a3724b
 
         userPhoneNumber = pref.getString("phoneNumber", null);
         PhonePassword = pref.getString("password", null);
@@ -71,26 +61,8 @@ public class RegisteredActivity extends BaseActivity {
             }
         });
 
-<<<<<<< HEAD
         fragment.updateView(userPhoneNumber, PhonePassword);
 
-=======
-
-        pref = PreferenceManager.getDefaultSharedPreferences(this);
-        editor = pref.edit();
-        editor.putString("phoneNumber", "187 5693 5216");
-        editor.putString("password", "123456");
-        editor.apply();
-
-        userPhoneNumber = pref.getString("phoneNumber", null);
-        PhonePassword = pref.getString("password", null);
-        bundle.putString("PhoneNumber", userPhoneNumber);
-        bundle.putString("Password", PhonePassword);
-        bundle.putString("MyRegisteredFragmentPhoneNumber", fragment.getEdUserPhoneNumber());
-        //bundle.putString("MyLosePasswordFragment1UserPhoneNumber", losefragment1.getEduserPhone());
-        fragment.setArguments(bundle);
-        fragment.updateView();
->>>>>>> 01461fb85d6724c508303d6f8a9c147e25a3724b
     }
 
 
