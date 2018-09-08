@@ -1,7 +1,5 @@
 package lf.com.android.blackfishdemo.util;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -16,7 +14,7 @@ public class FragmentTranscationUtil {
         FragmentManager manager = activity.getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.anim.activity_right_in, 0, 0, R.anim.activity_right_out);
-        transaction.replace(R.id.registeredFrame_layout, fragment);
+        transaction.replace(R.id.userloginFrame_layout, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -27,9 +25,10 @@ public class FragmentTranscationUtil {
         fragment.setArguments(bundle);
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.setCustomAnimations(R.anim.activity_right_in, 0, 0, R.anim.activity_right_out);
-        transaction.replace(R.id.registeredFrame_layout, fragment);
+        transaction.replace(R.id.userloginFrame_layout, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
     }
+
 
 }

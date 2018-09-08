@@ -28,4 +28,8 @@
     <string name="losePassword_Message1">请输入正确验证码，以防假冒</string>
     <string name="losePasswordMessageError1">验证码失效，请重新获取</string>
     <string name="losePasswordMessageError2">验证码获取过程发生未知错误，请检查网络重新获取</string>
+    <string name="InputNewPassword">请输入新的登录密码</string>
+    <string name="newstringpasswordhint">6-20位，不能为纯数字或纯字母</string>
+    <string name="submission">提交</string>
+    <string name="setpassword">设置登录密码</string>
 </resources>

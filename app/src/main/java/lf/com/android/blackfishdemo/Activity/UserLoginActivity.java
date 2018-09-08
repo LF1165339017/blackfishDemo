@@ -1,23 +1,21 @@
 package lf.com.android.blackfishdemo.Activity;
 
-
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
 
 import lf.com.android.blackfishdemo.AlertDialog.MyAlertDialogFragment;
-import lf.com.android.blackfishdemo.Fragment.MyRegisteredFragment;
+import lf.com.android.blackfishdemo.Fragment.UserLoginFragment;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnBackPress;
 import lf.com.android.blackfishdemo.listener.OnCheckReturn;
 import lf.com.android.blackfishdemo.listener.Ondialoglistener;
 
-
-public class RegisteredActivity extends BaseActivity {
+public class UserLoginActivity extends BaseActivity {
     private String userPhoneNumber;
     private String PhonePassword;
-    private MyRegisteredFragment fragment = new MyRegisteredFragment();
+    private UserLoginFragment fragment = new UserLoginFragment();
     private SharedPreferences pref;
     private SharedPreferences.Editor editor;
     private OnBackPress onBackPress;
@@ -25,7 +23,7 @@ public class RegisteredActivity extends BaseActivity {
 
     @Override
     public int getlayoutId() {
-        return R.layout.activity_registered_layout;
+        return R.layout.activity_user_login;
     }
 
     @Override
@@ -35,7 +33,7 @@ public class RegisteredActivity extends BaseActivity {
         editor.putString("phoneNumber", "187 5693 5216");
         editor.putString("password", "123456");
         editor.apply();
-        fragment = (MyRegisteredFragment) getSupportFragmentManager().findFragmentById(R.id.RegisterFrame_layout);
+        fragment = (UserLoginFragment) getSupportFragmentManager().findFragmentById(R.id.userloginFrame_layout);
         userPhoneNumber = pref.getString("phoneNumber", null);
         PhonePassword = pref.getString("password", null);
         fragment.setCheckReturn(new OnCheckReturn() {
@@ -54,7 +52,6 @@ public class RegisteredActivity extends BaseActivity {
         fragment.updateView(userPhoneNumber, PhonePassword);
     }
 
-
     @Override
     public void intitdata() {
 
@@ -70,7 +67,6 @@ public class RegisteredActivity extends BaseActivity {
         super.onBackPressed();
         overridePendingTransition(0, R.anim.activity_bottom_out);
     }
-
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {

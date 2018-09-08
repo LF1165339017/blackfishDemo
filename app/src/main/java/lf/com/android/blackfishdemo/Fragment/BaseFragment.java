@@ -17,8 +17,6 @@ import butterknife.Unbinder;
 public abstract class BaseFragment extends Fragment implements View.OnClickListener {
     private View contentView;
     private SparseArray<View> mViews;
-
-
     public abstract void initView();
 
     public abstract void initdata();

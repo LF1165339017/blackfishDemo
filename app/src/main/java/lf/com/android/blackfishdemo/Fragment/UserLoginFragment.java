@@ -1,22 +1,16 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.view.animation.Transformation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,14 +21,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import lf.com.android.blackfishdemo.R;
-import lf.com.android.blackfishdemo.listener.OnButtonClick;
 import lf.com.android.blackfishdemo.listener.OnCheckReturn;
 import lf.com.android.blackfishdemo.util.FragmentTranscationUtil;
 import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.PhoneUtil;
 import lf.com.android.blackfishdemo.util.ToastUtil;
 
-public class MyRegisteredFragment extends BaseFragment {
+public class UserLoginFragment extends BaseFragment {
     private Context mContext;
     private OnCheckReturn aReturn;
     private RelativeLayout muserpasswordRelayout;
@@ -50,7 +43,7 @@ public class MyRegisteredFragment extends BaseFragment {
     private boolean isPasswordinit = false;//判断输入框是否输入密码;
     private int mEyesType = 0;//设置点击计数器，判断当前密码状态
     private int layoutChange = 0;//设置点击计数器，判断当前布局状态
-    private Bundle myRegisteredFragmentBundle, bundle;
+    private Bundle myregisteredfragmentbundle;
     private String userPhoneNumber, bundlePhoneNumber;
     private String userPhonePassword, bundlePhonePassword;
     private Handler mHandler = new Handler(new Handler.Callback() {
@@ -79,19 +72,20 @@ public class MyRegisteredFragment extends BaseFragment {
                     mIv_eyes_type.setImageResource(R.drawable.user_icon_eye_open_blue);
                     muserPAPEdtext.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
                     break;
-                case 0x07://通过点击次数判断是否改变格局，此时不改变
-                    muserpasswordRelayout.setVisibility(View.VISIBLE);
-                    isViewRegisteredType = true;//是登录界面
-                    mTv_Choose_type.setText(R.string.registered_msg2);
-                    mLogin_btn.setText(R.string.btn_registered_msg2);
-                    mLogin_btn.setBackground(getResources().getDrawable(R.drawable.shape_btn_light_yellow_bg));
-                    break;
-                case 0x08://通过点击次数判断是否改变格局，此时改变
+                case 0x07://通过点击次数判断是否改变格局，此时改变
                     muserpasswordRelayout.setVisibility(View.GONE);
                     isViewRegisteredType = false;//是注册界面
                     mTv_Choose_type.setText(R.string.registered_msg1);
                     mLogin_btn.setText(R.string.btn_registered_msg1);
                     mLogin_btn.setBackground(getResources().getDrawable(R.drawable.shape_btn_khakil_bg));
+                    break;
+                case 0x08://通过点击次数判断是否改变格局，此时不改变
+                    muserpasswordRelayout.setVisibility(View.VISIBLE);
+                    isViewRegisteredType = true;//是登录界面
+                    mTv_Choose_type.setText(R.string.registered_msg2);
+                    mLogin_btn.setText(R.string.btn_registered_msg2);
+                    mLogin_btn.setBackground(getResources().getDrawable(R.drawable.shape_btn_light_yellow_bg));
+
                     break;
                 default:
                     break;
@@ -235,10 +229,10 @@ public class MyRegisteredFragment extends BaseFragment {
             if (isUserPhoneCheck) {//判断手机号是否有13位
                 if (PhoneUtil.isPhone(phonenumber)) {//判断是否是手机号
                     if (userPhoneNumber.equals(bundlePhoneNumber)) {//判断账户是否存在
-                        bundle = new Bundle();
-                        bundle.putString("register", userPhoneNumber);
-                        bundle.putInt("code", 2);
-                        FragmentTranscationUtil.replaceFragment(getActivity(), new MylosePasswordFragment2(), myRegisteredFragmentBundle);
+                        myregisteredfragmentbundle = new Bundle();
+                        myregisteredfragmentbundle.putString("register", userPhoneNumber);
+                        myregisteredfragmentbundle.putInt("code", 2);
+                        FragmentTranscationUtil.replaceFragment(getActivity(), new MylosePasswordFragment2(), myregisteredfragmentbundle);
                     } else {
                         toast3.show();
                     }
@@ -256,20 +250,20 @@ public class MyRegisteredFragment extends BaseFragment {
      * 忘记密码跳转到新的页面
      */
     private void jumpNewFragment() {
-        myRegisteredFragmentBundle = new Bundle();
+        myregisteredfragmentbundle = new Bundle();
         userPhoneNumber = muserPNEdtext.getText().toString();
         String phonenumber = userPhoneNumber.replace(" ", "");
         if (isUserPhoneCheck) {//判断手机号是否是13位
             if (PhoneUtil.isPhone(phonenumber)) {//判断手机号是否是手机号
-                myRegisteredFragmentBundle.putString("MyRegisteredFragmentPhoneNumber", userPhoneNumber);
+                myregisteredfragmentbundle.putString("MyRegisteredFragmentPhoneNumber", userPhoneNumber);
             } else {
-                myRegisteredFragmentBundle.putString("MyRegisteredFragmentPhoneNumber", null);
+                myregisteredfragmentbundle.putString("MyRegisteredFragmentPhoneNumber", null);
             }
         } else {
-            myRegisteredFragmentBundle.putString("MyRegisteredFragmentPhoneNumber", null);
+            myregisteredfragmentbundle.putString("MyRegisteredFragmentPhoneNumber", null);
         }
 
-        FragmentTranscationUtil.replaceFragment(getActivity(), new MylosePasswordFragment1(), myRegisteredFragmentBundle);
+        FragmentTranscationUtil.replaceFragment(getActivity(), new MylosePasswordFragment1(), myregisteredfragmentbundle);
     }
 
     public void setCheckReturn(OnCheckReturn aReturn) {//点击Dialog忘记密码时回调的函数

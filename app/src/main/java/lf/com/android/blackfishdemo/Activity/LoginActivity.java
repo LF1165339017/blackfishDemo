@@ -23,6 +23,7 @@ public class LoginActivity extends BaseActivity {
     ImageView mIv_icon_qq;
     @BindView(R.id.user_icon_wechat_login)
     ImageView mIv_icon_Wechat;
+
     @Override
     public int getlayoutId() {
         return R.layout.activity_login;
@@ -60,8 +61,9 @@ public class LoginActivity extends BaseActivity {
     public void ClickListener(View view) {
         switch (view.getId()) {
             case R.id.btn_login:
+                startActivity(new Intent(LoginActivity.this, UserLoginActivity.class));
+                overridePendingTransition(R.anim.activity_bottom_in, 0);
                 break;
-
             case R.id.btn_registered:
                 startActivity(new Intent(LoginActivity.this, RegisteredActivity.class));
                 overridePendingTransition(R.anim.activity_bottom_in, 0);

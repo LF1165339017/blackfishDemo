@@ -72,7 +72,7 @@
             android:layout_width="40dp"
             android:layout_height="2dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorYellowf1f44e" />
+            android:background="@color/colorGray707061" />
 
         <View
             android:layout_width="0dp"
@@ -84,7 +84,7 @@
             android:layout_width="40dp"
             android:layout_height="2dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorYellowf1f44e" />
+            android:background="@color/colorGray707061" />
 
         <View
             android:layout_width="0dp"
@@ -96,7 +96,7 @@
             android:layout_width="40dp"
             android:layout_height="2dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorYellowf1f44e" />
+            android:background="@color/colorGray707061" />
 
         <View
             android:layout_width="0dp"
@@ -108,7 +108,7 @@
             android:layout_width="40dp"
             android:layout_height="2dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorYellowf1f44e" />
+            android:background="@color/colorGray707061" />
 
         <View
             android:layout_width="0dp"
@@ -120,7 +120,7 @@
             android:layout_width="40dp"
             android:layout_height="2dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorYellowf1f44e" />
+            android:background="@color/colorGray707061" />
 
         <View
             android:layout_width="0dp"
@@ -132,7 +132,7 @@
             android:layout_width="40dp"
             android:layout_height="2dp"
             android:layout_gravity="bottom"
-            android:background="@color/colorYellowf1f44e" />
+            android:background="@color/colorGray707061" />
 
     </LinearLayout>
 

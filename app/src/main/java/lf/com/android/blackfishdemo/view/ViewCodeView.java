@@ -2,12 +2,16 @@ package lf.com.android.blackfishdemo.view;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -23,6 +27,7 @@ public class ViewCodeView extends RelativeLayout {
     private static int Max = 6;
     private String inputContext;
     private InputCompleterListener listener;
+    private Handler mHandler;
 
     public ViewCodeView(Context context) {
         super(context);
@@ -58,6 +63,65 @@ public class ViewCodeView extends RelativeLayout {
         mEditText = findViewById(R.id.et_code_text);
         mEditText.setCursorVisible(false);
         setEditTextLitener();
+
+        mHandler = new Handler(new Handler.Callback() {
+            @Override
+            public boolean handleMessage(Message msg) {
+                switch (msg.what) {
+                    case 0x01:
+                        mViews[0].setBackgroundColor(Color.parseColor("#FFCD15"));
+                        mViews[1].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[2].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[3].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[4].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[5].setBackgroundColor(Color.parseColor("#707061"));
+                        break;
+                    case 0x02:
+                        mViews[0].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[1].setBackgroundColor(Color.parseColor("#FFCD15"));
+                        mViews[2].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[3].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[4].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[5].setBackgroundColor(Color.parseColor("#707061"));
+                        break;
+                    case 0x03:
+                        mViews[0].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[1].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[2].setBackgroundColor(Color.parseColor("#FFCD15"));
+                        mViews[3].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[4].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[5].setBackgroundColor(Color.parseColor("#707061"));
+                        break;
+                    case 0x04:
+                        mViews[0].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[1].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[2].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[3].setBackgroundColor(Color.parseColor("#FFCD15"));
+                        mViews[4].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[5].setBackgroundColor(Color.parseColor("#707061"));
+                        break;
+                    case 0x05:
+                        mViews[0].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[1].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[2].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[3].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[4].setBackgroundColor(Color.parseColor("#FFCD15"));
+                        mViews[5].setBackgroundColor(Color.parseColor("#707061"));
+                        break;
+                    case 0x06:
+                        mViews[0].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[1].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[2].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[3].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[4].setBackgroundColor(Color.parseColor("#707061"));
+                        mViews[5].setBackgroundColor(Color.parseColor("#FFCD15"));
+                        break;
+                    default:
+                        break;
+                }
+                return false;
+            }
+        });
     }
 
     private void setEditTextLitener() {
@@ -77,7 +141,8 @@ public class ViewCodeView extends RelativeLayout {
                 inputContext = mEditText.getText().toString();
                 if (listener != null) {
                     if (inputContext.length() >= Max) {
-                        listener.inputComplete();
+                        listener.inputComplete(mEditText);
+
                     } else {
                         listener.invalidContent();
                     }
@@ -91,6 +156,7 @@ public class ViewCodeView extends RelativeLayout {
                     }
                 }
 
+                ChangeType(s.length());
             }
         });
     }
@@ -108,4 +174,41 @@ public class ViewCodeView extends RelativeLayout {
     }
 
 
+    private void ChangeType(int length) {
+        if (length < Max + 1) {
+            switch (length) {
+                case 1:
+                    Message message1 = mHandler.obtainMessage(0x01);
+                    mHandler.sendMessage(message1);
+                    break;
+                case 2:
+                    Message message2 = mHandler.obtainMessage(0x02);
+                    mHandler.sendMessage(message2);
+                    break;
+                case 3:
+                    Message message3 = mHandler.obtainMessage(0x03);
+                    mHandler.sendMessage(message3);
+                    break;
+                case 4:
+                    Message message4 = mHandler.obtainMessage(0x04);
+                    mHandler.sendMessage(message4);
+                    break;
+                case 5:
+                    Message message5 = mHandler.obtainMessage(0x05);
+                    mHandler.sendMessage(message5);
+                    break;
+                case 6:
+                    Message message6 = mHandler.obtainMessage(0x06);
+                    mHandler.sendMessage(message6);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+    }
+
+    public EditText getmEditText() {
+        return mEditText;
+    }
 }

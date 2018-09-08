@@ -4,8 +4,8 @@
     android:layout_height="match_parent">
 
     <fragment
-        android:id="@+id/RegisterFrame_layout"
-        android:name="lf.com.android.blackfishdemo.Fragment.MyRegisteredFragment"
+        android:id="@+id/userloginFrame_layout"
+        android:name="lf.com.android.blackfishdemo.Fragment.UserLoginFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

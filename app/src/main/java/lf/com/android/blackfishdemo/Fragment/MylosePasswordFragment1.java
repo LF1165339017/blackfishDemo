@@ -50,6 +50,7 @@ public class MylosePasswordFragment1 extends BaseFragment {
         }
     });
 
+
     @Override
     public void initView() {
         //5.0及以上系统才支持
@@ -214,6 +215,7 @@ public class MylosePasswordFragment1 extends BaseFragment {
     private void jumpNewFragment() {
         mLosePassword1Bundle = new Bundle();
         mLosePassword1Bundle.putString("MyLosePasswordFragment1UserPhoneNumber", userPhoneNumber);
+        mLosePassword1Bundle.putInt("code", 1);
         FragmentTranscationUtil.replaceFragment(getActivity(), new MylosePasswordFragment2(), mLosePassword1Bundle);
     }
 
