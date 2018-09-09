@@ -39,7 +39,7 @@ public class UserLoginFragment extends BaseFragment {
     private View mView_phonebg_line, mView_password_line;
     private Button mLogin_btn;
     private boolean isUserPhoneCheck = false;//判断输入框格式是否正确 false为默认不正确
-    private boolean isViewRegisteredType = false;//true 为登录界面 false为注册界面
+    private boolean isViewRegisteredType = true;//true 为登录界面 false为注册界面
     private boolean isPasswordinit = false;//判断输入框是否输入密码;
     private int mEyesType = 0;//设置点击计数器，判断当前密码状态
     private int layoutChange = 0;//设置点击计数器，判断当前布局状态
@@ -185,7 +185,7 @@ public class UserLoginFragment extends BaseFragment {
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_registered_layout;
+        return R.layout.fragment_userlogin_layout;
     }
 
 

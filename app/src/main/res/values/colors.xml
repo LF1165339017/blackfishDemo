@@ -30,4 +30,5 @@
     <color name="colorFFCD15">#FFCD15</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorYellowf1f22c">#f1f22c</color>
+    <color name="bottom_navigation_above_color">#cccccc</color>
 </resources>

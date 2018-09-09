@@ -121,6 +121,7 @@ public class MylosePasswordFragment3 extends BaseFragment implements OnBackPress
                 Intent intent = new Intent(getContext(), UserLoginActivity.class).
                         setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
+                getActivity().overridePendingTransition(0, R.anim.activity_right_out);
             } else {
                 toast1.show();
             }

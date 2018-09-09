@@ -8,10 +8,12 @@ import android.view.View;
 
 import lf.com.android.blackfishdemo.AlertDialog.MyAlertDialogFragment;
 import lf.com.android.blackfishdemo.Fragment.MyRegisteredFragment;
+import lf.com.android.blackfishdemo.Fragment.MylosePasswordFragment1;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnBackPress;
 import lf.com.android.blackfishdemo.listener.OnCheckReturn;
 import lf.com.android.blackfishdemo.listener.Ondialoglistener;
+import lf.com.android.blackfishdemo.util.FragmentTranscationUtil;
 
 
 public class RegisteredActivity extends BaseActivity {
@@ -45,7 +47,7 @@ public class RegisteredActivity extends BaseActivity {
                 fragment.setOnLosePassword(new Ondialoglistener() {
                     @Override
                     public void OnClick(View view) {
-
+                        FragmentTranscationUtil.replaceFragment(RegisteredActivity.this, new MylosePasswordFragment1());
                     }
                 });
                 fragment.show(getSupportFragmentManager(), "MyAlertDialogFragment");
