@@ -1,6 +1,7 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -20,6 +21,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import lf.com.android.blackfishdemo.Activity.MainActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnCheckReturn;
 import lf.com.android.blackfishdemo.util.FragmentTranscationUtil;
@@ -209,7 +211,8 @@ public class UserLoginFragment extends BaseFragment {
                     if (isPasswordinit) {//判断密码是否输入且位数是否在6-20之间
                         if (userPhoneNumber.equals(bundlePhoneNumber)) {//判断账户是否存在
                             if (userPhonePassword.equals(bundlePhonePassword)) {//判断密码是否正确
-                                Toast.makeText(mContext, "成功", Toast.LENGTH_SHORT).show();
+                                getActivity().startActivity(new Intent(getActivity(), MainActivity.class)
+                                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
                             } else {
                                 aReturn.onCheckResultReturn();
                             }

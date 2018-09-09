@@ -6,18 +6,18 @@
         android:title="首页" />
     <item
         android:id="@+id/bottom_nav_mall"
-        android:icon="@drawable/selector_nav_home"
+        android:icon="@drawable/selector_nav_mall"
         android:title="商城" />
     <item
         android:id="@+id/bottom_nav_financial"
-        android:icon="@drawable/selector_nav_home"
+        android:icon="@drawable/selector_nav_financial"
         android:title="理财" />
     <item
         android:id="@+id/bottom_nav_housekeeper"
-        android:icon="@drawable/selector_nav_home"
+        android:icon="@drawable/selector_nav_housekeeper"
         android:title="信用管家" />
     <item
         android:id="@+id/bottom_nav_mine"
-        android:icon="@drawable/selector_nav_home"
+        android:icon="@drawable/selector_nav_mine"
         android:title="我的" />
 </menu>
