@@ -47,7 +47,8 @@ public class MainActivity extends BaseActivity {
         }
         //设置缓存页面
         mViewPager.setOffscreenPageLimit(4);
-        //BottomNavigationViewHelper.disableShiftMode(mNavigationView);
+        BottomNavigationViewHelper.disableShiftMode(mNavigationView);
+        mNavigationView.setItemIconTintList(null);
         mNavigationViewListener();
         mViewPagerListener();
     }
@@ -107,11 +108,11 @@ public class MainActivity extends BaseActivity {
 
             @Override
             public void onPageSelected(int i) {
-                /*if (mMenuItem != null) {
+                if (mMenuItem != null) {
                     mMenuItem.setChecked(false);
                 } else {
                     mNavigationView.getMenu().getItem(0).setChecked(false);
-                }*/
+                }
                 mMenuItem = mNavigationView.getMenu().getItem(i);
                 mMenuItem.setChecked(true);
             }
