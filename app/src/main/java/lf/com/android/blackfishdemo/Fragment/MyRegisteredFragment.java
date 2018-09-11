@@ -1,22 +1,16 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.preference.PreferenceManager;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.view.animation.Transformation;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import lf.com.android.blackfishdemo.R;
-import lf.com.android.blackfishdemo.listener.OnButtonClick;
 import lf.com.android.blackfishdemo.listener.OnCheckReturn;
 import lf.com.android.blackfishdemo.util.FragmentTranscationUtil;
 import lf.com.android.blackfishdemo.util.LogUtil;

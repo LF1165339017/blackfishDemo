@@ -8,6 +8,8 @@
     <color name="Gray">#808080</color>
     <color name="White">#FFFFFF</color>
     <color name="Black">#000000</color>
+    <color name="colorGray2D2F31">#2D2F31</color>
+    <color name="colorGray1C1C1C">#1C1C1C</color>
     <color name="colorRoyalBlue">#4169E1</color>
     <color name="colorYellow">#FFFF00</color>
     <color name="colorYellowEEEE00">#EEEE00</color>
@@ -31,4 +33,6 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorYellowf1f22c">#f1f22c</color>
     <color name="bottom_navigation_above_color">#cccccc</color>
+    <color name="color_rv_bg">#F3F3F3</color>
+    <color name="color_Home_HeaderBg">#FDDB0A</color>
 </resources>

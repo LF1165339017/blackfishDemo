@@ -47,7 +47,7 @@ public class MainActivity extends BaseActivity {
         }
         //设置缓存页面
         mViewPager.setOffscreenPageLimit(4);
-        BottomNavigationViewHelper.disableShiftMode(mNavigationView);
+        //BottomNavigationViewHelper.disableShiftMode(mNavigationView);
         mNavigationView.setItemIconTintList(null);
         mNavigationViewListener();
         mViewPagerListener();
