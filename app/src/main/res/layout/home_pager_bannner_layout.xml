@@ -11,7 +11,8 @@
         android:layout_height="200dp"
         app:rvb_autoPlaying="true"
         app:rvb_indicatorGravity="center"
-        app:rvb_indicatorSelectedSrc="@drawable/icon_home_banner_selected"
-        app:rvb_indicatorSize="5dp"
-        app:rvb_indicatorUnSelectedSrc="@drawable/icon_home_banner_unselected" />
+        app:rvb_indicatorSelectedSrc="@drawable/shape_btn_yellow_bg"
+        app:rvb_indicatorSize="10dp"
+        app:rvb_indicatorSpace="20dp"
+        app:rvb_indicatorUnSelectedSrc="@drawable/shape_btn_white_bg" />
 </FrameLayout>

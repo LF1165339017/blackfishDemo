@@ -42,4 +42,5 @@ dependencies {
         transitive = true
     }
     implementation 'com.facebook.fresco:fresco:1.10.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.11.0'
 }

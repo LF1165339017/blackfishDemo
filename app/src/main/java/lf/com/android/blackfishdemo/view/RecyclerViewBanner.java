@@ -31,6 +31,7 @@ import java.util.List;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnRvBannerClickListener;
 import lf.com.android.blackfishdemo.listener.OnSwitchRvBannerListener;
+import lf.com.android.blackfishdemo.util.LogUtil;
 
 public class RecyclerViewBanner extends FrameLayout {
     private static final int DEFAULT_SELECT_COLOR = 0xffffffff;
@@ -60,10 +61,12 @@ public class RecyclerViewBanner extends FrameLayout {
     private Runnable playTask = new Runnable() {
         @Override
         public void run() {
+            LogUtil.d("LF123", "currentIndexScr=" + currentIndex);
             mRecyclerView.smoothScrollToPosition(++currentIndex);
             if (isShowIndicator) {
-                switchIndicator();
+                changePoint();
             }
+            LogUtil.d("LF123", "currentIndex=" + currentIndex);
             mHandler.postDelayed(this, mInterval);
         }
     };
@@ -99,7 +102,7 @@ public class RecyclerViewBanner extends FrameLayout {
 
         margin = typedArray.getDimensionPixelSize(R.styleable.RecyclerViewBanner_rvb_indicatorMargin,
                 dp2px(10));
-        int g = typedArray.getDimensionPixelSize(R.styleable.RecyclerViewBanner_rvb_indicatorGravity,
+        int g = typedArray.getInt(R.styleable.RecyclerViewBanner_rvb_indicatorGravity,
                 1);
         switch (g) {
             case 0:
@@ -137,7 +140,7 @@ public class RecyclerViewBanner extends FrameLayout {
 
         mRecyclerView = new RecyclerView(context);
         mLinearLayout = new LinearLayout(context);
-        new PagerSnapHelper().attachToRecyclerView(mRecyclerView);
+        new PagerSnapHelper().attachToRecyclerView(mRecyclerView);//辅助Recycler进行滚动对齐
         adapter = new RecyclerViewAdapter();
         mRecyclerView.setAdapter(adapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -147,12 +150,9 @@ public class RecyclerViewBanner extends FrameLayout {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int first = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
                     int last = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
-                    if (first == last && currentIndex != last) {
-                        currentIndex = last;
-                        if (isShowIndicator && isTouched) {
-                            isTouched = false;
-                            switchIndicator();
-                        }
+                    if (currentIndex != (first + last) / 2) {
+                        currentIndex = (first + last) / 2;
+                        changePoint();
                     }
                 }
             }
@@ -170,6 +170,50 @@ public class RecyclerViewBanner extends FrameLayout {
 
         addView(mRecyclerView, vpLayoutParams);
         addView(mLinearLayout, linearLayoutParams);
+    }
+
+    /**
+     * 设置间隔时间
+     *
+     * @param mInterval
+     */
+    public void setmInterval(int mInterval) {
+        this.mInterval = mInterval;
+    }
+
+    /**
+     * 设置是否指示器导航点
+     *
+     * @param showIndicator
+     */
+    public void setShowIndicator(boolean showIndicator) {
+        isShowIndicator = showIndicator;
+    }
+
+    /**
+     * 设置是否禁止滚动播放
+     *
+     * @param autoPlaying
+     */
+    public void setAutoPlaying(boolean autoPlaying) {
+        isAutoPlaying = autoPlaying;
+    }
+
+    /**
+     * 设置是否自动播放（上锁）
+     *
+     * @param playing 开始播放
+     */
+    private synchronized void setPlaying(boolean playing) {
+        if (isAutoPlaying) {
+            if (!isPlaying && playing && adapter != null && adapter.getItemCount() > 2) {
+                mHandler.postDelayed(playTask, mInterval);
+                isPlaying = true;
+            } else if (isPlaying && !playing) {
+                mHandler.removeCallbacksAndMessages(null);
+                isPlaying = false;
+            }
+        }
     }
 
     //手指触摸事件
@@ -270,16 +314,12 @@ public class RecyclerViewBanner extends FrameLayout {
                 TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
     }
 
-    private synchronized void setPlaying(boolean playing) {
-        if (isAutoPlaying) {
-            if (!isPlaying && playing && adapter != null && adapter.getItemCount() > 2) {
 
-            } else if (isPlaying && !playing) {
-
-            }
-        }
-    }
-
+    /**
+     * 设置轮播数据
+     *
+     * @param data
+     */
     public void setRvBannerData(List data) {
         setPlaying(false);
         mData.clear();
@@ -298,9 +338,10 @@ public class RecyclerViewBanner extends FrameLayout {
             currentIndex = 0;
             adapter.notifyDataSetChanged();
         }
+
     }
 
-    private void switchIndicator() {
+    private void changePoint() {
         if (mLinearLayout != null && mLinearLayout.getChildCount() > 0) {
             for (int i = 0; i < mLinearLayout.getChildCount(); i++) {
                 ((ImageView) mLinearLayout.getChildAt(i)).setImageDrawable(
@@ -339,14 +380,12 @@ public class RecyclerViewBanner extends FrameLayout {
             if (onSwitchRvBannerListener != null) {
                 onSwitchRvBannerListener.switchBanner(i % mData.size(), draweeView);
             }
+
         }
 
         @Override
         public int getItemCount() {
-            if (mData != null) {
-                return mData.size();
-            }
-            return 0;
+            return mData == null ? 0 : mData.size() < 2 ? mData.size() : Integer.MAX_VALUE;
         }
     }
 
