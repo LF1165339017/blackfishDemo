@@ -30,7 +30,7 @@ public class JsonUtil {
                 for (int i = 0; i < mJsonArray.length(); i++) {
                     JSONObject jsonObject = (JSONObject) mJsonArray.get(i);
                     String title = jsonObject.getString("title");
-                    String sortImageUrl = jsonObject.getString("setImageUrl");
+                    String sortImageUrl = jsonObject.getString("sortImageUrl");
                     JSONArray jsonArray = jsonObject.getJSONArray("goods");
                     for (int j = 0; j < jsonArray.length(); j++) {
                         JSONObject jsonObject1 = (JSONObject) jsonArray.get(j);

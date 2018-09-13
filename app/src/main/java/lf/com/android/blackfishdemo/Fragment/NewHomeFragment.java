@@ -20,6 +20,7 @@ import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -72,6 +73,7 @@ public class NewHomeFragment extends BaseFragment {
 
     @Override
     public void initView() {
+        Fresco.initialize(getContext());//初始化默认配置
         //实例化控件
         mtv_home_username = findView(R.id.tv_home_username);
         mtv_home_userLevel = findView(R.id.tv_home_userlevel);
@@ -104,7 +106,7 @@ public class NewHomeFragment extends BaseFragment {
         OkHttpUtil.getInstance().startGet(UrlInfoBean.homeGoodsUrl, new OnNetResultListener() {
             @Override
             public void OnSuccessListener(String result) {
-                mBannerInfos = jsonUtil.getDataFromJson(result, 0);
+                mHomeSortInfos = jsonUtil.getDataFromJson(result, 0);
                 Message message = mHandler.obtainMessage(0x01, mHomeSortInfos);
                 mHandler.sendMessage(message);
             }
@@ -238,11 +240,10 @@ public class NewHomeFragment extends BaseFragment {
             @Override
             public MainViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
                 View view = LayoutInflater.from(
-                        getContext()).inflate(R.layout.home_pager_goods_layout, viewGroup, false);
+                        getActivity()).inflate(R.layout.home_pager_goods_layout, viewGroup, false);
                 return new MainViewHolder(view);
             }
 
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onBindViewHolder(@NonNull MainViewHolder mainViewHolder, int i) {
                 super.onBindViewHolder(mainViewHolder, i);
@@ -255,13 +256,13 @@ public class NewHomeFragment extends BaseFragment {
                 TextView textLeftImage = mainViewHolder.itemView.findViewById(R.id.tv_home_goods_title_image);
                 switch (i) {
                     case 1:
-                        textLeftImage.setBackground(getActivity().getDrawable(R.drawable.shape_home_goods_title1));
+                        textLeftImage.setBackground(getContext().getResources().getDrawable(R.drawable.shape_home_goods_title1));
                         break;
                     case 2:
-                        textLeftImage.setBackground(getActivity().getDrawable(R.drawable.shape_home_goods_title2));
+                        textLeftImage.setBackground(getContext().getResources().getDrawable(R.drawable.shape_home_goods_title2));
                         break;
                     case 3:
-                        textLeftImage.setBackground(getActivity().getDrawable(R.drawable.shape_home_goods_title3));
+                        textLeftImage.setBackground(getContext().getResources().getDrawable(R.drawable.shape_home_goods_title3));
                         break;
                     default:
                         break;
