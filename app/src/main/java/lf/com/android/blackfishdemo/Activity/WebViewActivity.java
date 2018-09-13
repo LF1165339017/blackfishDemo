@@ -1,17 +1,21 @@
 package lf.com.android.blackfishdemo.Activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.design.widget.BottomSheetDialog;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import lf.com.android.blackfishdemo.R;
+import lf.com.android.blackfishdemo.util.ToastUtil;
 
 public class WebViewActivity extends BaseActivity {
     @BindView(R.id.iv_back)
@@ -22,6 +26,7 @@ public class WebViewActivity extends BaseActivity {
     ImageView mIv_share;
     @BindView(R.id.webView)
     WebView mWebView;
+    private Context mContext;
 
     @Override
     public int getlayoutId() {
@@ -40,6 +45,7 @@ public class WebViewActivity extends BaseActivity {
             //将状态栏设置成透明色
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
+        mContext = WebViewActivity.this;
         mWebView.getSettings().setJavaScriptEnabled(true);//支持JavaScript脚本
         mWebView.setWebChromeClient(new WebChromeClient() {
             @Override
@@ -79,8 +85,46 @@ public class WebViewActivity extends BaseActivity {
     }
 
     private void ShowBottomDialog() {
-        BottomSheetDialog dialog = new BottomSheetDialog(this);
+        final BottomSheetDialog dialog = new BottomSheetDialog(this);
         View view = LayoutInflater.from(this).inflate(R.layout.view_bottom_show_dialog, null);
+        dialog.setContentView(view);
+        ImageView imageView = view.findViewById(R.id.iv_close_dialog);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
+        view.findViewById(R.id.iv_weChat).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = ToastUtil.setMyToast(
+                        mContext, ToastUtil.PROMPT, "分享至微信好友", Toast.LENGTH_SHORT);
+
+                toast.show();
+            }
+        });
+
+        view.findViewById(R.id.iv_weChat_friend).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = ToastUtil.setMyToast(
+                        mContext, ToastUtil.PROMPT, "分享至微信朋友圈", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+        });
+        dialog.setCancelable(true);
+        dialog.show();
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            finish();
+            overridePendingTransition(0, R.anim.activity_right_out);
+        }
+        return true;
     }
 }

@@ -1,17 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/White"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="我是MallFragment页面"
-        android:textColor="@color/Black"
-        android:textSize="16sp" />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_fragment_mall_context"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/White"
+            android:clipToPadding="true"
+            android:descendantFocusability="blocksDescendants"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:requiresFadingEdge="none"
+            android:scrollbars="none" />
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-</RelativeLayout>
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_mall"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorYellow"
+        app:layout_behavior="lf.com.android.blackfishdemo.util.MallBarAlphaBehavior">
+
+        <RelativeLayout
+            android:id="@+id/rl_mall_header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/iv_mall_heard_menu"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/stages_icon_classify_white" />
+
+            <RelativeLayout
+                android:id="@+id/rl_mall_head_layout"
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="40dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="12.5dp"
+                android:layout_toEndOf="@+id/iv_mall_heard_menu"
+                android:background="@drawable/shape_search_view">
+
+                <ImageView
+                    android:id="@+id/iv_search_logo"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:src="@drawable/stages_icon_search" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="10dp"
+                    android:layout_toRightOf="@id/iv_search_logo"
+                    android:background="@color/color_rv_bg"
+                    android:hint="HuaWei P10"
+                    android:textSize="13sp" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/iv_mall_header_msg"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="12.5dp"
+                android:src="@drawable/icon_home_header_msg_white" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+</android.support.design.widget.CoordinatorLayout>
