@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+    <lf.com.android.blackfishdemo.view.RecyclerViewBanner
+        android:id="@+id/rvb_mall_header"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:rvb_autoPlaying="true"
+        app:rvb_indicatorGravity="center"
+        app:rvb_indicatorSelectedSrc="@drawable/shape_btn_light_yellow_bg"
+        app:rvb_indicatorSize="10dp"
+        app:rvb_indicatorUnSelectedSrc="@drawable/shape_btn_white_bg" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:scaleType="fitXY"
+        android:src="@drawable/image_mall_banner_bottom" />
+</FrameLayout>

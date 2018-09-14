@@ -11,7 +11,7 @@ public class UrlInfoBean {
     public static final String classifyGoodsUrl = "http://www.wooyun.site/blackfish/classify_goods.json";
 
     //商城页数据
-    public static final String mallGoodsUrl = "http://www.wooyun.site/blackfish/mall_goods.json";
+    public static final String mallGoodsUrl = "http://www.wanandroid.com/tools/mockapi/448/mall_goods";
 
     //理财 WebView
     public static final String financialUrl = "https://h5.shanhulicai.cn/main/#/home?entry=bar&_k=ra1im0";

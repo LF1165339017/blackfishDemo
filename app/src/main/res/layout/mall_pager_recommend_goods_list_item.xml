@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="@color/White">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/iv_mall_recommend_goods_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="25dp" />
+
+    <TextView
+        android:id="@+id/tv_mall_recommend_goods_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_toRightOf="@+id/iv_mall_recommend_goods_image"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textColor="@color/Black" />
+
+    <TextView
+        android:id="@+id/tv_mall_recommend_goods_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_mall_recommend_goods_desc"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@+id/iv_mall_recommend_goods_image"
+        android:maxLines="1"
+        android:text="￥27.72x12期 ￥298.00"
+        android:textColor="@color/Black" />
+
+    <TextView
+        android:id="@+id/tv_mall_recommend_goods_evaluation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/iv_mall_recommend_goods_image"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_evaluation_text"
+        android:paddingBottom="2dp"
+        android:paddingEnd="10dp"
+        android:paddingStart="10dp"
+        android:paddingTop="2dp"
+        android:text="好评率：99%"
+        android:textColor="@color/Black"
+        android:textSize="12sp" />
+
+</RelativeLayout>

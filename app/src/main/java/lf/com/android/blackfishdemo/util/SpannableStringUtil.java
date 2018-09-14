@@ -1,5 +1,6 @@
 package lf.com.android.blackfishdemo.util;
 
+import android.graphics.Color;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -43,6 +44,15 @@ public class SpannableStringUtil {
         RelativeSizeSpan sizeSpan = new RelativeSizeSpan(relativeSize);
         mSpannableString.setSpan(sizeSpan, relstart, relend, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         mSpannableString.setSpan(span, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        return mSpannableString;
+    }
+
+    public SpannableString setMallGoodsPrice(String string, int start, int end) {
+        mSpannableString = new SpannableString(string);
+        ForegroundColorSpan span = new ForegroundColorSpan(Color.parseColor("#EB5640"));
+        mSpannableString.setSpan(span, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        RelativeSizeSpan sizeSpan = new RelativeSizeSpan(1.5f);
+        mSpannableString.setSpan(sizeSpan, start + 1, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         return mSpannableString;
     }
 }

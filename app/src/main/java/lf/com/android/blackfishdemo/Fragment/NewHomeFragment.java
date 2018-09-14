@@ -23,6 +23,8 @@ import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
@@ -106,7 +108,11 @@ public class NewHomeFragment extends BaseFragment {
         OkHttpUtil.getInstance().startGet(UrlInfoBean.homeGoodsUrl, new OnNetResultListener() {
             @Override
             public void OnSuccessListener(String result) {
-                mHomeSortInfos = jsonUtil.getDataFromJson(result, 0);
+                try {
+                    mHomeSortInfos = jsonUtil.getDataFromJson(result, 0);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
                 Message message = mHandler.obtainMessage(0x01, mHomeSortInfos);
                 mHandler.sendMessage(message);
             }
