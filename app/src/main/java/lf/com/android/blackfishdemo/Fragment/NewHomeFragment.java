@@ -113,6 +113,7 @@ public class NewHomeFragment extends BaseFragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                LogUtil.d("LF123", "mHomeSortInfos=" + mHomeSortInfos);
                 Message message = mHandler.obtainMessage(0x01, mHomeSortInfos);
                 mHandler.sendMessage(message);
             }
