@@ -125,14 +125,10 @@ public class MallFragment extends BaseFragment {
         OkHttpUtil.getInstance().startGet(UrlInfoBean.mallGoodsUrl, new OnNetResultListener() {
             @Override
             public void OnSuccessListener(String result) {
-                try {
-                    mMallPagerInfos = mJsonUtil.getDataFromJson(result, 3);
-                    LogUtil.d("LF1234", "mMallPagerInfos= " + mMallPagerInfos);
-                    Message msg = mHandler.obtainMessage(0x01);
-                    mHandler.sendMessage(msg);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                mMallPagerInfos = mJsonUtil.getDataFromJson(result, 3);
+                LogUtil.d("LF1234", "mMallPagerInfos= " + mMallPagerInfos);
+                Message msg = mHandler.obtainMessage(0x01);
+                mHandler.sendMessage(msg);
             }
 
             @Override

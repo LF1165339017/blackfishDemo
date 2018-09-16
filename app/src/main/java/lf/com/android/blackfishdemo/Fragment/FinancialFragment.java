@@ -11,8 +11,7 @@ import lf.com.android.blackfishdemo.bean.UrlInfoBean;
 import lf.com.android.blackfishdemo.util.WebSettingUtil;
 
 public class FinancialFragment extends BaseFragment {
-    @BindView(R.id.webViews)
-    WebView mWebView;
+    private WebView mWebView;
     private Context mContext;
 
     public static FinancialFragment newInstance() {
@@ -22,6 +21,7 @@ public class FinancialFragment extends BaseFragment {
     @Override
     public void initView() {
         mContext = getActivity();
+        mWebView = findView(R.id.vv_view);
         WebSettingUtil.setSetting(mWebView);
         mWebView.loadUrl(UrlInfoBean.financialUrl);
 

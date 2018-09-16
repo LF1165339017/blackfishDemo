@@ -3,7 +3,11 @@ package lf.com.android.blackfishdemo.Fragment;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,9 +16,10 @@ import android.widget.TextView;
 
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnDialogPosBtnClickListener;
+import lf.com.android.blackfishdemo.util.DenistyUtil;
 import lf.com.android.blackfishdemo.util.JsonUtil;
 
-public class HouseKeeperFragment extends BaseFragment {
+public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnClickListener {
     private ImageView mImageViewAdd, mImageShowEyes;
     private TextView mTextMoney, mTextGrid1, mTextGrid2, mTextGrid3, mTextGrid4, mTextGrid;
     private RelativeLayout mCradLayout;
@@ -91,8 +96,57 @@ public class HouseKeeperFragment extends BaseFragment {
     }
 
 
-    private void showAddBilDialog(int id, String text, int type, OnDialogPosBtnClickListener listener) {
-        Dialog dialog = new Dialog(mContext, R.style.MyDialog);
+    private void showAddBilDialog(int drawableid, String text, final int type, final OnDialogPosBtnClickListener listener) {
+        final Dialog dialog = new Dialog(mContext, R.style.MyDialog);
+        View view = LayoutInflater.from(mContext).inflate(R.layout.view_keeper_dialog, null);
+        dialog.setContentView(view);
+        ImageView imageExit = view.findViewById(R.id.iv_dialog_exit);
+        ImageView imageIcon = view.findViewById(R.id.iv_dialog_icon);
+        imageIcon.setImageResource(drawableid);
+        TextView textTitle = view.findViewById(R.id.tv_dialog_title);
+        textTitle.setText(text);
+        TextView textCancel = view.findViewById(R.id.tv_dialog_cancel);
+        TextView textAddBill = view.findViewById(R.id.tv_dialog_add_bill);
+        textCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
 
+        textAddBill.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.onBtnClick(type);
+                dialog.dismiss();
+            }
+        });
+
+        imageExit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams layoutParams = window.getAttributes();
+        layoutParams.height = DenistyUtil.dip2px(getContext(), 220);
+        layoutParams.width = DenistyUtil.dip2px(getContext(), 280);
+        layoutParams.gravity = Gravity.CENTER;
+        window.setAttributes(layoutParams);
+        dialog.show();
+    }
+
+
+    @Override
+    public void onBtnClick(int type) {
+        if (type == 0) {
+
+        } else if (type == 1) {
+
+        } else {
+            return;
+        }
     }
 }

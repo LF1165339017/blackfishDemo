@@ -23,7 +23,7 @@ public class JsonUtil {
     private static final int MALL_GOODS_INFO = 3;
     private static final int GOODS_DETAILS_INFO = 4;
 
-    public List getDataFromJson(String json, int type) throws JSONException {
+    public List getDataFromJson(String json, int type) {
         List<HomeSortInfo> homeSortInfos = new ArrayList<>();
         List<HomeSortItemfo> homeSortItemfos = new ArrayList<>();
         JSONObject mJsonObject;
@@ -46,6 +46,7 @@ public class JsonUtil {
                     }
                     homeSortInfos.add(new HomeSortInfo(title, sortImageUrl, homeSortItemfos));
                 }
+                LogUtil.d("LF1234", "homeSortInfos" + homeSortInfos);
                 return homeSortInfos;
             } else if (type == BANK_CARD_INFO) {
 

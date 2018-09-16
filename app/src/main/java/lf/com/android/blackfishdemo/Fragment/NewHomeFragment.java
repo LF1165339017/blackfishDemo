@@ -1,11 +1,9 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,17 +14,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
-import com.alibaba.android.vlayout.LayoutHelper;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.alibaba.android.vlayout.layout.GridLayoutHelper;
 import com.alibaba.android.vlayout.layout.SingleLayoutHelper;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import org.json.JSONException;
-
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -108,11 +102,8 @@ public class NewHomeFragment extends BaseFragment {
         OkHttpUtil.getInstance().startGet(UrlInfoBean.homeGoodsUrl, new OnNetResultListener() {
             @Override
             public void OnSuccessListener(String result) {
-                try {
-                    mHomeSortInfos = jsonUtil.getDataFromJson(result, 0);
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                LogUtil.d("LF1234", "result=" + result);
+                mHomeSortInfos = jsonUtil.getDataFromJson(result, 0);
                 LogUtil.d("LF123", "mHomeSortInfos=" + mHomeSortInfos);
                 Message message = mHandler.obtainMessage(0x01, mHomeSortInfos);
                 mHandler.sendMessage(message);
