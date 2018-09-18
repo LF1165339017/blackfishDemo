@@ -1,5 +1,6 @@
 package lf.com.android.blackfishdemo.Fragment;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
@@ -24,6 +25,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import lf.com.android.blackfishdemo.Activity.BaseWebViewActivity;
+import lf.com.android.blackfishdemo.Activity.ClassifyGoodsActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.adapter.GeneralVLayoutAdapter;
 import lf.com.android.blackfishdemo.bean.BannerInfo;
@@ -157,7 +160,7 @@ public class NewHomeFragment extends BaseFragment {
                 mRecyclerViewBanner.setListener(new OnRvBannerClickListener() {
                     @Override
                     public void OnClick(int position) {
-
+                        toWebActivity(UrlInfoBean.homeBannerUrls[position]);
                     }
                 });
             }
@@ -243,13 +246,19 @@ public class NewHomeFragment extends BaseFragment {
             }
 
             @Override
-            public void onBindViewHolder(@NonNull MainViewHolder mainViewHolder, int i) {
+            public void onBindViewHolder(@NonNull MainViewHolder mainViewHolder, final int i) {
                 super.onBindViewHolder(mainViewHolder, i);
                 HomeSortInfo homeSortInfo = mHomeSortInfos.get(i);
                 TextView textTitle = mainViewHolder.itemView.findViewById(R.id.tv_home_goods_title_text);
                 textTitle.setText(homeSortInfo.getTitle());
                 SimpleDraweeView draweeView = mainViewHolder.itemView.findViewById(R.id.iv_home_goods_bigImage);
                 draweeView.setImageURI(homeSortInfo.getSortImageUrl());
+                draweeView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toWebActivity(UrlInfoBean.homeHeaderUrls[i]);
+                    }
+                });
 
                 TextView textLeftImage = mainViewHolder.itemView.findViewById(R.id.tv_home_goods_title_image);
                 switch (i) {
@@ -270,7 +279,8 @@ public class NewHomeFragment extends BaseFragment {
                 heardLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(getContext(), "点击了这个事件", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getContext(), ClassifyGoodsActivity.class));
+                        getActivity().overridePendingTransition(R.anim.activity_right_in, 0);
                     }
                 });
 
@@ -338,10 +348,7 @@ public class NewHomeFragment extends BaseFragment {
                     toast3.show();
                     break;
                 case 4:
-                    Toast toast4 = ToastUtil.setMyToast(
-                            getContext(), ToastUtil.PROMPT,
-                            "点击了第" + id + "图标", Toast.LENGTH_SHORT);
-                    toast4.show();
+                    toWebActivity(UrlInfoBean.gameUrl);
                     break;
                 case 5:
                     Toast toast5 = ToastUtil.setMyToast(
@@ -356,16 +363,11 @@ public class NewHomeFragment extends BaseFragment {
                     toast6.show();
                     break;
                 case 7:
-                    Toast toast7 = ToastUtil.setMyToast(
-                            getContext(), ToastUtil.PROMPT,
-                            "点击了第" + id + "图标", Toast.LENGTH_SHORT);
-                    toast7.show();
+                    toWebActivity(UrlInfoBean.bankCard);
                     break;
                 case 8:
-                    Toast toast8 = ToastUtil.setMyToast(
-                            getContext(), ToastUtil.PROMPT,
-                            "点击了第" + id + "图标", Toast.LENGTH_SHORT);
-                    toast8.show();
+                    startActivity(new Intent(getContext(), ClassifyGoodsActivity.class));
+                    getActivity().overridePendingTransition(R.anim.activity_right_in, 0);
                     break;
                 default:
                     break;
@@ -373,5 +375,11 @@ public class NewHomeFragment extends BaseFragment {
         }
     }
 
+    private void toWebActivity(String loadUrl) {
+        Intent intent = new Intent(getActivity(), BaseWebViewActivity.class);
+        intent.putExtra("loadUrl", loadUrl);
+        startActivity(intent);
+
+    }
 
 }

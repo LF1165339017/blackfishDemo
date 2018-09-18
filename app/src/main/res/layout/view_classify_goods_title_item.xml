@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/f1_classify_layout"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/White">
+
+    <TextView
+        android:id="@+id/tv_classify_goods_title_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="test"
+        android:textColor="@color/Black" />
+</FrameLayout>

@@ -32,4 +32,6 @@
     <string name="newstringpasswordhint">6-20位，不能为纯数字或纯字母</string>
     <string name="submission">提交</string>
     <string name="setpassword">设置登录密码</string>
+    <string name="service_msg">商城承诺此商品非假冒品牌(包括盗版)商品，非未经报关的进口商品，非假冒材质成分商品。</string>
+    <string name="service_msg1">此商品由京东供货并提供配送服务</string>
 </resources>

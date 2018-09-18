@@ -16,4 +16,8 @@
         <attr name="rvb_autoPlaying" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="TagsLayout">
+        <attr name="tagVerticalSpace" format="dimension" />
+        <attr name="tagHorizontalSpace" format="dimension" />
+    </declare-styleable>
 </resources>

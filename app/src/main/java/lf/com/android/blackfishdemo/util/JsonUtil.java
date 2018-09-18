@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lf.com.android.blackfishdemo.bean.BannerInfo;
+import lf.com.android.blackfishdemo.bean.ClassifyGoodsInfo;
+import lf.com.android.blackfishdemo.bean.ClassifyGridInfo;
 import lf.com.android.blackfishdemo.bean.GridInfo;
 import lf.com.android.blackfishdemo.bean.HomeSortInfo;
 import lf.com.android.blackfishdemo.bean.HomeSortItemfo;
@@ -52,7 +54,38 @@ public class JsonUtil {
 
 
             } else if (type == CLASSIFY_GOODS_INFO) {
+                List<ClassifyGoodsInfo> classifyGoodsInfos = new ArrayList<>();
+                mJsonObject = new JSONObject(json);
+                mJsonArray = mJsonObject.getJSONArray("classifyTitle");
+                for (int i = 0; i < mJsonArray.length(); i++) {
+                    JSONObject jsonObject = (JSONObject) mJsonArray.get(i);
+                    String title = jsonObject.getString("title");
+                    String headerImageUrl = jsonObject.getString("headerImageUrl");
+                    String subtitle1 = jsonObject.getString("subTitle1");
+                    String subtitle2 = jsonObject.getString("suTitle");
+                    JSONArray jsonArray = ((JSONObject) mJsonArray.get(i)).getJSONArray("gridImageUrls1");
 
+                    List<ClassifyGridInfo> mGridInfos1 = new ArrayList<>();
+                    List<ClassifyGridInfo> mGridInfos2 = new ArrayList<>();
+
+                    for (int j = 0; j < jsonArray.length(); j++) {
+                        JSONObject jsonObject1 = (JSONObject) jsonArray.get(j);
+                        int id = jsonObject1.getInt("id");
+                        String desc = jsonObject1.getString("desc");
+                        String imageUrl = jsonObject1.getString("iamgeUrl");
+                        mGridInfos1.add(new ClassifyGridInfo(id, desc, imageUrl));
+                    }
+                    JSONArray jsonArray1 = ((JSONObject) mJsonArray.get(i)).getJSONArray("gridImageUrls2");
+                    for (int j = 0; j < jsonArray1.length(); j++) {
+                        JSONObject jsonObject1 = (JSONObject) jsonArray1.get(j);
+                        int id = jsonObject1.getInt("id");
+                        String desc = jsonObject1.getString("desc");
+                        String imageUrl = jsonObject1.getString("iamgeUrl");
+                        mGridInfos2.add(new ClassifyGridInfo(id, desc, imageUrl));
+                    }
+                    classifyGoodsInfos.add(new ClassifyGoodsInfo(title, headerImageUrl, subtitle1, subtitle2, mGridInfos1, mGridInfos2));
+                }
+                return classifyGoodsInfos;
             } else if (type == MALL_GOODS_INFO) {
                 List<MallPagerInfo> mallPagerInfos = new ArrayList<>();
                 List<BannerInfo> bannerInfos = new ArrayList<>();

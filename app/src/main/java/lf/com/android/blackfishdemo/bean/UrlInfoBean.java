@@ -8,7 +8,7 @@ public class UrlInfoBean {
     public static final String bankCardsInfo = "https://api.51datakey.com/conf/api/v3/banks/all";
 
     //商品分类信息
-    public static final String classifyGoodsUrl = "http://www.wooyun.site/blackfish/classify_goods.json";
+    public static final String classifyGoodsUrl = "http://www.wanandroid.com/tools/mockapi/448/classify_goodsjson";
 
     //商城页数据
     public static final String mallGoodsUrl = "http://www.wanandroid.com/tools/mockapi/448/mall_goods";

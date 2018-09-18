@@ -1,6 +1,7 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -29,6 +31,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import lf.com.android.blackfishdemo.Activity.BaseActivity;
+import lf.com.android.blackfishdemo.Activity.BaseWebViewActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.adapter.GeneralVLayoutAdapter;
 import lf.com.android.blackfishdemo.adapter.GridOnlyImageAdapter;
@@ -49,6 +53,7 @@ import lf.com.android.blackfishdemo.listener.OnViewItemClickListener;
 import lf.com.android.blackfishdemo.util.JsonUtil;
 import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.OkHttpUtil;
+import lf.com.android.blackfishdemo.util.ToastUtil;
 import lf.com.android.blackfishdemo.view.GridViewForScroll;
 import lf.com.android.blackfishdemo.view.RecyclerViewBanner;
 
@@ -126,7 +131,6 @@ public class MallFragment extends BaseFragment {
             @Override
             public void OnSuccessListener(String result) {
                 mMallPagerInfos = mJsonUtil.getDataFromJson(result, 3);
-                LogUtil.d("LF1234", "mMallPagerInfos= " + mMallPagerInfos);
                 Message msg = mHandler.obtainMessage(0x01);
                 mHandler.sendMessage(msg);
             }
@@ -179,7 +183,10 @@ public class MallFragment extends BaseFragment {
                 mBanner.setListener(new OnRvBannerClickListener() {
                     @Override
                     public void OnClick(int position) {
-
+                        Intent intent = new Intent(mContext, BaseWebViewActivity.class);
+                        intent.putExtra("loadUrl", "https://github.com/LF1165339017");
+                        startActivity(intent);
+                        getActivity().overridePendingTransition(R.anim.activity_right_in, 0);
                     }
                 });
             }
@@ -324,7 +331,35 @@ public class MallFragment extends BaseFragment {
     private OnViewItemClickListener onViewItemClickListener = new OnViewItemClickListener() {
         @Override
         public void onItemClick(String id) {
+            for (int i = 0; i < 10; i++) {
+                if (id.equals("ClassifyGridItem" + i)) {
+                    Toast toast = ToastUtil
+                            .setMyToast(mContext, ToastUtil.PROMPT, "第" + i + "个Item被点击", Toast.LENGTH_SHORT);
+                    toast.show();
+                    return;
+                }
+            }
 
+            if (id.equals("SingleHeaderImage")) {
+                Intent intent = new Intent(mContext, BaseWebViewActivity.class);
+                intent.putExtra("loadUrl", "https://world.taobao.com/");
+                startActivity(intent);
+                getActivity().overridePendingTransition(R.anim.activity_right_in, 0);
+                return;
+            }
+
+            for (int i = 0; i < 5; i++) {
+                if (id.equals("HotGoodsHeaderImage" + i)) {
+                    Intent intent = new Intent(mContext, BaseWebViewActivity.class);
+                    intent.putExtra("loadUrl", UrlInfoBean.hotGoodsHeaderUrls[i]);
+                    startActivity(intent);
+                    getActivity().overridePendingTransition(R.anim.activity_right_in, 0);
+                    return;
+                }
+            }
+            if (id.equals("HotGoodsItem")) {
+
+            }
         }
     };
 }
