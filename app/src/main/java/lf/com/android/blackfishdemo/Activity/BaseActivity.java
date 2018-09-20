@@ -1,5 +1,6 @@
 package lf.com.android.blackfishdemo.Activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,7 @@ import android.view.View;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import lf.com.android.blackfishdemo.R;
 
 public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
     private Unbinder mUnbinder;
@@ -38,5 +40,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View v) {
         ClickListener(v);
+    }
+
+    public void skipActivity(Intent intent) {
+        startActivity(intent);
+        overridePendingTransition(R.anim.activity_right_in, 0);
     }
 }

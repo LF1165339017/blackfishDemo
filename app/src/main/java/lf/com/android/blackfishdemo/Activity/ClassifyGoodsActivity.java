@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.util.ArrayList;
@@ -96,6 +97,7 @@ public class ClassifyGoodsActivity extends BaseActivity {
 
     @Override
     public void initView() {
+        Fresco.initialize(this);
         mContext = ClassifyGoodsActivity.this;
         mLayoutHeader.setOnClickListener(this);
         mImageMsg.setOnClickListener(this);

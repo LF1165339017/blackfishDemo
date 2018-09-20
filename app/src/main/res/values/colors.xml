@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorBlue1296db">#1296db</color>
+    <color name="colorWhite999999">#999999</color>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
@@ -36,4 +38,5 @@
     <color name="color_rv_bg">#F3F3F3</color>
     <color name="color_Home_HeaderBg">#FDDB0A</color>
     <color name="colorEvaluation">#ECECEC</color>
+    <color name="colorGrap">#F2F3F8</color>
 </resources>

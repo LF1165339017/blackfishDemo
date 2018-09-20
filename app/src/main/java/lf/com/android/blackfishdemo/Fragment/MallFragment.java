@@ -33,6 +33,7 @@ import java.util.List;
 
 import lf.com.android.blackfishdemo.Activity.BaseActivity;
 import lf.com.android.blackfishdemo.Activity.BaseWebViewActivity;
+import lf.com.android.blackfishdemo.Activity.GoodsDetailActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.adapter.GeneralVLayoutAdapter;
 import lf.com.android.blackfishdemo.adapter.GridOnlyImageAdapter;
@@ -358,7 +359,9 @@ public class MallFragment extends BaseFragment {
                 }
             }
             if (id.equals("HotGoodsItem")) {
-
+                startActivity(new Intent(mContext, GoodsDetailActivity.class));
+                getActivity().overridePendingTransition(R.anim.activity_right_in, 0);
+                return;
             }
         }
     };

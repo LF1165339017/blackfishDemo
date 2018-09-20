@@ -82,6 +82,80 @@
             android:textColor="@color/Black"
             android:textSize="18sp" />
 
+        <lf.com.android.blackfishdemo.view.TagsLayout
+            android:id="@+id/labels_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_color"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:minHeight="100dp"
+            app:tagHorizontalSpace="10dp"
+            app:tagVerticalSpace="10dp" />
 
+        <View
+            android:id="@+id/view_divider1"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/labels_view"
+            android:layout_marginTop="10dp"
+            android:background="@color/Gray" />
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view_divider2"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:text="数量"
+            android:textColor="@color/Black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_price_bottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_amount"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/Black" />
+
+        <lf.com.android.blackfishdemo.view.AmountView
+            android:id="@+id/amount_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/view_divider1"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp" />
+
+        <View
+            android:id="@+id/view_divider2"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_below="@id/amount_view"
+            android:layout_marginTop="30dp"
+            android:background="@color/Gray" />
+
+        <TextView
+            android:id="@+id/tv_diter_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/view_divider2"
+            android:layout_marginBottom="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape_btn_pressed"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:paddingEnd="15dp"
+            android:paddingStart="15dp"
+            android:paddingTop="10dp"
+            android:text="确认购买"
+            android:textColor="@color/Black"
+            android:textSize="16sp" />
     </RelativeLayout>
 </RelativeLayout>
