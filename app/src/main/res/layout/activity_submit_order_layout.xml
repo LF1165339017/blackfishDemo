@@ -82,7 +82,7 @@
         android:background="@color/colorGrap" />
 
     <com.facebook.drawee.view.SimpleDraweeView
-        android:id="@+id/iv_goods"
+        android:id="@+id/iv_good"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_below="@id/iv_bar"
@@ -97,7 +97,7 @@
         android:layout_marginEnd="70dp"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
-        android:layout_toEndOf="@id/iv_goods"
+        android:layout_toEndOf="@id/iv_good"
         android:ellipsize="end"
         android:maxLines="2"
         android:text="@string/goods_text"
@@ -121,7 +121,7 @@
         android:layout_below="@id/tv_goods_desc"
         android:layout_marginStart="10dp"
         android:layout_marginTop="15dp"
-        android:layout_toEndOf="@id/iv_goods"
+        android:layout_toEndOf="@id/iv_good"
         android:text="类型:中"
         android:textColor="@color/Black" />
 
@@ -138,7 +138,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:layout_below="@id/iv_goods"
+        android:layout_below="@id/iv_good"
         android:layout_marginTop="10dp"
         android:background="@color/colorGrap" />
 
@@ -146,7 +146,7 @@
         android:id="@+id/tv_invoice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/iv_goods"
+        android:layout_below="@id/iv_good"
         android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:text="发票选择"

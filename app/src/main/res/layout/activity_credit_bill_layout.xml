@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/fl_add_credit_bill"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/iv_keeper_add_credit_bill_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/user_icon_arrow_left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="添加信用卡账单"
+            android:textColor="@color/Black" />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_handed"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_icon_handed"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_add_bill_handed" />
+
+        <TextView
+            android:id="@+id/tv_handed_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/iv_icon_handed"
+            android:text="手动记账"
+            android:textColor="@color/Black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_handed_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_handed_title"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/iv_icon_handed"
+            android:text="没邮箱、网银账单？手动更方便"
+            android:textColor="@color/Gray"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="18sp"
+            android:layout_height="18sp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/user_icon_arrow_right" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_import_email"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_icon_import_email"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_add_bill_import_email" />
+
+        <TextView
+            android:id="@+id/tv_import_email_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toRightOf="@id/iv_icon_import_email"
+            android:text="邮箱导入"
+            android:textColor="@color/Black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_import_email_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_import_email_title"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/iv_icon_import_email"
+            android:text="每月自动更新账单，快捷方便"
+            android:textColor="@color/Gray"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/user_icon_arrow_right" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_qq_email"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="5dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_qq_email"
+            android:gravity="center"
+            android:paddingStart="25dp"
+            android:text="QQ邮箱"
+            android:textColor="@color/colorBlue1296db"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_other_email"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_weight="1"
+            android:drawableLeft="@drawable/icon_other_email"
+            android:gravity="center"
+            android:paddingStart="25dp"
+            android:text="其他邮箱"
+            android:textColor="@color/color_Home_HeaderBg"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_import_net_silver"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <ImageView
+            android:id="@+id/iv_icon_import_net_silver"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_add_bill_import_net_silver" />
+
+        <TextView
+            android:id="@+id/tv_import_net_silver_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@id/iv_icon_import_net_silver"
+            android:text="网银导入"
+            android:textColor="@color/Black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_import_net_silver_title"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/iv_icon_import_net_silver"
+            android:text="多重加密技术，保障网银账号安全"
+            android:textColor="@color/Gray"
+            android:textSize="13sp" />
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="15dp"
+            android:src="@drawable/user_icon_arrow_right" />
+    </RelativeLayout>
+    <GridView
+        android:id="@+id/gv_bank_cards"
+        android:numColumns="4"
+        android:stretchMode="spacingWidth"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

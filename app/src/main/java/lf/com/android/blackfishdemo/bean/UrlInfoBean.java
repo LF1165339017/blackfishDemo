@@ -2,7 +2,7 @@ package lf.com.android.blackfishdemo.bean;
 
 public class UrlInfoBean {
     //首页商品信息
-    public static final String homeGoodsUrl = "http://www.wanandroid.com/tools/mockapi/448/home_sortjson";
+    public static final String homeGoodsUrl = "https://www.easy-mock.com/mock/5baae3508c199c08988d8fdc/lf/home_sort";
 
     //银行卡信息
     public static final String bankCardsInfo = "https://api.51datakey.com/conf/api/v3/banks/all";

@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White">
+
+    <FrameLayout
+        android:id="@+id/fl_add_bill"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/iv_keeper_add_bill_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/user_icon_arrow_left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="添加账单"
+            android:textColor="@color/Black"
+            android:textSize="20dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_keeper_bill"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/fl_add_bill"
+        android:layout_margin="15dp"
+        android:text="信贷账单"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/fl_add_bill"
+        android:layout_margin="15dp"
+        android:text="解决逾期问题"
+        android:textColor="@color/colorGray2D2F31"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_add_bill"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/tv_keeper_bill"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_add_bank_bill"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_grid_pressed">
+
+            <ImageView
+                android:id="@+id/tv_keeper_add_bill_icon_1"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/icon_keeper_add_bill_bank" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@+id/tv_keeper_add_bill_icon_1"
+                android:text="信用卡账单"
+                android:textColor="@color/Black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@+id/tv_keeper_add_bill_icon_1"
+                android:text="一键导入，智能管理"
+                android:textColor="@color/Gray"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_add_wd_bill"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_grid_pressed">
+
+            <ImageView
+                android:id="@+id/tv_keeper_add_bill_icon_2"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/icon_keeper_add_bill_icon_2" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/tv_keeper_add_bill_icon_2"
+                android:text="忘带账单"
+                android:textColor="@color/Black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@id/tv_keeper_add_bill_icon_2"
+                android:text="还款提醒，不在逾期"
+                android:textColor="@color/Gray"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_keeper_bill_general"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear_layout_add_bill"
+        android:layout_margin="15dp"
+        android:text="常用账单"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/linear_layout_add_bill"
+        android:layout_margin="15dp"
+        android:text="账单查询，智能提醒"
+        android:textColor="@color/Gray"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:id="@+id/linear_layout_add_bill_2"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_below="@id/tv_keeper_bill_general"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:id="@+id/rl_add_zfb_bill"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_grid_pressed">
+
+            <ImageView
+                android:id="@+id/tv_keeper_add_bill_icon_3"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/icon_zfb" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/tv_keeper_add_bill_icon_3"
+                android:text="支付宝"
+                android:textColor="@color/Black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@id/tv_keeper_add_bill_icon_3"
+                android:text="查流水询账单"
+                android:textColor="@color/Gray"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_add_gjj_bill"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/selector_grid_pressed">
+
+            <ImageView
+                android:id="@+id/tv_keeper_add_bill_icon_4"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/icon_keeper_gjj" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_toEndOf="@id/tv_keeper_add_bill_icon_4"
+                android:text="公积金"
+                android:textColor="@color/Black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_toEndOf="@id/tv_keeper_add_bill_icon_4"
+                android:text="查询被遗忘的财富"
+                android:textColor="@color/Gray"
+                android:textSize="12sp" />
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

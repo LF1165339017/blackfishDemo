@@ -80,8 +80,4 @@ public class ShowImageActivity extends BaseActivity {
         }
     }
 
-    private void finishActivity() {
-        finish();
-        overridePendingTransition(0, R.anim.activity_right_out);
-    }
 }

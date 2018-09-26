@@ -13,7 +13,7 @@ import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.bean.UrlInfoBean;
 
 public class SubmitOrderActivity extends BaseActivity {
-    @BindView(R.id.iv_goods)
+    @BindView(R.id.iv_good)
     SimpleDraweeView mIvGoods;
     @BindView(R.id.btn_submit_order)
     Button mBtnSubmitOrder;

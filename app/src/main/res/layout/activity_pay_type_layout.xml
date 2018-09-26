@@ -135,17 +135,75 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_toEndOf="@id/iv_cash_pay"
             android:text="现金支付"
             android:textColor="@color/Black" />
+
         <TextView
-            android:text="微信,支付宝直接支付"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/iv_cash_pay"
+            android:text="微信、支付宝直接支付"
+            android:textColor="@color/colorGray707061" />
     </RelativeLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1.0dp"
+        android:layout_below="@id/rl_cash_pay"
+        android:layout_marginTop="5dp"
+        android:background="@color/colorGray707061" />
+
+    <RelativeLayout
+        android:id="@+id/rl_fenqi_pay"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_below="@id/rl_cash_pay"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_fenqi_pay"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/icon_checkbox_unchecked" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_toEndOf="@id/iv_fenqi_pay"
+            android:text="分期支付"
+            android:textColor="@color/Black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="10dp"
+            android:layout_toEndOf="@id/iv_fenqi_pay"
+            android:text="从购物起，按分期付款逐月付款"
+            android:textColor="@color/colorGray707061" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/shape_btn_pressed"
+        android:text="支付48元"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
 
 </RelativeLayout>

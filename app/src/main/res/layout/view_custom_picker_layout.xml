@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White">
+
+    <TextView
+        android:id="@+id/tv_picker_custom_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:text="取消"
+        android:textColor="@color/Black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_picker_custom_determine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        android:text="确定"
+        android:textColor="@color/Black"
+        android:textSize="18sp" />
+
+    <com.cncoderx.wheelview.Wheel3DView
+        android:id="@+id/wheel_view_picker"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tv_picker_custom_cancel"
+        app:cyclic="false"
+        app:toward="right" />
+
+</RelativeLayout>

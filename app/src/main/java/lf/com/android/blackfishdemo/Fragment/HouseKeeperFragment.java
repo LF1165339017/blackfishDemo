@@ -2,22 +2,23 @@ package lf.com.android.blackfishdemo.Fragment;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import lf.com.android.blackfishdemo.Activity.AddBillActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnDialogPosBtnClickListener;
 import lf.com.android.blackfishdemo.util.DenistyUtil;
-import lf.com.android.blackfishdemo.util.JsonUtil;
 
 public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnClickListener {
     private ImageView mImageViewAdd, mImageShowEyes;
@@ -47,10 +48,6 @@ public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnC
         mCradLayout = findView(R.id.rl_keeper_card);
         mButtonAddBill = findView(R.id.btn_keeper_add_bill);
 
-    }
-
-    @Override
-    public void initdata() {
         mImageViewAdd.setOnClickListener(this);
         mImageShowEyes.setOnClickListener(this);
         mTextGrid1.setOnClickListener(this);
@@ -60,6 +57,19 @@ public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnC
         mTextGrid.setOnClickListener(this);
         mCradLayout.setOnClickListener(this);
         mButtonAddBill.setOnClickListener(this);
+
+        mCradLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Animation animation = setLongClickAnimation(mCradLayout);
+                animation.start();
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void initdata() {
 
 
     }
@@ -92,7 +102,7 @@ public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnC
 
     @Override
     public int getLayoutId() {
-        return R.layout.fragment_nav_housekeeper;
+        return R.layout.fragment_nav_housekeeper_layout;
     }
 
 
@@ -148,5 +158,31 @@ public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnC
         } else {
             return;
         }
+    }
+
+    private Animation setLongClickAnimation(View view) {
+        Animation animation = new ScaleAnimation(0.95f, 1, 0.95f, 1,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+        animation.setDuration(300);
+
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                startActivity(new Intent(getActivity(), AddBillActivity.class));
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+
+        return animation;
     }
 }

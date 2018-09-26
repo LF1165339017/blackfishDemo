@@ -39,4 +39,5 @@
     <color name="color_Home_HeaderBg">#FDDB0A</color>
     <color name="colorEvaluation">#ECECEC</color>
     <color name="colorGrap">#F2F3F8</color>
+    <color name="colorWhiteE8E8E8">#E8E8E8</color>
 </resources>

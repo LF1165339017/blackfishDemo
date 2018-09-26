@@ -69,7 +69,7 @@ public class SimilarRecoAdapter extends BaseAdapter {
             ButterKnife.bind(this, view);
         }
 
-        @BindView(R.id.iv_goods)
+        @BindView(R.id.iv_good)
         SimpleDraweeView draweeView;
         @BindView(R.id.tv_desc)
         TextView mTvDesc;

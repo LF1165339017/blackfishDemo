@@ -46,4 +46,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         startActivity(intent);
         overridePendingTransition(R.anim.activity_right_in, 0);
     }
+
+    public void finishActivity() {
+        finish();
+        overridePendingTransition(0, R.anim.activity_right_out);
+    }
 }

@@ -28,7 +28,6 @@ import java.util.List;
 import butterknife.BindView;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.adapter.SimilarRecoAdapter;
-import lf.com.android.blackfishdemo.bean.BannerInfo;
 import lf.com.android.blackfishdemo.bean.GoodsDetailsInfo;
 import lf.com.android.blackfishdemo.bean.OptionalTypeInfo;
 import lf.com.android.blackfishdemo.bean.SimilarRecoInfo;
@@ -255,7 +254,7 @@ public class GoodsDetailActivity extends BaseActivity {
                 mDialog.dismiss();
             }
         });
-        SimpleDraweeView draweeView = view.findViewById(R.id.iv_goods);
+        SimpleDraweeView draweeView = view.findViewById(R.id.iv_good);
         draweeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
