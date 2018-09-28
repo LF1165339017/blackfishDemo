@@ -35,4 +35,6 @@
     <string name="service_msg">商城承诺此商品非假冒品牌(包括盗版)商品，非未经报关的进口商品，非假冒材质成分商品。</string>
     <string name="service_msg1">此商品由京东供货并提供配送服务</string>
     <string name="goods_text">收纳博士（DR.STORAGE） 9丝加厚真空收纳压缩袋 8只装【4特大4中】内含手动抽气泵</string>
+
+    <string name="image_desc">ImageView</string>
 </resources>

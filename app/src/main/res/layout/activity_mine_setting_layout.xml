@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:divider="@drawable/shape_divider_layout"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="@color/colorWhite">
+
+        <ImageView
+            android:id="@+id/iv_mine_setting_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_to_left" />
+
+        <TextView
+            android:layout_width="match_parent"
+
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="设置"
+            android:textColor="@color/Black"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_setting_login_pwd"
+        style="@style/MinePagerTextListStyle"
+        android:layout_marginTop="1dp"
+        android:text="登录密码" />
+
+    <TextView
+        android:id="@+id/tv_setting_pay_pwd"
+        style="@style/MinePagerTextListStyle"
+        android:text="支付密码" />
+
+    <TextView
+        android:id="@+id/tv_setting_manger_address"
+        style="@style/MinePagerTextListStyle"
+        android:text="收货地址管理" />
+
+    <TextView
+        android:id="@+id/btn_setting_exit_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:background="@color/colorWhite"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/colorRedFF5A34"
+        android:textSize="17sp" />
+</LinearLayout>

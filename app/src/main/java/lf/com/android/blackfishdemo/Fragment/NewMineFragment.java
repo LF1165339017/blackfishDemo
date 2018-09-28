@@ -1,12 +1,14 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import lf.com.android.blackfishdemo.Activity.MineSettingActibity;
 import lf.com.android.blackfishdemo.R;
 
 public class NewMineFragment extends BaseFragment {
@@ -67,6 +69,7 @@ public class NewMineFragment extends BaseFragment {
     public void lisetener(View view) {
         switch (view.getId()) {
             case R.id.iv_mine_settings:
+                startActivity(new Intent(getActivity(), MineSettingActibity.class));
                 break;
             case R.id.iv_mine_portrait:
                 break;

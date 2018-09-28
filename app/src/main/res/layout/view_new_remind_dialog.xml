@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/shape_new_remind_dialog">
+
+    <ImageView
+        android:id="@+id/iv_remind_dialog_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_bill_detail_close_remind" />
+
+    <TextView
+        android:id="@+id/tv_remind_time_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_remind_dialog_close"
+        android:layout_marginStart="30dp"
+        android:text="提醒时间"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iv_remind_date"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tv_remind_time_title"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bm_icon_remind_date" />
+
+    <TextView
+        android:id="@+id/tv_remind_data"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/tv_remind_time_title"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@id/iv_remind_date"
+        android:background="@drawable/shape_card_view"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:text="提前 1 天"
+        android:textColor="@color/Gray" />
+
+    <ImageView
+        android:id="@+id/iv_remind_time"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/iv_remind_date"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bm_icon_remind_calener" />
+
+    <TextView
+        android:id="@+id/tv_remind_time"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/iv_remind_date"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@id/iv_remind_time"
+        android:background="@drawable/shape_card_view"
+        android:gravity="center_vertical"
+        android:paddingStart="20dp"
+        android:text="12:00"
+        android:textColor="@color/Gray" />
+
+    <TextView
+        android:id="@+id/tv_remind_way_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/iv_remind_time"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:text="提醒方式"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iv_remind_select_way"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_below="@id/tv_remind_way_title"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="20dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/icon_remind_way_checked" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@id/tv_remind_way_title"
+        android:layout_marginEnd="30dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@id/iv_remind_select_way"
+        android:background="@drawable/shape_card_view">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="20dp"
+            android:text="消息提醒"
+            android:textColor="@color/Black" />
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_remind_way_msg" />
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_remind_cancel"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/iv_remind_select_way"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/shape_radius_white_btn"
+        android:text="取消"
+        android:textColor="@color/Gray" />
+
+    <Button
+        android:id="@+id/btn_remind_determine"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/iv_remind_select_way"
+        android:layout_marginEnd="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/selector_btn_general"
+        android:text="确定" />
+</RelativeLayout>

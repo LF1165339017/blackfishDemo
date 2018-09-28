@@ -1,8 +1,10 @@
 package lf.com.android.blackfishdemo.Fragment;
 
+import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +16,20 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 import lf.com.android.blackfishdemo.Activity.AddBillActivity;
+import lf.com.android.blackfishdemo.Activity.AddCreditBillActivity;
+import lf.com.android.blackfishdemo.Activity.ShowDetailBillActivity;
 import lf.com.android.blackfishdemo.R;
 import lf.com.android.blackfishdemo.listener.OnDialogPosBtnClickListener;
 import lf.com.android.blackfishdemo.util.DenistyUtil;
+import lf.com.android.blackfishdemo.util.SpannableStringUtil;
+import lf.com.android.blackfishdemo.util.ToastUtil;
 
-public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnClickListener {
+public class HouseKeeperFragment extends BaseFragment {
     private ImageView mImageViewAdd, mImageShowEyes;
     private TextView mTextMoney, mTextGrid1, mTextGrid2, mTextGrid3, mTextGrid4, mTextGrid;
     private RelativeLayout mCradLayout;
@@ -78,22 +87,50 @@ public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnC
     public void lisetener(View view) {
         switch (view.getId()) {
             case R.id.iv_keeper_add:
+                startActivity(new Intent(getActivity(), AddBillActivity.class));
                 break;
             case R.id.tv_keeper_show_money:
+                if (!isShowMoney) {
+                    final DecimalFormat decimalFormat = new DecimalFormat(".00");
+                    ValueAnimator animator = ValueAnimator.ofFloat(0, money);
+                    animator.setDuration(1000);
+                    animator.start();
+                    animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            mTextMoney.setText(decimalFormat.format(animation.getAnimatedFraction()));
+                            SpannableStringUtil.setRelativeSizeText(
+                                    mTextMoney, 0, mTextMoney.getText().length() - 3,
+                                    1.3f, mTextMoney.getText().toString());
+                        }
+                    });
+                    isShowMoney = true;
+                    mImageShowEyes.setImageResource(R.drawable.user_icon_eye_open_blue);
+                } else {
+                    mTextMoney.setText("******");
+                    isShowMoney = false;
+                    mImageShowEyes.setImageResource(R.drawable.user_icon_eye_close_blue);
+                }
                 break;
             case R.id.tv_keeper_grid_1:
+                showAddBilDialog(R.drawable.icon_dialog_add_bill_1, "你还没有账单，快去添加吧", 0, new DialogListener());
                 break;
             case R.id.tv_keeper_grid_2:
+                showAddBilDialog(R.drawable.icon_dialog_add_bill_2, "免息期告诉你今天刷哪张卡最划算", 1, new DialogListener());
                 break;
             case R.id.tv_keeper_grid_3:
+                Toast toast = ToastUtil.setMyToast(mContext, ToastUtil.PROMPT, "办信用卡", Toast.LENGTH_SHORT);
+                toast.show();
                 break;
             case R.id.tv_keeper_grid_4:
-                break;
-            case R.id.tv_keeper_gift:
+                Toast toast1 = ToastUtil.setMyToast(mContext, ToastUtil.PROMPT, "我要贷款", Toast.LENGTH_SHORT);
+                toast1.show();
                 break;
             case R.id.rl_keeper_card:
+                setClickAnimation(mCradLayout);
                 break;
             case R.id.btn_keeper_add_bill:
+                startActivity(new Intent(mContext, AddBillActivity.class));
                 break;
             default:
                 break;
@@ -149,17 +186,6 @@ public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnC
     }
 
 
-    @Override
-    public void onBtnClick(int type) {
-        if (type == 0) {
-
-        } else if (type == 1) {
-
-        } else {
-            return;
-        }
-    }
-
     private Animation setLongClickAnimation(View view) {
         Animation animation = new ScaleAnimation(0.95f, 1, 0.95f, 1,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
@@ -184,5 +210,43 @@ public class HouseKeeperFragment extends BaseFragment implements OnDialogPosBtnC
         });
 
         return animation;
+    }
+
+    private class DialogListener implements OnDialogPosBtnClickListener {
+
+        @Override
+        public void onBtnClick(int type) {
+            if (type == 0) {
+                startActivity(new Intent(mContext, AddBillActivity.class));
+            } else if (type == 1) {
+                startActivity(new Intent(mContext, AddCreditBillActivity.class));
+            } else {
+                return;
+            }
+        }
+    }
+
+    private void setClickAnimation(View view) {
+        Animation animation = new ScaleAnimation(0.95f, 1, 095f, 1,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF,
+                0.5f);
+        animation.setDuration(300);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                startActivity(new Intent(getActivity(), ShowDetailBillActivity.class));
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        view.startAnimation(animation);
     }
 }

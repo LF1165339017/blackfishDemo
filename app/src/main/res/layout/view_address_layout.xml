@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_address"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@color/colorWhite">
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="15dp"
+        android:text="当当猫"
+        android:textColor="@color/Gray"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_phone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_toEndOf="@+id/tv_name"
+        android:text="18800809573"
+        android:textColor="@color/Gray"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_name"
+        android:layout_marginStart="10dp"
+        android:text="上海市 浦东新区"
+        android:textColor="@color/Gray" />
+
+    <TextView
+        android:id="@+id/tv_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.2dp"
+        android:layout_below="@id/tv_address"
+        android:layout_marginTop="10dp"
+        android:background="@color/Gray"
+        android:textColor="@color/Black" />
+
+    <android.support.v7.widget.AppCompatCheckBox
+        android:id="@+id/checks"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_divider"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:text="默认地址"
+        android:textColor="@color/Black" />
+
+    <TextView
+        android:id="@+id/tv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@id/tv_divider"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:drawableStart="@drawable/icon_delete"
+        android:text="删除"
+        android:textColor="@color/Black" />
+
+    <TextView
+        android:id="@+id/tv_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_divider"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_toStartOf="@id/tv_delete"
+        android:drawableStart="@drawable/icon_edit"
+        android:text="编辑"
+        android:textColor="@color/Black" />
+</RelativeLayout>

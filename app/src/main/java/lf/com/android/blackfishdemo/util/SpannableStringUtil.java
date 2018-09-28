@@ -32,7 +32,7 @@ public class SpannableStringUtil {
         ForegroundColorSpan span = new ForegroundColorSpan(color);
         RelativeSizeSpan sizeSpan = new RelativeSizeSpan(relativeSize);
         mSpannableString.setSpan(span, start, end, SpannableString.SPAN_INCLUSIVE_EXCLUSIVE);
-        mSpannableString.setSpan(relativeSize, relstart, relend, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        mSpannableString.setSpan(sizeSpan, relstart, relend, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         textView.setText(mSpannableString);
     }
 
@@ -54,5 +54,14 @@ public class SpannableStringUtil {
         RelativeSizeSpan sizeSpan = new RelativeSizeSpan(1.5f);
         mSpannableString.setSpan(sizeSpan, start + 1, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         return mSpannableString;
+    }
+
+    public static void setRelativeSizeText(TextView textView, int start,
+                                           int end,
+                                           final float relativeSize, String text) {
+        mSpannableString = new SpannableString(text);
+        RelativeSizeSpan sizeSpan = new RelativeSizeSpan(relativeSize);
+        mSpannableString.setSpan(sizeSpan, start, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        textView.setText(mSpannableString);
     }
 }
