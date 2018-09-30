@@ -20,4 +20,4 @@ https://www.jianshu.com/p/7e748757413f
               
 https://www.jianshu.com/p/05856c6ca7f4
 
-在此，也非常感谢MobSDK的工作人员，他们的耐心的解答让我获益匪浅
+在此，也非常感谢MobSDK的工作人员，他们耐心的解答让我获益匪浅
