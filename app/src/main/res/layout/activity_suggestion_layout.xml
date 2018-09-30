@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/iv_mine_sug_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_to_left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="意见反馈"
+            android:textColor="@color/Black"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="反馈类型:"
+            android:textColor="@color/Black"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_sug_interface"
+            android:layout_width="100dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/shape_sug_text_view_unselected"
+            android:gravity="center"
+            android:text="体验与界面"
+            android:textColor="@color/Black" />
+
+        <TextView
+            android:id="@+id/tv_sug_other"
+            android:layout_width="100dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/shape_sug_text_view_unselected"
+            android:gravity="center"
+            android:text="其他"
+            android:textColor="@color/Black" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <EditText
+            android:id="@+id/et_sug"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:gravity="start|top"
+            android:hint="你的建议是我们宝贵的经验"
+            android:paddingStart="10dp"
+            android:paddingTop="10dp"
+            android:textColor="@color/Black"
+            android:textColorHint="@color/Gray" />
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/iv_sug_add_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="start|bottom"
+            android:layout_marginBottom="5dp"
+            android:layout_marginStart="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_sug_add_image" />
+    </FrameLayout>
+
+    <EditText
+        android:id="@+id/et_sug_phone_text"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        android:hint="手机号/邮箱(选填,方便我们给你答复)"
+        android:inputType="textEmailAddress|phone"
+        android:paddingStart="10dp"
+        android:textColor="@color/Black"
+        android:textColorHint="@color/Gray" />
+
+    <Button
+        android:id="@+id/btn_sug_submit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/selector_btn_general"
+        android:text="结交" />
+
+</LinearLayout>

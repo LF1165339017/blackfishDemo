@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="vertical"
+    android:showDividers="middle">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <ImageView
+            android:id="@+id/tv_mine_about_back"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_to_left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="关于小黑鱼"
+            android:textColor="@color/Black"
+            android:textSize="18sp" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="@drawable/cert_list_bg_header">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:src="@drawable/fish_logo" />
+
+        <TextView
+            android:id="@+id/tv_about_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:text="V1.3.5版本"
+            android:textColor="@color/Black"
+            android:textSize="20sp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_about_sug"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/selector_text_view_pressed"
+        android:clickable="true"
+        android:drawableRight="@drawable/user_icon_arrow_right"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp"
+        android:text="意见反馈"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_about_contact"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/selector_text_view_pressed"
+        android:clickable="true"
+        android:drawableRight="@drawable/user_icon_arrow_right"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp"
+        android:text="联系客服"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tv_about_check"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/selector_text_view_pressed"
+        android:clickable="true"
+        android:drawableRight="@drawable/user_icon_arrow_right"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="15dp"
+        android:text="检查更新"
+        android:textColor="@color/Black"
+        android:textSize="16sp" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|bottom"
+            android:layout_marginBottom="20dp"
+            android:text="Copyright @ 2018 *******有限公司"
+            android:textColor="@color/Black"
+            android:textSize="12sp" />
+
+    </FrameLayout>
+
+
+</LinearLayout>

@@ -5,6 +5,10 @@ import android.support.v7.widget.AppCompatEditText;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+/**
+ * 验证码控件，去掉传统EditText双击选中EditText的内容
+ * 和去掉光标位置会随点击改变
+ */
 public class CodeEditTextView extends AppCompatEditText {
     private long lastTime = 0;
 
@@ -29,7 +33,7 @@ public class CodeEditTextView extends AppCompatEditText {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_DOWN://判断点击事件，防止用户多次点击
                 long currenTime = System.currentTimeMillis();
                 if (currenTime - lastTime < 500) {
                     lastTime = currenTime;

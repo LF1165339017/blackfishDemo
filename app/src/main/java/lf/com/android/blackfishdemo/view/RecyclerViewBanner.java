@@ -34,40 +34,38 @@ import lf.com.android.blackfishdemo.listener.OnSwitchRvBannerListener;
 import lf.com.android.blackfishdemo.util.LogUtil;
 
 public class RecyclerViewBanner extends FrameLayout {
-    private static final int DEFAULT_SELECT_COLOR = 0xffffffff;
-    private static final int DEFAULT_UNSELECTED_COLOR = 0X50ffffff;
+    private static final int DEFAULT_SELECT_COLOR = 0xffffffff;//选中时的颜色
+    private static final int DEFAULT_UNSELECTED_COLOR = 0X50ffffff;//未来选中时的颜色
     private RecyclerView mRecyclerView;
     private RecyclerViewAdapter adapter;
     private LinearLayout mLinearLayout;
     private OnRvBannerClickListener listener;
     private OnSwitchRvBannerListener onSwitchRvBannerListener;
-    private boolean isPlaying;
-    private int startX, startY, currentIndex;
-    private int mSize;
-    private int mSpace;
-    private int mInterval;
-    private int margin;
-    private int gravity;
-    private boolean isShowIndicator;
-    private boolean isAutoPlaying;
-    private boolean isTouched;
+    private boolean isPlaying;//是否播放
+    private int startX, startY, currentIndex;//从X轴开始的位置，从Y轴开始的位置
+    private int mSize;//大小
+    private int mSpace;//间距
+    private int mInterval;//时间间隔
+    private int margin;//距离外边距的距离
+    private int gravity;//位置
+    private boolean isShowIndicator;//是否显示指示器
+    private boolean isAutoPlaying;//是否自动播放
+    private boolean isTouched;//是否触摸
     private List<Object> mData = new ArrayList<>();
-    private Drawable mSelectedDrawable;
-    private Drawable mUnSelectedDrawable;
-    private Drawable selectedSrc;
-    private Drawable unSelectedSrc;
+    private Drawable mSelectedDrawable;//选中时背景
+    private Drawable mUnSelectedDrawable;//未选中时的背景
+    private Drawable selectedSrc;//选中时的资源
+    private Drawable unSelectedSrc;//未选中时的资源
     private Handler mHandler = new Handler();
 
     private Runnable playTask = new Runnable() {
         @Override
         public void run() {
-            LogUtil.d("LF123", "currentIndexScr=" + currentIndex);
-            mRecyclerView.smoothScrollToPosition(++currentIndex);
+            mRecyclerView.smoothScrollToPosition(++currentIndex);//让RecyclerView平滑到指定的位置
             if (isShowIndicator) {
-                changePoint();
+                changePoint();//改变圆点指示器的显示位置
             }
-            LogUtil.d("LF123", "currentIndex=" + currentIndex);
-            mHandler.postDelayed(this, mInterval);
+            mHandler.postDelayed(this, mInterval);//设置定时器
         }
     };
 

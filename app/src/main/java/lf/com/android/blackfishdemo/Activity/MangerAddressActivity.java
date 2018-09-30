@@ -35,8 +35,8 @@ public class MangerAddressActivity extends BaseActivity {
     @BindView(R.id.btn_add_address)
     Button mBtnAddAddress;
 
-    private static final int REQUEST_CODE = 0X01;
-    private static final int RESULT_CODE = 0X02;
+    private static final int REQUEST_CODE = 0x01;
+    private static final int RESULT_CODE = 0x02;
     private Context mContext;
     private SharePerUtil mSharePerUtil;
 
@@ -53,6 +53,8 @@ public class MangerAddressActivity extends BaseActivity {
         getWindow().setStatusBarColor(getColor(R.color.colorWhite));
         mContext = MangerAddressActivity.this;
         mSharePerUtil = new SharePerUtil(mContext);
+        mIvBack.setOnClickListener(this);
+        mBtnNewAddress.setOnClickListener(this);
     }
 
     @Override

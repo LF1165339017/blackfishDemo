@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import lf.com.android.blackfishdemo.Activity.AboutActivity;
 import lf.com.android.blackfishdemo.Activity.MineSettingActibity;
 import lf.com.android.blackfishdemo.R;
 
@@ -69,29 +71,50 @@ public class NewMineFragment extends BaseFragment {
     public void lisetener(View view) {
         switch (view.getId()) {
             case R.id.iv_mine_settings:
+                //设置
                 startActivity(new Intent(getActivity(), MineSettingActibity.class));
                 break;
             case R.id.iv_mine_portrait:
+                //个人头像
+                Toast.makeText(mContext, "点击了个人头像", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_personal_center:
+                //个人中心
+                Toast.makeText(mContext, "点击了个人中心", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_grid_pay:
+                //待付款
+                Toast.makeText(mContext, "点击了个待付款", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_grid_send_goods:
+                //待发货
+                Toast.makeText(mContext, "点击了个待发货", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_grid_get_goods:
+                //待收货
+                Toast.makeText(mContext, "点击了个待收货", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_grid_after_sale:
+                //待付款
+                Toast.makeText(mContext, "点击了个待付款", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_bank_card:
+                //我的银行卡
+                Toast.makeText(mContext, "点击我的银行卡", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_coupons://我的优惠劵
+                Toast.makeText(mContext, "点击了我的优惠劵", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_history://浏览历史
+                Toast.makeText(mContext, "点击了浏览历史", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_help_center:
+                //帮助中心
+                Toast.makeText(mContext, "点击了帮助中心", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.tv_mine_about_of:
+                //关于小黑鱼
+                startActivity(new Intent(getActivity(), AboutActivity.class));
                 break;
             default:
                 break;
