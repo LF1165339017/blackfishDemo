@@ -6,9 +6,11 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -45,7 +47,6 @@ import lf.com.android.blackfishdemo.view.RecyclerViewBanner;
 public class NewHomeFragment extends BaseFragment {
     private TextView mtv_home_username, mtv_home_userLevel, mtv_home_userMsg, mtv_home_wallet,
             mtv_home_head_click;
-
     private RecyclerView mRecyclerView;
     private VirtualLayoutManager mlayoutManager;
     private RecyclerView.RecycledViewPool mviewPool;//Recycler复用池
@@ -55,6 +56,12 @@ public class NewHomeFragment extends BaseFragment {
     private List<HomeSortInfo> mHomeSortInfos;
     private List<HomeSortItemfo> mHomeSortItemfos;
     private RecyclerViewBanner mRecyclerViewBanner;
+    private Toolbar mToolbar;
+    private AlphaAnimation mShowAnim, mHiddenAmin;//控件的显示和隐藏动画
+    private View mToolbarview;
+    private View mToolbarview1;
+    private boolean arrowup = true;
+    private boolean arrowupdown = true;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -73,19 +80,20 @@ public class NewHomeFragment extends BaseFragment {
     @Override
     public void initView() {
         Fresco.initialize(getContext());//初始化默认配置
+        mToolbarview = LayoutInflater.from(getContext()).inflate(R.layout.new_home_fragment_toolbar_layout, null);
+        mToolbarview1 = LayoutInflater.from(getContext()).inflate(R.layout.new_home_fragment_toolbar_layout1, null);
         //实例化控件
-        mtv_home_username = findView(R.id.tv_home_username);
-        mtv_home_userLevel = findView(R.id.tv_home_userlevel);
-        mtv_home_userMsg = findView(R.id.tv_home_msg);
-        mtv_home_wallet = findView(R.id.tv_home_wallet);
-        mtv_home_head_click = findView(R.id.tv_home_head_click);
         mRecyclerView = findView(R.id.rv_fragment_home_context);
-        //为TextView设置字体为加粗格式
-        mtv_home_username.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        mtv_home_userMsg.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        mtv_home_wallet.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        mtv_home_head_click.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-
+        mToolbar = findView(R.id.tool_bar);
+        mToolbar.addView(mToolbarview);
+        initmToolbarView();
+        initmToolbarView1();
+        //控件显示的动画
+        mShowAnim = new AlphaAnimation(0.0f, 1.0f);
+        mShowAnim.setDuration(300);
+        //控件隐藏的动画
+        mHiddenAmin = new AlphaAnimation(1.0f, 0.0f);
+        mHiddenAmin.setDuration(300);
         //初始化VirtualLayout和设置RecyclerView;
         mlayoutManager = new VirtualLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mlayoutManager);
@@ -94,7 +102,7 @@ public class NewHomeFragment extends BaseFragment {
         mviewPool.setMaxRecycledViews(0, 20);
         mdelegateAdapter = new DelegateAdapter(mlayoutManager, false);
         mRecyclerView.setAdapter(mdelegateAdapter);
-
+        addRecyclerListener();
     }
 
     @Override
@@ -380,6 +388,55 @@ public class NewHomeFragment extends BaseFragment {
         intent.putExtra("loadUrl", loadUrl);
         startActivity(intent);
 
+    }
+
+    private void initmToolbarView() {
+        mtv_home_username = mToolbarview.findViewById(R.id.tv_home_username);
+        mtv_home_userLevel = mToolbarview.findViewById(R.id.tv_home_userlevel);
+        mtv_home_userMsg = mToolbarview.findViewById(R.id.tv_home_msg);
+        mtv_home_wallet = mToolbarview.findViewById(R.id.tv_home_wallet);
+        mtv_home_head_click = mToolbarview.findViewById(R.id.tv_home_head_click);
+        //为TextView设置字体为加粗格式
+        mtv_home_username.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        mtv_home_userMsg.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        mtv_home_wallet.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+        mtv_home_head_click.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
+    }
+
+    private void initmToolbarView1() {
+
+    }
+
+    private void addRecyclerListener() {
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                if (dy < 0) {//先判断滑动位置，这时候向上
+                    if (!recyclerView.canScrollVertically(-1)) {//无法再向上滑动的时候，说明已经到头
+                        if (arrowup) {
+                            mToolbar.setAnimation(mShowAnim);
+                            mToolbar.removeAllViews();
+                            mToolbar.addView(mToolbarview);
+                            arrowup = false;
+                            arrowupdown = true;
+                        }
+
+                    }
+                } else if (dy > 0) {//先判断滑动位置，这时候向下
+                    if (recyclerView.canScrollVertically(1)) {//可以向下滑动
+                        if (arrowupdown) {
+                            mToolbar.setAnimation(mHiddenAmin);
+                            mToolbar.removeAllViews();
+                            mToolbar.addView(mToolbarview1);
+                            arrowupdown = false;
+                        }
+                        arrowup = true;
+                    }
+                }
+            }
+        });
     }
 
 }
