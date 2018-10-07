@@ -7,16 +7,20 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import lf.com.android.blackfishdemo.bean.BankCardsInfo;
 import lf.com.android.blackfishdemo.bean.BannerInfo;
 import lf.com.android.blackfishdemo.bean.ClassifyGoodsInfo;
 import lf.com.android.blackfishdemo.bean.ClassifyGridInfo;
+import lf.com.android.blackfishdemo.bean.GoodsDetailsInfo;
 import lf.com.android.blackfishdemo.bean.GridInfo;
 import lf.com.android.blackfishdemo.bean.HomeSortInfo;
 import lf.com.android.blackfishdemo.bean.HomeSortItemfo;
 import lf.com.android.blackfishdemo.bean.MallGoodsInfo;
 import lf.com.android.blackfishdemo.bean.MallGoodsItemInfo;
 import lf.com.android.blackfishdemo.bean.MallPagerInfo;
+import lf.com.android.blackfishdemo.bean.OptionalTypeInfo;
 import lf.com.android.blackfishdemo.bean.RecommendGoodsInfo;
+import lf.com.android.blackfishdemo.bean.SimilarRecoInfo;
 
 public class JsonUtil {
     private static final int HOME_COODS_INFO = 0;
@@ -51,7 +55,19 @@ public class JsonUtil {
                 LogUtil.d("LF1234", "homeSortInfos" + homeSortInfos);
                 return homeSortInfos;
             } else if (type == BANK_CARD_INFO) {
-
+                List<BankCardsInfo> bankCardsInfos = new ArrayList<>();
+                mJsonArray = new JSONArray(json);
+                mJsonObject = (JSONObject) mJsonArray.get(0);
+                JSONArray jsonArray = mJsonObject.getJSONArray("bank_list");
+                JSONObject jsonObject = null;
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    jsonObject = (JSONObject) jsonArray.get(i);
+                    String abbr = jsonObject.getString("abbr");
+                    String name = jsonObject.getString("name");
+                    String logo_url = jsonObject.getString("logo_uri");
+                    bankCardsInfos.add(new BankCardsInfo(logo_url, name, abbr));
+                }
+                return bankCardsInfos;
 
             } else if (type == CLASSIFY_GOODS_INFO) {
                 List<ClassifyGoodsInfo> classifyGoodsInfos = new ArrayList<>();
@@ -151,12 +167,40 @@ public class JsonUtil {
                         recommendGoodsInfoList));
                 return mallPagerInfos;
             } else if (type == GOODS_DETAILS_INFO) {
-
+                List<GoodsDetailsInfo> detailsInfos = new ArrayList<>();
+                List<String> bannerList = new ArrayList<>();
+                mJsonObject = new JSONObject(json);
+                mJsonArray = mJsonObject.getJSONArray("bannerUrls");
+                for (int i = 0; i < mJsonArray.length(); i++) {
+                    JSONObject jsonObject = (JSONObject) mJsonArray.get(i);
+                    String bannerUrl = jsonObject.getString("imageUrl");
+                    bannerList.add(bannerUrl);
+                }
+                double totalPrice = mJsonObject.getDouble("totalPrice");
+                double singlePrice = mJsonObject.getDouble("singlePrice");
+                int periods = mJsonObject.getInt("periods");
+                String desc = mJsonObject.getString("desc");
+                String defaultType = mJsonObject.getString("defaultType");
+                List<OptionalTypeInfo> optionalTypeInfos = new ArrayList<>();
+                List<SimilarRecoInfo> similarRecoInfos = new ArrayList<>();
+                JSONArray jsonArrayOptional = mJsonObject.getJSONArray("optionalType");
+                for (int i = 0; i < jsonArrayOptional.length(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArrayOptional.get(i);
+                    optionalTypeInfos.add(new OptionalTypeInfo(jsonObject.getString("type"), jsonObject.getDouble("totalPrice"), jsonObject.getDouble("singlePrice")));
+                }
+                JSONArray jsonArraySimilar = mJsonObject.getJSONArray("similarRecommend");
+                for (int i = 0; i < jsonArraySimilar.length(); i++) {
+                    JSONObject jsonObject = (JSONObject) jsonArraySimilar.get(i);
+                    similarRecoInfos.add(new SimilarRecoInfo(jsonObject.getString("imageUrl"), jsonObject.getString("desc"), jsonObject.getDouble("totalPrice"), jsonObject.getDouble("singlePrice"), jsonObject.getInt("periods")));
+                }
+                detailsInfos.add(new GoodsDetailsInfo(bannerList, totalPrice, singlePrice, periods, desc, defaultType, optionalTypeInfos, similarRecoInfos));
+                return detailsInfos;
+            } else {
+                return null;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

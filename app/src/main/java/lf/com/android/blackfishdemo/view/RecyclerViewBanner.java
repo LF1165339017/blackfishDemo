@@ -49,7 +49,7 @@ public class RecyclerViewBanner extends FrameLayout {
     private int margin;//距离外边距的距离
     private int gravity;//位置
     private boolean isShowIndicator;//是否显示指示器
-    private boolean isAutoPlaying;//是否自动播放
+    private boolean isAutoPlaying = true;//是否自动播放
     private boolean isTouched;//是否触摸
     private List<Object> mData = new ArrayList<>();
     private Drawable mSelectedDrawable;//选中时背景
@@ -148,9 +148,13 @@ public class RecyclerViewBanner extends FrameLayout {
                 if (newState == RecyclerView.SCROLL_STATE_IDLE) {
                     int first = ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstVisibleItemPosition();
                     int last = ((LinearLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPosition();
-                    if (currentIndex != (first + last) / 2) {
-                        currentIndex = (first + last) / 2;
-                        changePoint();
+                    if (first == last && currentIndex != last) {
+                        currentIndex = last;
+                        if (isShowIndicator && isTouched) {
+                            isTouched = false;
+                            changePoint();
+                        }
+
                     }
                 }
             }
