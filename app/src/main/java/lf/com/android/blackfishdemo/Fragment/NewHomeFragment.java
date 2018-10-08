@@ -1,16 +1,13 @@
 package lf.com.android.blackfishdemo.Fragment;
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -38,16 +35,17 @@ import lf.com.android.blackfishdemo.bean.UrlInfoBean;
 import lf.com.android.blackfishdemo.listener.OnNetResultListener;
 import lf.com.android.blackfishdemo.listener.OnRvBannerClickListener;
 import lf.com.android.blackfishdemo.listener.OnSwitchRvBannerListener;
+import lf.com.android.blackfishdemo.util.AlphaRecyclerListener;
 import lf.com.android.blackfishdemo.util.JsonUtil;
 import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.OkHttpUtil;
+import lf.com.android.blackfishdemo.util.RecyclerAlphaListener;
 import lf.com.android.blackfishdemo.util.ToastUtil;
 import lf.com.android.blackfishdemo.view.RecyclerViewBanner;
 
-public class NewHomeFragment extends BaseFragment {
-    private TextView mtv_home_username, mtv_home_userLevel, mtv_home_userMsg, mtv_home_wallet,
-            mtv_home_head_click;
+public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListener {
     private RecyclerView mRecyclerView;
+    private RelativeLayout mTitleLayout;
     private VirtualLayoutManager mlayoutManager;
     private RecyclerView.RecycledViewPool mviewPool;//Recycler复用池
     private DelegateAdapter mdelegateAdapter;
@@ -56,12 +54,6 @@ public class NewHomeFragment extends BaseFragment {
     private List<HomeSortInfo> mHomeSortInfos;
     private List<HomeSortItemfo> mHomeSortItemfos;
     private RecyclerViewBanner mRecyclerViewBanner;
-    private Toolbar mToolbar;
-    private AlphaAnimation mShowAnim, mHiddenAmin;//控件的显示和隐藏动画
-    private View mToolbarview;
-    private View mToolbarview1;
-    private boolean arrowup = true;
-    private boolean arrowupdown = true;
 
     private Handler mHandler = new Handler(new Handler.Callback() {
         @Override
@@ -80,20 +72,9 @@ public class NewHomeFragment extends BaseFragment {
     @Override
     public void initView() {
         Fresco.initialize(getContext());//初始化默认配置
-        mToolbarview = LayoutInflater.from(getContext()).inflate(R.layout.new_home_fragment_toolbar_layout, null);
-        mToolbarview1 = LayoutInflater.from(getContext()).inflate(R.layout.new_home_fragment_toolbar_layout1, null);
         //实例化控件
         mRecyclerView = findView(R.id.rv_fragment_home_context);
-        mToolbar = findView(R.id.tool_bar);
-        mToolbar.addView(mToolbarview);
-        initmToolbarView();
-        initmToolbarView1();
-        //控件显示的动画
-        mShowAnim = new AlphaAnimation(0.0f, 1.0f);
-        mShowAnim.setDuration(300);
-        //控件隐藏的动画
-        mHiddenAmin = new AlphaAnimation(1.0f, 0.0f);
-        mHiddenAmin.setDuration(300);
+        mTitleLayout = findView(R.id.rl_title);
         //初始化VirtualLayout和设置RecyclerView;
         mlayoutManager = new VirtualLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(mlayoutManager);
@@ -102,7 +83,9 @@ public class NewHomeFragment extends BaseFragment {
         mviewPool.setMaxRecycledViews(0, 20);
         mdelegateAdapter = new DelegateAdapter(mlayoutManager, false);
         mRecyclerView.setAdapter(mdelegateAdapter);
-        addRecyclerListener();
+        //设置滑动监听
+        RecyclerAlphaListener alphaListener = new RecyclerAlphaListener(this);
+        mRecyclerView.addOnScrollListener(alphaListener);
     }
 
     @Override
@@ -139,6 +122,23 @@ public class NewHomeFragment extends BaseFragment {
 
     private void addItemView(List<HomeSortInfo> homeSortInfos) {
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
+        GeneralVLayoutAdapter topAdapter = new GeneralVLayoutAdapter(
+                getContext(), singleLayoutHelper, 1) {
+            @NonNull
+            @Override
+            public MainViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+                View view = LayoutInflater.from(getContext()).inflate(
+                        R.layout.new_home_fragment_toolbar_layout, viewGroup, false);
+                return new MainViewHolder(view);
+            }
+
+            @Override
+            public void onBindViewHolder(@NonNull MainViewHolder mainViewHolder, int i) {
+                super.onBindViewHolder(mainViewHolder, i);
+            }
+        };
+        madapters.add(topAdapter);
+
         GeneralVLayoutAdapter bannerAdapter = new GeneralVLayoutAdapter(
                 getContext(), singleLayoutHelper, 1) {
             @NonNull
@@ -316,6 +316,16 @@ public class NewHomeFragment extends BaseFragment {
 
     }
 
+    @Override
+    public void onScrollAlpha(float alpha) {
+        mTitleLayout.setAlpha(alpha);
+    }
+
+    @Override
+    public void onScroll(RecyclerView recyclerView, int dx, int dy) {
+
+    }
+
     private class MyClick implements View.OnClickListener {
 
         private int id;
@@ -388,55 +398,6 @@ public class NewHomeFragment extends BaseFragment {
         intent.putExtra("loadUrl", loadUrl);
         startActivity(intent);
 
-    }
-
-    private void initmToolbarView() {
-        mtv_home_username = mToolbarview.findViewById(R.id.tv_home_username);
-        mtv_home_userLevel = mToolbarview.findViewById(R.id.tv_home_userlevel);
-        mtv_home_userMsg = mToolbarview.findViewById(R.id.tv_home_msg);
-        mtv_home_wallet = mToolbarview.findViewById(R.id.tv_home_wallet);
-        mtv_home_head_click = mToolbarview.findViewById(R.id.tv_home_head_click);
-        //为TextView设置字体为加粗格式
-        mtv_home_username.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        mtv_home_userMsg.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        mtv_home_wallet.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-        mtv_home_head_click.setTypeface(Typeface.defaultFromStyle(Typeface.BOLD));
-    }
-
-    private void initmToolbarView1() {
-
-    }
-
-    private void addRecyclerListener() {
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-
-                if (dy < 0) {//先判断滑动位置，这时候向上
-                    if (!recyclerView.canScrollVertically(-1)) {//无法再向上滑动的时候，说明已经到头
-                        if (arrowup) {
-                            mToolbar.setAnimation(mShowAnim);
-                            mToolbar.removeAllViews();
-                            mToolbar.addView(mToolbarview);
-                            arrowup = false;
-                            arrowupdown = true;
-                        }
-
-                    }
-                } else if (dy > 0) {//先判断滑动位置，这时候向下
-                    if (recyclerView.canScrollVertically(1)) {//可以向下滑动
-                        if (arrowupdown) {
-                            mToolbar.setAnimation(mHiddenAmin);
-                            mToolbar.removeAllViews();
-                            mToolbar.addView(mToolbarview1);
-                            arrowupdown = false;
-                        }
-                        arrowup = true;
-                    }
-                }
-            }
-        });
     }
 
 }
