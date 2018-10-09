@@ -13,7 +13,7 @@
 
 **1.** 引导页和用户登录功能：
 
-![效果.gif](https://upload-images.jianshu.io/upload_images/12812898-29a405acf639c595.gif?imageMogr2/auto-orient/strip)
+![效果.gif](https://user-images.githubusercontent.com/35454973/46644161-b7512b00-cbb1-11e8-8f1e-c7ad450b06cd.gif)
 
 详细说明请戳这里
 
