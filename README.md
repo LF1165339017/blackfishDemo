@@ -32,3 +32,7 @@ https://www.jianshu.com/p/05856c6ca7f4
 **3.** 商城首页功能
 
 ![商城首页面](https://user-images.githubusercontent.com/35454973/46670413-b7c6e180-cc04-11e8-9d8c-a57ce57a3027.gif)
+
+详细说明请戳这里
+
+https://www.jianshu.com/p/e9f08581b514
