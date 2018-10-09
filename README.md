@@ -6,7 +6,7 @@
 主要实现功能：
 
 * **引导页和用户登录功能**
-
+* **短信验证功能**
 
 
 **效果展示**
@@ -24,3 +24,5 @@ https://www.jianshu.com/p/7e748757413f
 https://www.jianshu.com/p/05856c6ca7f4
 
 在此，也非常感谢MobSDK的工作人员，他们耐心的解答让我获益匪浅
+**2.** 短信验证功能
+![短信验证gif](https://user-images.githubusercontent.com/35454973/46644262-24fd5700-cbb2-11e8-93f9-11ba2352e26b.gif)
