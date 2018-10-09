@@ -1,9 +1,11 @@
 package lf.com.android.blackfishdemo.Activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.KeyEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import lf.com.android.blackfishdemo.AlertDialog.MyAlertDialogFragment;
 import lf.com.android.blackfishdemo.Fragment.UserLoginFragment;
@@ -20,6 +22,7 @@ public class UserLoginActivity extends BaseActivity {
     private SharedPreferences.Editor editor;
     private OnBackPress onBackPress;
     private boolean isInterception = false;
+    private Context mContext;
 
     @Override
     public int getlayoutId() {
@@ -33,6 +36,7 @@ public class UserLoginActivity extends BaseActivity {
         editor.putString("phoneNumber", "187 5693 5216");
         editor.putString("password", "123456");
         editor.apply();
+        mContext = UserLoginActivity.this;
         fragment = (UserLoginFragment) getSupportFragmentManager().findFragmentById(R.id.userloginFrame_layout);
         userPhoneNumber = pref.getString("phoneNumber", null);
         PhonePassword = pref.getString("password", null);
@@ -43,7 +47,7 @@ public class UserLoginActivity extends BaseActivity {
                 fragment.setOnLosePassword(new Ondialoglistener() {
                     @Override
                     public void OnClick(View view) {
-
+                        Toast.makeText(mContext, "点击了忘记按钮", Toast.LENGTH_SHORT).show();
                     }
                 });
                 fragment.show(getSupportFragmentManager(), "MyAlertDialogFragment");
