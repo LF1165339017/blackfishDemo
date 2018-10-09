@@ -16,6 +16,7 @@
         app:placeholderImageScaleType="fitXY" />
 
     <TextView
+        android:layout_marginTop="10dp"
         android:id="@+id/tv_classify_common_item"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

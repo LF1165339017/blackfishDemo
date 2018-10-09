@@ -78,12 +78,10 @@ public class JsonUtil {
                     String title = jsonObject.getString("title");
                     String headerImageUrl = jsonObject.getString("headerImageUrl");
                     String subtitle1 = jsonObject.getString("subTitle1");
-                    String subtitle2 = jsonObject.getString("suTitle");
-                    JSONArray jsonArray = ((JSONObject) mJsonArray.get(i)).getJSONArray("gridImageUrls1");
-
+                    String subtitle2 = jsonObject.getString("subTitle");
                     List<ClassifyGridInfo> mGridInfos1 = new ArrayList<>();
                     List<ClassifyGridInfo> mGridInfos2 = new ArrayList<>();
-
+                    JSONArray jsonArray = ((JSONObject) mJsonArray.get(i)).getJSONArray("gridImageUrls1");
                     for (int j = 0; j < jsonArray.length(); j++) {
                         JSONObject jsonObject1 = (JSONObject) jsonArray.get(j);
                         int id = jsonObject1.getInt("id");

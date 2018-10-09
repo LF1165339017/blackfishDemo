@@ -197,42 +197,42 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
                     case 0:
                         textView.setText("充值中心");
                         imageView.setImageResource(R.drawable.icon_voucher_center);
-                        imageView.setOnClickListener(new MyClick(1));
+                        imageView.setOnClickListener(new MyClick("iv_home_one_grid_icon_1"));
                         break;
                     case 1:
                         textView.setText("手机通讯");
                         imageView.setImageResource(R.drawable.icon_phone);
-                        imageView.setOnClickListener(new MyClick(2));
+                        imageView.setOnClickListener(new MyClick("iv_home_one_grid_icon_2"));
                         break;
                     case 2:
                         textView.setText("电影票");
                         imageView.setImageResource(R.drawable.icon_movie);
-                        imageView.setOnClickListener(new MyClick(3));
+                        imageView.setOnClickListener(new MyClick("iv_home_one_grid_icon_3"));
                         break;
                     case 3:
                         textView.setText("全民游戏");
                         imageView.setImageResource(R.drawable.icon_game);
-                        imageView.setOnClickListener(new MyClick(4));
+                        imageView.setOnClickListener(new MyClick("iv_home_one_grid_icon_4"));
                         break;
                     case 4:
                         textView.setText("代还信用卡");
                         imageView.setImageResource(R.drawable.icon_pay_card);
-                        imageView.setOnClickListener(new MyClick(5));
+                        imageView.setOnClickListener(new MyClick("iv_home_one_grid_icon_5"));
                         break;
                     case 5:
                         textView.setText("现金分期");
                         imageView.setImageResource(R.drawable.icon_cash_fenqi);
-                        imageView.setOnClickListener(new MyClick(6));
+                        imageView.setOnClickListener(new MyClick("iv_home_one_grid_icon_6"));
                         break;
                     case 6:
                         textView.setText("办信用卡");
                         imageView.setImageResource(R.drawable.icon_ban_card);
-                        imageView.setOnClickListener(new MyClick(7));
+                        imageView.setOnClickListener(new MyClick("iv_home_one_grid_icon_7"));
                         break;
                     case 7:
                         textView.setText("全部分类");
                         imageView.setImageResource(R.drawable.icon_all_classify);
-                        imageView.setOnClickListener(new MyClick(8));
+                        imageView.setOnClickListener(new MyClick("iv_home_one_grid_icon_8"));
                         break;
                     default:
                         break;
@@ -327,14 +327,7 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
     }
 
     private class MyClick implements View.OnClickListener {
-
-        private int id;
         private String text;
-
-        public MyClick(int id) {
-            this.id = id;
-        }
-
         public MyClick(String text) {
             this.text = text;
         }
@@ -346,44 +339,44 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
                     Toast.makeText(getActivity(), "点击了第" + i + "Item页面", Toast.LENGTH_SHORT).show();
                 }
             }
-            switch (id) {
-                case 1:
+            switch (text) {
+                case "iv_home_one_grid_icon_1":
                     Toast toast1 = ToastUtil.setMyToast(
                             getContext(), ToastUtil.PROMPT,
-                            "点击了第" + id + "图标", Toast.LENGTH_SHORT);
+                            "充值中心", Toast.LENGTH_SHORT);
                     toast1.show();
                     break;
-                case 2:
+                case "iv_home_one_grid_icon_2":
                     Toast toast2 = ToastUtil.setMyToast(
                             getContext(), ToastUtil.PROMPT,
-                            "点击了第" + id + "图标", Toast.LENGTH_SHORT);
+                            "手机通讯" , Toast.LENGTH_SHORT);
                     toast2.show();
                     break;
-                case 3:
+                case "iv_home_one_grid_icon_3":
                     Toast toast3 = ToastUtil.setMyToast(
                             getContext(), ToastUtil.PROMPT,
-                            "点击了第" + id + "图标", Toast.LENGTH_SHORT);
+                            "电影票", Toast.LENGTH_SHORT);
                     toast3.show();
                     break;
-                case 4:
+                case "iv_home_one_grid_icon_4":
                     toWebActivity(UrlInfoBean.gameUrl);
                     break;
-                case 5:
+                case "iv_home_one_grid_icon_5":
                     Toast toast5 = ToastUtil.setMyToast(
                             getContext(), ToastUtil.PROMPT,
-                            "点击了第" + id + "图标", Toast.LENGTH_SHORT);
+                            "代还信用卡", Toast.LENGTH_SHORT);
                     toast5.show();
                     break;
-                case 6:
+                case "iv_home_one_grid_icon_6":
                     Toast toast6 = ToastUtil.setMyToast(
                             getContext(), ToastUtil.PROMPT,
-                            "点击了第" + id + "图标", Toast.LENGTH_SHORT);
+                            "现金分期" , Toast.LENGTH_SHORT);
                     toast6.show();
                     break;
-                case 7:
+                case "iv_home_one_grid_icon_7":
                     toWebActivity(UrlInfoBean.bankCard);
                     break;
-                case 8:
+                case "iv_home_one_grid_icon_8":
                     startActivity(new Intent(getContext(), ClassifyGoodsActivity.class));
                     getActivity().overridePendingTransition(R.anim.activity_right_in, 0);
                     break;

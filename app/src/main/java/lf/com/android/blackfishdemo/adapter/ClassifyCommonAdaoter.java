@@ -21,10 +21,10 @@ public class ClassifyCommonAdaoter extends BaseAdapter {
 
     private List<ClassifyGridInfo> mGridInfos;
 
-    public ClassifyCommonAdaoter(Context mContext, List<ClassifyGridInfo> mGridInfos) {
+    public ClassifyCommonAdaoter(Context mContext, List<ClassifyGridInfo> grids) {
         mGridInfos = new ArrayList<>();
         this.mContext = mContext;
-        this.mGridInfos = mGridInfos;
+        this.mGridInfos = grids;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class ClassifyCommonAdaoter extends BaseAdapter {
             viewHolder = new MyViewHolder();
             convertView = LayoutInflater.from(mContext).inflate(R.layout.view_classify_common_item_layout, null);
             viewHolder.mDraweeView = convertView.findViewById(R.id.iv_classify_common_item);
-            viewHolder.mTextView = convertView.findViewById(R.id.tv_classify_goods_title_item);
+            viewHolder.mTextView = convertView.findViewById(R.id.tv_classify_common_item);
             convertView.setTag(viewHolder);
         } else {
             viewHolder = (MyViewHolder) convertView.getTag();

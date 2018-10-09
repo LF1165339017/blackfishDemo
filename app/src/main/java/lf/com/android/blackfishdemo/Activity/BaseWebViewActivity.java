@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,14 +51,26 @@ public class BaseWebViewActivity extends FragmentActivity implements View.OnClic
         setContentView(R.layout.activity_web_view_layout);
         ButterKnife.bind(this);
         context = BaseWebViewActivity.this;
-
-
         WebSettingUtil.setSetting(mWebview);
-
         Intent intent = getIntent();
         mWebview.loadUrl(intent.getStringExtra("loadUrl"));
+        mIv_Back.setOnClickListener(this);
+        mIv_share.setOnClickListener(this);
+        mWebview.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int newProgress) {
+                if (newProgress < 100) {
+                    mTv_Title.setText("正在加载中....");
+                }else {
+                    mTv_Title.setText("加载完成");
+                }
+            }
 
-
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                mTv_Title.setText(title);
+            }
+        });
     }
 
     @Override

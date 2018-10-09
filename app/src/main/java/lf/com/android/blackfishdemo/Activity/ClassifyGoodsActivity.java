@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -11,6 +13,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -28,7 +31,9 @@ import lf.com.android.blackfishdemo.bean.UrlInfoBean;
 import lf.com.android.blackfishdemo.listener.OnClassifyItemClickListener;
 import lf.com.android.blackfishdemo.listener.OnNetResultListener;
 import lf.com.android.blackfishdemo.util.JsonUtil;
+import lf.com.android.blackfishdemo.util.LogUtil;
 import lf.com.android.blackfishdemo.util.OkHttpUtil;
+import lf.com.android.blackfishdemo.util.ToastUtil;
 import lf.com.android.blackfishdemo.view.GridViewForScroll;
 
 public class ClassifyGoodsActivity extends BaseActivity {
@@ -99,6 +104,8 @@ public class ClassifyGoodsActivity extends BaseActivity {
     public void initView() {
         Fresco.initialize(this);
         mContext = ClassifyGoodsActivity.this;
+        mRecyclerViewLeft.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerViewLeft.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         mLayoutHeader.setOnClickListener(this);
         mImageMsg.setOnClickListener(this);
         mImageBack.setOnClickListener(this);
@@ -119,7 +126,8 @@ public class ClassifyGoodsActivity extends BaseActivity {
 
             @Override
             public void OnFailureListener(String result) {
-
+                Toast toast = ToastUtil.setMyToast(mContext, ToastUtil.PROMPT, "网络请求失败", Toast.LENGTH_SHORT);
+                toast.show();
             }
         });
 
@@ -127,7 +135,19 @@ public class ClassifyGoodsActivity extends BaseActivity {
 
     @Override
     public void ClickListener(View view) {
-
+        switch (view.getId()) {
+            case R.id.rl_classify_heard_search:
+                Toast.makeText(mContext, "查询", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.iv_classify_goods_back:
+                finishActivity();
+                break;
+            case R.id.iv_classify_heard_msg:
+                Toast.makeText(mContext, "消息", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
     }
 
 

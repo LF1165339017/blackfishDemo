@@ -20,10 +20,10 @@ public class ClassifyTitleAdapter extends RecyclerView.Adapter<ClassifyTitleAdap
     private ArrayList<String> mListTitle;
     private OnClassifyItemClickListener listener;
 
-    public ClassifyTitleAdapter(Context mContext, ArrayList<String> mListTitle) {
+    public ClassifyTitleAdapter(Context mContext, ArrayList<String> ListTitle) {
         mListTitle = new ArrayList<>();
         this.mContext = mContext;
-        this.mListTitle = mListTitle;
+        this.mListTitle = ListTitle;
     }
 
     @NonNull
