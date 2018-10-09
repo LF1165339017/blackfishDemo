@@ -7,7 +7,7 @@
 
 * **引导页和用户登录功能**
 * **短信验证功能**
-
+* **商城首页NewHomeFragment编写**
 
 **效果展示**
 
@@ -28,3 +28,6 @@ https://www.jianshu.com/p/05856c6ca7f4
 **2.** 短信验证功能
 
 ![短信验证gif](https://user-images.githubusercontent.com/35454973/46644262-24fd5700-cbb2-11e8-93f9-11ba2352e26b.gif)
+
+**3.** 商城首页功能
+
