@@ -19,14 +19,15 @@
         <activity android:name=".splash.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".splash.WelcomeSplashActivity" />
         <activity android:name=".Activity.LoginActivity" />
         <activity android:name=".Activity.RegisteredActivity" />
-        <activity android:name=".Activity.MainActivity" />
+        <activity android:name=".Activity.MainActivity">
+
+        </activity>
         <activity android:name=".Activity.UserLoginActivity" />
         <activity android:name=".Activity.AboutActivity" />
         <activity android:name=".Activity.AddCreditBillActivity" />

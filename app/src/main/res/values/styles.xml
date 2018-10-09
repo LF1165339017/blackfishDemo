@@ -15,7 +15,7 @@
         <item name="android:layout_marginRight">10dp</item>
     </style>
 
-    <style name="PassWordDialog" parent="Base.Theme.AppCompat.Dialog.Alert">
+    <style name="PassWordDialog" parent="Base.Theme.AppCompat.Dialog">
         <!-- 是否浮现在activity之上 -->
         <item name="android:windowIsFloating">true</item>
         <!-- 是否半透明 -->

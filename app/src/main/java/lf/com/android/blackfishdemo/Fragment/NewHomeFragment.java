@@ -120,7 +120,7 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
         return R.layout.fragment_nav_home;
     }
 
-    private void addItemView(List<HomeSortInfo> homeSortInfos) {
+    private void addItemView(final List<HomeSortInfo> homeSortInfos) {
         SingleLayoutHelper singleLayoutHelper = new SingleLayoutHelper();
         GeneralVLayoutAdapter topAdapter = new GeneralVLayoutAdapter(
                 getContext(), singleLayoutHelper, 1) {
@@ -242,7 +242,7 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
         };
         madapters.add(gridAdapter);
 
-        int count = mHomeSortInfos.size();
+        int count = homeSortInfos.size();
         GridLayoutHelper sortHelp = new GridLayoutHelper(1);
         GeneralVLayoutAdapter sortAdapter = new GeneralVLayoutAdapter(getContext(), sortHelp, count) {
             @NonNull
@@ -256,7 +256,7 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
             @Override
             public void onBindViewHolder(@NonNull MainViewHolder mainViewHolder, final int i) {
                 super.onBindViewHolder(mainViewHolder, i);
-                HomeSortInfo homeSortInfo = mHomeSortInfos.get(i);
+                HomeSortInfo homeSortInfo = homeSortInfos.get(i);
                 TextView textTitle = mainViewHolder.itemView.findViewById(R.id.tv_home_goods_title_text);
                 textTitle.setText(homeSortInfo.getTitle());
                 SimpleDraweeView draweeView = mainViewHolder.itemView.findViewById(R.id.iv_home_goods_bigImage);

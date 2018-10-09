@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="15dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -43,5 +44,5 @@
     <WebView
         android:id="@+id/wv_base_activity_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </LinearLayout>
