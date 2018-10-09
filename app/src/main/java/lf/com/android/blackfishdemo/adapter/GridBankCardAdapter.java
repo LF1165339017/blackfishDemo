@@ -1,4 +1,4 @@
-package lf.com.android.blackfishdemo.Activity;
+package lf.com.android.blackfishdemo.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;

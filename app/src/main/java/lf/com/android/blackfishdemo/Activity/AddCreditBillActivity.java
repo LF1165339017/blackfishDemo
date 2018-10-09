@@ -16,6 +16,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import lf.com.android.blackfishdemo.R;
+import lf.com.android.blackfishdemo.adapter.GridBankCardAdapter;
 import lf.com.android.blackfishdemo.bean.BankCardsInfo;
 import lf.com.android.blackfishdemo.bean.UrlInfoBean;
 import lf.com.android.blackfishdemo.listener.OnNetResultListener;

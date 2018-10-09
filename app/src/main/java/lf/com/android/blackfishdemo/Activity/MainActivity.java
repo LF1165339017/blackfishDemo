@@ -51,6 +51,7 @@ public class MainActivity extends BaseActivity {
         mNavigationView.setItemIconTintList(null);
         mNavigationViewListener();
         mViewPagerListener();
+
     }
 
     @Override

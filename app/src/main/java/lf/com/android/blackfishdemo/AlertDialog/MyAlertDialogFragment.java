@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import lf.com.android.blackfishdemo.R;
@@ -27,7 +28,8 @@ public class MyAlertDialogFragment extends DialogFragment implements View.OnClic
         mContext = getActivity();
         view = LayoutInflater.from(mContext).inflate(R.layout.passworderrordialog, null);
         mDialog = new Dialog(mContext, R.style.PassWordDialog);
-        mDialog.setContentView(view);
+        ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(500, 350);
+        mDialog.addContentView(view, layoutParams);
         intitView();
         initData();
         return mDialog;

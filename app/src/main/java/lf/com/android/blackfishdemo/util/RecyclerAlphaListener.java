@@ -23,7 +23,7 @@ public class RecyclerAlphaListener extends RecyclerView.OnScrollListener {
 
     public RecyclerAlphaListener(AlphaRecyclerListener listener) {
         mAlphaListener = listener;
-        mPaddingTopHieght = DenistyUtil.dip2px(MyApplication.getmContext(), 75); //吸顶标题栏的高度+margin (此处数值和layout里保持一致)
+        mPaddingTopHieght = DenistyUtil.dip2px(MyApplication.getmContext(), 60); //吸顶标题栏的高度+margin (此处数值和layout里保持一致)
         mHeight = DenistyUtil.dip2px(MyApplication.getmContext(), 150); //头部View高度 (此处数值和layout里保持一致)
     }
 
@@ -49,7 +49,6 @@ public class RecyclerAlphaListener extends RecyclerView.OnScrollListener {
         RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
 
         if (layoutManager instanceof LinearLayoutManager) {
-
             int position = ((LinearLayoutManager) layoutManager).findFirstVisibleItemPosition();
             View firstChildView = recyclerView.getChildAt(0);
             mAbsLocY = -firstChildView.getTop();

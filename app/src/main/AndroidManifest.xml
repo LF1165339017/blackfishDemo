@@ -9,27 +9,44 @@
         android:name=".Application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        tools:replace="android:theme"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/Theme.AppCompat.NoActionBar"
+        tools:replace="android:theme">
 
         <activity android:name=".Activity.HomeActivity" />
         <activity android:name=".splash.WelcomeActivity">
-
-        </activity>
-        <activity android:name=".splash.WelcomeSplashActivity" />
-        <activity android:name=".Activity.LoginActivity" />
-        <activity android:name=".Activity.RegisteredActivity" />
-        <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".splash.WelcomeSplashActivity" />
+        <activity android:name=".Activity.LoginActivity" />
+        <activity android:name=".Activity.RegisteredActivity" />
+        <activity android:name=".Activity.MainActivity" />
         <activity android:name=".Activity.UserLoginActivity" />
+        <activity android:name=".Activity.AboutActivity" />
+        <activity android:name=".Activity.AddCreditBillActivity" />
+        <activity android:name=".Activity.AddBillActivity" />
+        <activity android:name=".Activity.BaseWebViewActivity" />
+        <activity android:name=".Activity.ClassifyGoodsActivity" />
+        <activity android:name=".Activity.CreateCreditBillActivity" />
+        <activity android:name=".Activity.GoodsDetailActivity" />
+        <activity android:name=".Activity.MangerAddressActivity" />
+        <activity android:name=".Activity.MineSettingActibity" />
+        <activity android:name=".Activity.NewAddressActivity" />
+        <activity android:name=".Activity.PayTypeActivity" />
+        <activity android:name=".Activity.SelectCardActivity" />
+        <activity android:name=".Activity.SetPwdActivity" />
+        <activity android:name=".Activity.ShowDetailBillActivity" />
+        <activity android:name=".Activity.ShowImageActivity" />
+        <activity android:name=".Activity.SubmitOrderActivity" />
+        <activity android:name=".Activity.SuggestionActivity" />
+        <activity android:name=".Activity.TestActivity" />
+        <activity android:name=".Activity.WebViewActivity" />
     </application>
 
 </manifest>
