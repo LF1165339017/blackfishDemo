@@ -6,14 +6,14 @@
 主要实现功能：
 
 * **引导页和用户登录功能**
-
-
+* **短信验证功能**
+* **商城首页NewHomeFragment编写**
 
 **效果展示**
 
 **1.** 引导页和用户登录功能：
 
-![效果.gif](https://upload-images.jianshu.io/upload_images/12812898-29a405acf639c595.gif?imageMogr2/auto-orient/strip)
+![效果.gif](https://user-images.githubusercontent.com/35454973/46644161-b7512b00-cbb1-11e8-8f1e-c7ad450b06cd.gif)
 
 详细说明请戳这里
 
@@ -24,3 +24,15 @@ https://www.jianshu.com/p/7e748757413f
 https://www.jianshu.com/p/05856c6ca7f4
 
 在此，也非常感谢MobSDK的工作人员，他们耐心的解答让我获益匪浅
+
+**2.** 短信验证功能
+
+![短信验证gif](https://user-images.githubusercontent.com/35454973/46644262-24fd5700-cbb2-11e8-93f9-11ba2352e26b.gif)
+
+**3.** 商城首页功能
+
+![商城首页面](https://user-images.githubusercontent.com/35454973/46670413-b7c6e180-cc04-11e8-9d8c-a57ce57a3027.gif)
+
+详细说明请戳这里
+
+https://www.jianshu.com/p/e9f08581b514
