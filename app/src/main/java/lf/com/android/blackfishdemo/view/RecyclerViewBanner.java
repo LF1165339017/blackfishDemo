@@ -138,6 +138,7 @@ public class RecyclerViewBanner extends FrameLayout {
 
         mRecyclerView = new RecyclerView(context);
         mLinearLayout = new LinearLayout(context);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
         new PagerSnapHelper().attachToRecyclerView(mRecyclerView);//辅助Recycler进行滚动对齐
         adapter = new RecyclerViewAdapter();
         mRecyclerView.setAdapter(adapter);
@@ -329,8 +330,9 @@ public class RecyclerViewBanner extends FrameLayout {
             mData.addAll(data);
         }
         if (mData.size() > 1) {
-            currentIndex = mData.size();
             adapter.notifyDataSetChanged();
+            // 将起始点设为最靠近的 MAX_VALUE/2 的，且为mData.size()整数倍的位置
+            currentIndex = Integer.MAX_VALUE / 2 - (Integer.MAX_VALUE / 2) % mData.size();
             mRecyclerView.scrollToPosition(currentIndex);
             if (isShowIndicator) {
                 createIndicators();
@@ -401,6 +403,14 @@ public class RecyclerViewBanner extends FrameLayout {
 
 
     private class PagerSnapHelper extends LinearSnapHelper {
+        /**
+         * 通过当前滑动速度，计算最终定位的position
+         *
+         * @param layoutManager
+         * @param velocityX
+         * @param velocityY
+         * @return
+         */
 
         @Override
         public int findTargetSnapPosition(RecyclerView.LayoutManager layoutManager, int velocityX, int velocityY) {

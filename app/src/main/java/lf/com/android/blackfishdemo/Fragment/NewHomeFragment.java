@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -134,7 +135,37 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
 
             @Override
             public void onBindViewHolder(@NonNull MainViewHolder mainViewHolder, int i) {
-                super.onBindViewHolder(mainViewHolder, i);
+                TextView mTvUserName = mainViewHolder.itemView.findViewById(R.id.tv_home_username);
+                TextView mTvMsg = mainViewHolder.itemView.findViewById(R.id.tv_home_msg);
+                TextView mTvWallet = mainViewHolder.itemView.findViewById(R.id.tv_home_wallet);
+                LinearLayout mLlCard = mainViewHolder.itemView.findViewById(R.id.linear_card);
+
+                mTvUserName.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "点击了姓名", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                mTvMsg.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "点击了信息", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                mTvWallet.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "点击了钱包", Toast.LENGTH_LONG).show();
+                    }
+                });
+
+                mLlCard.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(getContext(), "点击了会员卡", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         };
         madapters.add(topAdapter);
@@ -328,6 +359,7 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
 
     private class MyClick implements View.OnClickListener {
         private String text;
+
         public MyClick(String text) {
             this.text = text;
         }
@@ -349,7 +381,7 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
                 case "iv_home_one_grid_icon_2":
                     Toast toast2 = ToastUtil.setMyToast(
                             getContext(), ToastUtil.PROMPT,
-                            "手机通讯" , Toast.LENGTH_SHORT);
+                            "手机通讯", Toast.LENGTH_SHORT);
                     toast2.show();
                     break;
                 case "iv_home_one_grid_icon_3":
@@ -370,7 +402,7 @@ public class NewHomeFragment extends BaseFragment implements AlphaRecyclerListen
                 case "iv_home_one_grid_icon_6":
                     Toast toast6 = ToastUtil.setMyToast(
                             getContext(), ToastUtil.PROMPT,
-                            "现金分期" , Toast.LENGTH_SHORT);
+                            "现金分期", Toast.LENGTH_SHORT);
                     toast6.show();
                     break;
                 case "iv_home_one_grid_icon_7":

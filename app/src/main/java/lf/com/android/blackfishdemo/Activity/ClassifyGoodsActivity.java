@@ -2,8 +2,10 @@ package lf.com.android.blackfishdemo.Activity;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -103,6 +105,22 @@ public class ClassifyGoodsActivity extends BaseActivity {
     @Override
     public void initView() {
         Fresco.initialize(this);
+
+        //5.0及以上系统才支持
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            View decorView = getWindow().getDecorView();
+            //两个Flag必须要结合在一起使用，表示会让应用的主体内容占用系统状态栏的空间
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            //将状态栏设置成透明色
+            getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            //将actionBar隐藏
+            actionBar.hide();
+        }
         mContext = ClassifyGoodsActivity.this;
         mRecyclerViewLeft.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerViewLeft.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));

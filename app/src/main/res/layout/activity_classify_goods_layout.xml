@@ -7,8 +7,9 @@
     <RelativeLayout
         android:id="@+id/rl_classify_header"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:background="@color/White">
+        android:layout_height="55dp"
+        android:background="@color/White"
+        android:paddingTop="15dp">
 
         <ImageView
             android:id="@+id/iv_classify_goods_back"
@@ -16,8 +17,8 @@
             android:layout_height="25dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="5dp"
-            android:scaleType="fitXY"
             android:gravity="center"
+            android:scaleType="fitXY"
             android:src="@drawable/user_icon_arrow_left" />
 
         <RelativeLayout

@@ -37,7 +37,8 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         contentView = inflater.inflate(getLayoutId(), container, false);
         initView();
         isInitView = true;
-        lazyLoad();
+        initdata();
+        //lazyLoad();
         return contentView;
     }
 
@@ -46,27 +47,28 @@ public abstract class BaseFragment extends Fragment implements View.OnClickListe
         lisetener(v);
     }
 
-    //懒加载
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser) {
-            isVisible = true;
-            lazyLoad();
-        } else {
-            isVisible = false;
-        }
+    /**
+     //懒加载
+     @Override public void setUserVisibleHint(boolean isVisibleToUser) {
+     super.setUserVisibleHint(isVisibleToUser);
+     if (isVisibleToUser) {
+     isVisible = true;
+     //lazyLoad();
+     } else {
+     isVisible = false;
+     }
 
-    }
-
-    private void lazyLoad() {
-        if (!isFirstLoad || !isVisible || !isInitView) {
-            //如果不是第一次加载、不是可见的、不是初始化View，则不加载数据
-            return;
-        }
-        initdata();
-        isFirstLoad = false;
-    }
+     }*/
+    /**
+     * private void lazyLoad() {
+     * if (!isFirstLoad || !isVisible || !isInitView) {
+     * //如果不是第一次加载、不是可见的、不是初始化View，则不加载数据
+     * return;
+     * }
+     * initdata();
+     * isFirstLoad = false;
+     * }
+     */
 
 
     public <E extends View> E findView(int ViewId) {
