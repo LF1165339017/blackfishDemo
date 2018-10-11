@@ -40,6 +40,8 @@ https://www.jianshu.com/p/e9f08581b514
 
 **4.** 商城首页功能
 
+![商城Mall页面](https://user-images.githubusercontent.com/35454973/46790915-82d89d00-cd72-11e8-8a06-5b1b0be66f88.gif)
+
 详细说明请戳这里
 
 https://www.jianshu.com/p/a5bcdb6baf00
