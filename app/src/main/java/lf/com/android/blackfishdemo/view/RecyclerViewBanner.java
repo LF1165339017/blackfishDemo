@@ -222,11 +222,11 @@ public class RecyclerViewBanner extends FrameLayout {
     //手指触摸事件
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        //手动触摸的时候，停止自动播放，根据手势变换
         switch (ev.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 startX = (int) ev.getX();
                 startY = (int) ev.getY();
-                //阻止父层View拦截事件
                 getParent().requestDisallowInterceptTouchEvent(true);
                 break;
             case MotionEvent.ACTION_MOVE:
@@ -241,7 +241,6 @@ public class RecyclerViewBanner extends FrameLayout {
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                break;
             case MotionEvent.ACTION_CANCEL:
                 if (!isPlaying) {
                     isTouched = true;
@@ -253,6 +252,7 @@ public class RecyclerViewBanner extends FrameLayout {
         }
         return super.dispatchTouchEvent(ev);
     }
+
 
     @Override
     protected void onAttachedToWindow() {
@@ -267,7 +267,7 @@ public class RecyclerViewBanner extends FrameLayout {
     }
 
     @Override
-    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
+    protected void onWindowVisibilityChanged(int visibility) {
         if (visibility == GONE || visibility == INVISIBLE) {
             // 停止轮播
             setPlaying(false);
@@ -275,8 +275,9 @@ public class RecyclerViewBanner extends FrameLayout {
             // 开始轮播
             setPlaying(true);
         }
-        super.onVisibilityChanged(changedView, visibility);
+        super.onWindowVisibilityChanged(visibility);
     }
+
 
     //创建默认指示器
     private GradientDrawable gradientDrawable(int color) {
@@ -418,18 +419,19 @@ public class RecyclerViewBanner extends FrameLayout {
             int targetPos = super.findTargetSnapPosition(layoutManager, velocityX, velocityY);
             //找到与之最近的view
             View currentView = findSnapView(layoutManager);
-            if (targetPos != RecyclerView.NOT_FOCUSABLE && null != currentView) {
+            if (targetPos != RecyclerView.NO_POSITION && null != currentView) {
                 //获取最近View的位置currentPos
                 int currentPos = layoutManager.getPosition(currentView);
                 int first = ((LinearLayoutManager) layoutManager).findFirstCompletelyVisibleItemPosition();
                 int last = ((LinearLayoutManager) layoutManager).findLastCompletelyVisibleItemPosition();
                 //如果滑动的位置<最近view的位置，最近的view的位置对齐最后一个可见view的位置
                 //如果滑动的位置>最近view的位置，最近的view的位置对齐第一个可见的View的位置
-                currentPos = targetPos < currentPos ? last : (targetPos > currentPos ? first : currentPos);
+                currentPos = targetPos < currentPos ? last : (targetPos > currentPos ?
+                        first : currentPos);
                 //如果滑动的位置<最后一个可见view的位置，将要滑动的位置对齐第一个view
                 //如果滑动的位置>第一个可见view的位置，将要滑动的位置对齐最后一个view
-                targetPos = targetPos < currentPos ? currentPos - 1 : (
-                        targetPos > currentPos ? currentPos + 1 : currentPos);
+                targetPos = targetPos < currentPos ? currentPos - 1 :
+                        (targetPos > currentPos ? currentPos + 1 : currentPos);
             }
             return targetPos;
         }
