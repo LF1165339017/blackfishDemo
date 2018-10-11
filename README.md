@@ -8,6 +8,7 @@
 * **引导页和用户登录功能**
 * **短信验证功能**
 * **商城首页NewHomeFragment编写**
+* **商城第二页面MallFragment编写**
 
 **效果展示**
 
@@ -36,3 +37,10 @@ https://www.jianshu.com/p/05856c6ca7f4
 详细说明请戳这里
 
 https://www.jianshu.com/p/e9f08581b514
+
+**4.** 商城首页功能
+
+详细说明请戳这里
+
+https://www.jianshu.com/p/a5bcdb6baf00
+
